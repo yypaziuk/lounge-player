@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Lounge · Always On — Internet Radio Player</title>
+<meta name="description" content="A beautiful internet radio player that never stops. Auto-reconnects on network changes, 6 stunning themes, 6 languages. One HTML file."/>
+<meta property="og:title" content="Lounge · Always On"/>
+<meta property="og:description" content="Beautiful internet radio player. Auto-reconnects, 6 themes, 6 languages."/>
+<meta property="og:type" content="website"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Manrope:wght@300;400;500;600&display=swap"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  font-family:'Manrope',system-ui,sans-serif;
+  background:#0e0420;
+  color:#faf2e2;
+  min-height:100dvh;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* animated background */
+.bg{
+  position:fixed;inset:0;z-index:0;
+  background:
+    radial-gradient(ellipse 70% 50% at 80% 95%, rgba(255,148,44,0.45), transparent 65%),
+    radial-gradient(ellipse 55% 40% at 12% 90%, rgba(220,64,76,0.25), transparent 65%),
+    radial-gradient(ellipse 60% 25% at 50% 2%, rgba(200,110,220,0.14), transparent 60%),
+    linear-gradient(176deg, #ffe4a8 0%, #f7a558 10%, #d85a32 22%, #8a2848 44%, #2e1042 72%, #0e0420 100%);
+}
+body::before{
+  content:'';position:fixed;inset:0;z-index:1;
+  background-image:
+    radial-gradient(circle at 1px 1px,rgba(255,255,255,.05) .7px,transparent .7px),
+    radial-gradient(circle at 3px 4px,rgba(0,0,0,.06) .7px,transparent .7px);
+  background-size:4px 4px,6px 6px;
+  pointer-events:none;mix-blend-mode:overlay;opacity:.85;
+}
+
+/* motes */
+.motes{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden}
+.motes span{
+  position:absolute;width:2px;height:2px;
+  background:rgba(255,224,138,.85);border-radius:50%;
+  bottom:-20px;left:var(--x);
+  animation:drift var(--d) linear infinite var(--delay);opacity:0;
+}
+@keyframes drift{
+  0%{transform:translate(0,0) scale(.8);opacity:0}
+  10%{opacity:1}90%{opacity:.6}
+  100%{transform:translate(var(--xs),-110vh) scale(1.1);opacity:0}
+}
+
+/* layout */
+.wrap{
+  position:relative;z-index:2;
+  max-width:860px;margin:0 auto;
+  padding:clamp(2rem,6vw,5rem) clamp(1.5rem,5vw,3rem);
+  min-height:100dvh;
+  display:flex;flex-direction:column;align-items:center;
+  text-align:center;gap:0;
+}
+
+/* nav */
+nav{
+  width:100%;display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:clamp(3rem,8vw,6rem);
+}
+.nav-brand{
+  font-family:'Fraunces',serif;font-style:italic;font-weight:300;
+  font-size:1.1rem;letter-spacing:-.01em;color:rgba(250,242,226,.7);
+}
+.nav-links{display:flex;gap:.5rem}
+.nav-link{
+  background:none;border:1px solid rgba(250,242,226,.15);
+  color:rgba(250,242,226,.6);padding:.4rem .85rem;
+  border-radius:999px;font-size:.75rem;letter-spacing:.06em;
+  text-decoration:none;transition:all 200ms;
+}
+.nav-link:hover{border-color:rgba(255,186,106,.6);color:rgba(255,220,158,.9)}
+.nav-link.primary{
+  background:rgba(255,186,106,.15);border-color:rgba(255,186,106,.4);
+  color:rgba(255,220,158,.95);
+}
+.nav-link.primary:hover{background:rgba(255,186,106,.28)}
+
+/* hero */
+.hero{margin-bottom:clamp(2.5rem,6vw,4rem)}
+.eyebrow{
+  font-size:.68rem;letter-spacing:.45em;text-transform:uppercase;
+  color:rgba(250,242,226,.45);margin-bottom:1.2rem;
+}
+h1{
+  font-family:'Fraunces',serif;font-weight:300;
+  font-size:clamp(2.8rem,8vw,5.5rem);line-height:1.08;
+  letter-spacing:-.03em;color:#faf2e2;
+  margin-bottom:1.4rem;
+}
+h1 em{font-style:italic;color:#ffdc9e;font-weight:300}
+.sub{
+  font-size:clamp(1rem,2.5vw,1.25rem);
+  color:rgba(250,242,226,.58);line-height:1.6;
+  max-width:520px;margin:0 auto 2.5rem;
+  font-weight:300;
+}
+.cta-row{display:flex;gap:.85rem;justify-content:center;flex-wrap:wrap}
+.btn{
+  display:inline-flex;align-items:center;gap:.5rem;
+  padding:.75rem 1.75rem;border-radius:999px;
+  font-size:.88rem;font-weight:500;letter-spacing:.04em;
+  text-decoration:none;transition:all 220ms cubic-bezier(.2,.8,.2,1);
+  border:none;cursor:pointer;
+}
+.btn-primary{
+  background:#faf2e2;color:#1a1024;
+  box-shadow:0 12px 28px -8px rgba(0,0,0,.45);
+}
+.btn-primary:hover{transform:translateY(-2px);background:#fff;box-shadow:0 18px 36px -10px rgba(0,0,0,.5)}
+.btn-ghost{
+  background:transparent;color:rgba(250,242,226,.75);
+  border:1px solid rgba(250,242,226,.2);
+}
+.btn-ghost:hover{border-color:rgba(255,186,106,.5);color:rgba(255,220,158,.9);transform:translateY(-2px)}
+
+/* vinyl preview */
+.vinyl-wrap{
+  position:relative;margin:0 auto clamp(3rem,7vw,5rem);
+  width:clamp(180px,45vw,260px);aspect-ratio:1;
+}
+.vinyl{
+  width:100%;aspect-ratio:1;border-radius:50%;
+  background:radial-gradient(circle at center,
+    #c86428 0,#c86428 28%,
+    #2a1818 28.4%,#2a1818 30%,
+    #0c0a0c 30%,#0c0a0c 100%);
+  box-shadow:
+    0 40px 70px -20px rgba(0,0,0,.7),
+    0 0 0 1px rgba(255,255,255,.04),
+    inset 0 -20px 50px rgba(0,0,0,.4);
+  animation:spin 5s linear infinite;
+  position:relative;
+}
+.vinyl::before{
+  content:'';position:absolute;inset:0;border-radius:50%;
+  background:repeating-radial-gradient(circle at center,
+    transparent 0,transparent 1.5px,
+    rgba(255,255,255,.04) 1.5px,rgba(255,255,255,.04) 2px);
+  -webkit-mask:radial-gradient(circle,transparent 30%,#000 31%);
+  mask:radial-gradient(circle,transparent 30%,#000 31%);
+}
+.vinyl::after{
+  content:'';position:absolute;inset:0;border-radius:50%;
+  background:linear-gradient(140deg,rgba(255,255,255,.14) 0%,transparent 55%);
+}
+.vinyl-hole{
+  position:absolute;top:50%;left:50%;
+  width:10px;height:10px;background:#000;border-radius:50%;
+  transform:translate(-50%,-50%);z-index:2;
+}
+.vinyl-halo{
+  position:absolute;inset:-25%;border-radius:50%;z-index:-1;
+  background:radial-gradient(circle,rgba(255,178,72,.32),rgba(255,178,72,.06) 44%,transparent 70%);
+  animation:halo 5.5s ease-in-out infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes halo{0%,100%{transform:scale(1);opacity:.7}50%{transform:scale(1.06);opacity:1}}
+
+/* features */
+.features{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:1px;width:100%;
+  border:1px solid rgba(250,242,226,.08);
+  border-radius:20px;overflow:hidden;
+  margin-bottom:clamp(3rem,7vw,5rem);
+  background:rgba(250,242,226,.08);
+}
+.feature{
+  background:rgba(10,5,20,.65);
+  backdrop-filter:blur(12px);
+  padding:1.75rem 1.5rem;text-align:left;
+}
+.feature-icon{font-size:1.6rem;margin-bottom:.8rem;line-height:1}
+.feature-title{
+  font-family:'Fraunces',serif;font-style:italic;
+  font-size:1.05rem;color:#faf2e2;margin-bottom:.4rem;line-height:1.25;
+}
+.feature-desc{font-size:.8rem;color:rgba(250,242,226,.5);line-height:1.55}
+
+/* themes strip */
+.themes-label{
+  font-size:.65rem;letter-spacing:.35em;text-transform:uppercase;
+  color:rgba(250,242,226,.35);margin-bottom:1rem;
+}
+.themes{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;margin-bottom:clamp(3rem,7vw,5rem)}
+.theme-pill{
+  display:flex;align-items:center;gap:.5rem;
+  padding:.4rem .85rem;border-radius:999px;
+  border:1px solid rgba(250,242,226,.1);
+  background:rgba(10,5,20,.5);
+  font-size:.72rem;color:rgba(250,242,226,.6);
+  backdrop-filter:blur(8px);
+}
+.theme-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+
+/* langs */
+.langs-label{
+  font-size:.65rem;letter-spacing:.35em;text-transform:uppercase;
+  color:rgba(250,242,226,.35);margin-bottom:.9rem;
+}
+.langs{display:flex;gap:.4rem;justify-content:center;flex-wrap:wrap;margin-bottom:clamp(3rem,7vw,5rem)}
+.lang{
+  padding:.35rem .8rem;border-radius:999px;
+  border:1px solid rgba(250,242,226,.1);
+  background:rgba(10,5,20,.4);
+  font-size:.78rem;color:rgba(250,242,226,.55);
+}
+
+/* bottom cta */
+.bottom-cta{
+  border-top:1px solid rgba(250,242,226,.08);
+  padding-top:clamp(2rem,5vw,3.5rem);width:100%;
+  display:flex;flex-direction:column;align-items:center;gap:1rem;
+}
+.bottom-cta p{font-size:.82rem;color:rgba(250,242,226,.38);letter-spacing:.06em}
+
+/* footer */
+footer{
+  margin-top:clamp(2rem,4vw,3rem);
+  font-size:.68rem;color:rgba(250,242,226,.22);
+  letter-spacing:.12em;text-transform:uppercase;
+}
+footer a{color:rgba(250,242,226,.35);text-decoration:none}
+footer a:hover{color:rgba(255,186,106,.7)}
+
+@media(max-width:500px){
+  .cta-row{flex-direction:column;align-items:stretch}
+  .btn{justify-content:center}
+  .nav-links .nav-link:not(.primary){display:none}
+}
+</style>
+</head>
+<body>
+<div class="bg"></div>
+<div class="motes" id="motes"></div>
+
+<div class="wrap">
+
+  <nav>
+    <span class="nav-brand">Lounge ✺ Always On</span>
+    <div class="nav-links">
+      <a class="nav-link" href="https://github.com/yypaziuk/lounge-player">GitHub</a>
+      <a class="nav-link primary" href="player.html">Open Player ▶</a>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <p class="eyebrow">Internet Radio Player</p>
+    <h1>Radio that<br><em>never stops</em></h1>
+    <p class="sub">Auto-reconnects when you switch networks. Beautiful themes. Six languages. One HTML file — no install, no server, no tracking.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="player.html">▶ Open Player</a>
+      <a class="btn btn-ghost" href="https://github.com/yypaziuk/lounge-player">↓ Download Free</a>
+    </div>
+  </div>
+
+  <div class="vinyl-wrap">
+    <div class="vinyl-halo"></div>
+    <div class="vinyl"><div class="vinyl-hole"></div></div>
+  </div>
+
+  <div class="features">
+    <div class="feature">
+      <div class="feature-icon">🔄</div>
+      <div class="feature-title">Always reconnects</div>
+      <div class="feature-desc">Switches WiFi ↔ mobile? Power nap? It reconnects automatically with smart exponential backoff.</div>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">🎨</div>
+      <div class="feature-title">6 live themes</div>
+      <div class="feature-desc">Golden Hour, Midnight Jazz, Tokyo Neon and more. Auto-switches by time of day or pick manually.</div>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">📻</div>
+      <div class="feature-title">50 000+ stations</div>
+      <div class="feature-desc">Search the Radio Browser database. Add any stream URL. Save your collection as JSON.</div>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">🌍</div>
+      <div class="feature-title">6 languages</div>
+      <div class="feature-desc">Ukrainian, English, German, French, Spanish, Polish. Auto-detected from your browser.</div>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">📦</div>
+      <div class="feature-title">One file</div>
+      <div class="feature-desc">Single HTML file, ~100KB. No npm, no server, no install. Download and open in any browser.</div>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">🌙</div>
+      <div class="feature-title">Focus mode</div>
+      <div class="feature-desc">Press F for fullscreen vinyl + clock. Sleep timer 15m–2h. MediaSession for headphone controls.</div>
+    </div>
+  </div>
+
+  <p class="themes-label">Themes</p>
+  <div class="themes">
+    <div class="theme-pill"><span class="theme-dot" style="background:linear-gradient(135deg,#ffbe6e,#d85a32)"></span>Golden Hour</div>
+    <div class="theme-pill"><span class="theme-dot" style="background:linear-gradient(135deg,#c89848,#101a2e)"></span>Midnight Jazz</div>
+    <div class="theme-pill"><span class="theme-dot" style="background:linear-gradient(135deg,#d09840,#360a10)"></span>Velvet Bordeaux</div>
+    <div class="theme-pill"><span class="theme-dot" style="background:linear-gradient(135deg,#ff68d8,#0e0638)"></span>Tokyo Neon</div>
+    <div class="theme-pill"><span class="theme-dot" style="background:linear-gradient(135deg,#ff9030,#081610)"></span>Cabin Fire</div>
+    <div class="theme-pill"><span class="theme-dot" style="background:linear-gradient(135deg,#48eec0,#08182e)"></span>Arctic Aurora</div>
+  </div>
+
+  <p class="langs-label">Languages</p>
+  <div class="langs">
+    <span class="lang">🇺🇦 Українська</span>
+    <span class="lang">🇬🇧 English</span>
+    <span class="lang">🇩🇪 Deutsch</span>
+    <span class="lang">🇫🇷 Français</span>
+    <span class="lang">🇪🇸 Español</span>
+    <span class="lang">🇵🇱 Polski</span>
+  </div>
+
+  <div class="bottom-cta">
+    <p>FREE · OPEN SOURCE · NO TRACKING</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="player.html">▶ Open Player</a>
+      <a class="btn btn-ghost" href="https://github.com/yypaziuk/lounge-player">View on GitHub</a>
+    </div>
+  </div>
+
+  <footer>
+    <a href="https://github.com/yypaziuk/lounge-player">github.com/yypaziuk/lounge-player</a>
+    &nbsp;·&nbsp; MIT License
+  </footer>
+
+</div>
+
+<script>
+const m = document.getElementById('motes');
+for(let i=0;i<12;i++){
+  const s=document.createElement('span');
+  s.style.setProperty('--x',Math.random()*100+'%');
+  s.style.setProperty('--xs',(Math.random()*60-30)+'px');
+  s.style.setProperty('--d',(16+Math.random()*14)+'s');
+  s.style.setProperty('--delay',(-Math.random()*20)+'s');
+  m.appendChild(s);
+}
+</script>
+</body>
+</html>
