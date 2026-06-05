@@ -4,9 +4,9 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Lounge · Always On — Internet Radio Player</title>
-<meta name="description" content="A beautiful internet radio player that never stops. Auto-reconnects on network changes, 6 stunning themes, 6 languages. One HTML file."/>
+<meta name="description" content="A beautiful internet radio player that never stops. Auto-reconnects, 10 themes, 6 languages. Free version open source. Pro adds profiles, history, favorites and more."/>
 <meta property="og:title" content="Lounge · Always On"/>
-<meta property="og:description" content="Beautiful internet radio player. Auto-reconnects, 6 themes, 6 languages."/>
+<meta property="og:description" content="Beautiful internet radio player. Auto-reconnects, 10 themes, 6 languages. Free + Pro."/>
 <meta property="og:type" content="website"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -87,6 +87,12 @@ nav{
   color:rgba(255,220,158,.95);
 }
 .nav-link.primary:hover{background:rgba(255,186,106,.28)}
+.nav-link.pro{
+  background:linear-gradient(135deg,rgba(255,186,80,.22),rgba(255,148,44,.12));
+  border-color:rgba(255,186,80,.45);
+  color:rgba(255,220,158,.95);
+}
+.nav-link.pro:hover{background:linear-gradient(135deg,rgba(255,186,80,.35),rgba(255,148,44,.25));border-color:rgba(255,186,80,.7)}
 
 /* hero */
 .hero{margin-bottom:clamp(2.5rem,6vw,4rem)}
@@ -125,6 +131,16 @@ h1 em{font-style:italic;color:#ffdc9e;font-weight:300}
   border:1px solid rgba(250,242,226,.2);
 }
 .btn-ghost:hover{border-color:rgba(255,186,106,.5);color:rgba(255,220,158,.9);transform:translateY(-2px)}
+.btn-pro{
+  background:linear-gradient(135deg,rgba(255,186,80,.22),rgba(255,148,44,.15));
+  color:rgba(255,220,158,.95);
+  border:1px solid rgba(255,186,80,.4);
+}
+.btn-pro:hover{
+  background:linear-gradient(135deg,rgba(255,186,80,.35),rgba(255,148,44,.28));
+  border-color:rgba(255,186,80,.7);
+  transform:translateY(-2px);
+}
 
 /* vinyl preview */
 .vinyl-wrap{
@@ -191,6 +207,66 @@ h1 em{font-style:italic;color:#ffdc9e;font-weight:300}
 }
 .feature-desc{font-size:.8rem;color:rgba(250,242,226,.5);line-height:1.55}
 
+/* pricing */
+.section-label{
+  font-size:.65rem;letter-spacing:.35em;text-transform:uppercase;
+  color:rgba(250,242,226,.35);margin-bottom:1.5rem;
+}
+.pricing{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1px;width:100%;
+  border:1px solid rgba(250,242,226,.08);
+  border-radius:20px;overflow:hidden;
+  margin-bottom:clamp(3rem,7vw,5rem);
+  background:rgba(250,242,226,.08);
+}
+.plan{
+  background:rgba(10,5,20,.65);
+  backdrop-filter:blur(12px);
+  padding:2rem 1.75rem;
+  text-align:left;
+  display:flex;flex-direction:column;
+}
+.plan-pro{
+  background:rgba(16,8,28,.82);
+  position:relative;
+}
+.plan-pro::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 90% 55% at 50% 0%, rgba(255,186,80,.09), transparent 65%);
+  pointer-events:none;
+}
+.plan-name{
+  font-size:.62rem;letter-spacing:.45em;text-transform:uppercase;
+  color:rgba(250,242,226,.38);margin-bottom:.8rem;
+}
+.plan-pro .plan-name{color:rgba(255,186,106,.55)}
+.plan-price{
+  font-family:'Fraunces',serif;font-weight:300;font-style:italic;
+  font-size:2.6rem;color:#faf2e2;line-height:1;
+  margin-bottom:.3rem;
+}
+.plan-pro .plan-price{color:#ffdc9e}
+.plan-tagline{
+  font-size:.76rem;color:rgba(250,242,226,.35);
+  margin-bottom:1.6rem;font-weight:300;
+}
+.plan-features{
+  list-style:none;
+  display:flex;flex-direction:column;gap:.55rem;
+  margin-bottom:1.75rem;flex:1;
+}
+.plan-features li{
+  font-size:.81rem;color:rgba(250,242,226,.62);
+  display:flex;align-items:flex-start;gap:.5rem;line-height:1.4;
+}
+.plan-features li::before{
+  content:'✓';color:rgba(250,242,226,.28);
+  flex-shrink:0;font-size:.72rem;margin-top:.15rem;
+}
+.plan-pro .plan-features li::before{color:rgba(255,186,106,.55)}
+
 /* themes strip */
 .themes-label{
   font-size:.65rem;letter-spacing:.35em;text-transform:uppercase;
@@ -205,7 +281,14 @@ h1 em{font-style:italic;color:#ffdc9e;font-weight:300}
   font-size:.72rem;color:rgba(250,242,226,.6);
   backdrop-filter:blur(8px);
 }
+.theme-pill.theme-pro{border-color:rgba(255,186,80,.2)}
 .theme-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.pro-tag{
+  font-size:.56rem;letter-spacing:.08em;text-transform:uppercase;
+  background:rgba(255,186,80,.16);color:rgba(255,186,80,.8);
+  border:1px solid rgba(255,186,80,.28);
+  padding:.1rem .38rem;border-radius:999px;margin-left:.1rem;
+}
 
 /* langs */
 .langs-label{
@@ -237,10 +320,13 @@ footer{
 footer a{color:rgba(250,242,226,.35);text-decoration:none}
 footer a:hover{color:rgba(255,186,106,.7)}
 
+@media(max-width:600px){
+  .pricing{grid-template-columns:1fr}
+}
 @media(max-width:500px){
   .cta-row{flex-direction:column;align-items:stretch}
   .btn{justify-content:center}
-  .nav-links .nav-link:not(.primary){display:none}
+  .nav-links .nav-link:not(.pro){display:none}
 }
 </style>
 </head>
@@ -255,6 +341,7 @@ footer a:hover{color:rgba(255,186,106,.7)}
     <div class="nav-links">
       <a class="nav-link" href="https://github.com/yypaziuk/lounge-player">GitHub</a>
       <a class="nav-link primary" href="player.html">Open Player ▶</a>
+      <a class="nav-link pro" href="https://yypaziuk.gumroad.com/l/lounge-player">Get Pro →</a>
     </div>
   </nav>
 
@@ -264,7 +351,7 @@ footer a:hover{color:rgba(255,186,106,.7)}
     <p class="sub">Auto-reconnects when you switch networks. Beautiful themes. Six languages. One HTML file — no install, no server, no tracking.</p>
     <div class="cta-row">
       <a class="btn btn-primary" href="player.html">▶ Open Player</a>
-      <a class="btn btn-ghost" href="https://github.com/yypaziuk/lounge-player">↓ Download Free</a>
+      <a class="btn btn-pro" href="https://yypaziuk.gumroad.com/l/lounge-player">Get Pro →</a>
     </div>
   </div>
 
@@ -281,7 +368,7 @@ footer a:hover{color:rgba(255,186,106,.7)}
     </div>
     <div class="feature">
       <div class="feature-icon">🎨</div>
-      <div class="feature-title">6 live themes</div>
+      <div class="feature-title">8 live themes</div>
       <div class="feature-desc">Golden Hour, Midnight Jazz, Tokyo Neon and more. Auto-switches by time of day or pick manually.</div>
     </div>
     <div class="feature">
@@ -306,6 +393,38 @@ footer a:hover{color:rgba(255,186,106,.7)}
     </div>
   </div>
 
+  <p class="section-label">Free vs Pro</p>
+  <div class="pricing">
+    <div class="plan">
+      <div class="plan-name">Free</div>
+      <div class="plan-price">$0</div>
+      <div class="plan-tagline">Open source, always</div>
+      <ul class="plan-features">
+        <li>Auto-reconnect on network change</li>
+        <li>6 themes + auto time-of-day switching</li>
+        <li>50 000+ stations via Radio Browser</li>
+        <li>6 languages, auto-detected</li>
+        <li>Focus mode + sleep timer</li>
+        <li>Single HTML file, no install</li>
+      </ul>
+      <a class="btn btn-ghost" href="player.html">▶ Open Player</a>
+    </div>
+    <div class="plan plan-pro">
+      <div class="plan-name">Pro</div>
+      <div class="plan-price">$3</div>
+      <div class="plan-tagline">Everything in Free, plus</div>
+      <ul class="plan-features">
+        <li>3 Profiles — Work, Evening, Weekend</li>
+        <li>10 Themes (4 Pro-exclusive)</li>
+        <li>6 Curated collections with live counters</li>
+        <li>Favorites ★ per station, filterable</li>
+        <li>Play history — last 8 stations</li>
+        <li>Smooth fade-out on pause</li>
+      </ul>
+      <a class="btn btn-pro" href="https://yypaziuk.gumroad.com/l/lounge-player">Get Pro →</a>
+    </div>
+  </div>
+
   <p class="themes-label">Themes</p>
   <div class="themes">
     <div class="theme-pill"><span class="theme-dot" style="background:linear-gradient(135deg,#ffbe6e,#d85a32)"></span>Golden Hour</div>
@@ -314,6 +433,10 @@ footer a:hover{color:rgba(255,186,106,.7)}
     <div class="theme-pill"><span class="theme-dot" style="background:linear-gradient(135deg,#ff68d8,#0e0638)"></span>Tokyo Neon</div>
     <div class="theme-pill"><span class="theme-dot" style="background:linear-gradient(135deg,#ff9030,#081610)"></span>Cabin Fire</div>
     <div class="theme-pill"><span class="theme-dot" style="background:linear-gradient(135deg,#48eec0,#08182e)"></span>Arctic Aurora</div>
+    <div class="theme-pill theme-pro"><span class="theme-dot" style="background:linear-gradient(135deg,#4a80b8,#0a1628)"></span>Monsoon Rain <span class="pro-tag">PRO</span></div>
+    <div class="theme-pill theme-pro"><span class="theme-dot" style="background:linear-gradient(135deg,#c89848,#1a0e06)"></span>Cozy Library <span class="pro-tag">PRO</span></div>
+    <div class="theme-pill theme-pro"><span class="theme-dot" style="background:linear-gradient(135deg,#e88228,#281006)"></span>Cognac &amp; Oak <span class="pro-tag">PRO</span></div>
+    <div class="theme-pill theme-pro"><span class="theme-dot" style="background:linear-gradient(135deg,#b94bff,#0e0626)"></span>Nebula Dream <span class="pro-tag">PRO</span></div>
   </div>
 
   <p class="langs-label">Languages</p>
@@ -330,6 +453,7 @@ footer a:hover{color:rgba(255,186,106,.7)}
     <p>FREE · OPEN SOURCE · NO TRACKING</p>
     <div class="cta-row">
       <a class="btn btn-primary" href="player.html">▶ Open Player</a>
+      <a class="btn btn-pro" href="https://yypaziuk.gumroad.com/l/lounge-player">Get Pro — $3</a>
       <a class="btn btn-ghost" href="https://github.com/yypaziuk/lounge-player">View on GitHub</a>
     </div>
   </div>
