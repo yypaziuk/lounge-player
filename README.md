@@ -30,7 +30,11 @@
 - **14 themes** that can auto-change by time of day
   - **Free (6):** Golden Hour · Midnight Jazz · Velvet Bordeaux · Tokyo Neon · Cabin Fire · Arctic Aurora
   - **Pro (8):** Monsoon Rain · Cozy Library · Cognac & Oak · Nebula Dream · Sakura Dawn · Synthwave · Abyssal Ocean · Noir Velvet
+- **One-tap mood presets** — Cozy Evening · Rainy Window · Starlit · Golden Calm · Aurora Night · Reading Room: each sets a theme + a tasteful blend of effects in one tap
 - **Atmosphere panel — 12 layered effects:** drifting dust, mote size, halo glow, sonar rings, film grain, breathing gradient, vinyl spin, **aurora ribbons, starfield + shooting stars, rain, bokeh orbs, vignette**
+- **Living vinyl** — softly breathing shadow, a slow lamplight glint, and a warm bloom when playback begins
+- **Procedural vinyl-crackle ambient** (Web Audio) — optional, off by default
+- **Warm first-run default** + a **time-of-day greeting** when the record is at rest
 - Glassmorphism UI panels
 - Respects `prefers-reduced-motion`
 
@@ -52,6 +56,7 @@
 
 ### 💎 Pro extras
 - **3 Profiles** — Work / Evening / Weekend, each with its own stations + theme
+- **8 extra themes**, **mood presets**, the full **12-effect atmosphere panel** and **vinyl-crackle ambient**
 - **6 Curated collections** with one-tap add
 - **Favorites** ★ with filter, and **History** of the last played stations
 - **Wake-up alarm** — fires a station at a set time (native mobile time picker)
@@ -110,6 +115,7 @@ Single self-contained HTML file. No frameworks, no build step, no npm.
 - **Reconnect logic** — `online/offline` events + stall watchdog + offline-station detection
 - **Search** — Radio Browser API across rotating mirrors (de2 → de1 → nl1 → at1)
 - **Themes & effects** — CSS custom properties + body data-attributes swapped on the fly
+- **Vinyl crackle** — procedurally generated noise buffer via the Web Audio API (no audio files)
 - **i18n** — pure JS translation table, 6 languages
 - **Storage** — `localStorage` with in-memory fallback
 - **Metadata** — SomaFM API + Icecast `status-json.xsl` polling
