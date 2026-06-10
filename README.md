@@ -10,13 +10,14 @@
 |---|------|----------|
 | File | `player.html` | `pro.html` |
 | Themes | 6 | **14** |
-| Atmosphere effects | core | **12 controls** |
+| Atmosphere effects | core | **15 controls** |
 | Profiles | — | **3 (Work / Evening / Weekend)** |
 | Curated collections | — | **6** |
 | Favorites · History | — | ✓ |
 | Wake-up alarm | — | ✓ |
 | Station artwork | — | ✓ |
 | Crossfade · sleep fade-out | — | ✓ |
+| Full backup &amp; restore | basic (stations) | **everything (profiles, themes, settings)** |
 | Android APK · Windows desktop | — | ✓ |
 
 👉 **Get Pro:** [yypaziuk.gumroad.com/l/lounge-player](https://yypaziuk.gumroad.com/l/lounge-player) — one-time $3, free updates forever.
@@ -31,7 +32,7 @@
   - **Free (6):** Golden Hour · Midnight Jazz · Velvet Bordeaux · Tokyo Neon · Cabin Fire · Arctic Aurora
   - **Pro (8):** Monsoon Rain · Cozy Library · Cognac & Oak · Nebula Dream · Sakura Dawn · Synthwave · Abyssal Ocean · Noir Velvet
 - **One-tap mood presets** — Cozy Evening · Rainy Window · Starlit · Golden Calm · Aurora Night · Reading Room: each sets a theme + a tasteful blend of effects in one tap
-- **Atmosphere panel — 12 layered effects:** drifting dust, mote size, halo glow, sonar rings, film grain, breathing gradient, vinyl spin, **aurora ribbons, starfield + shooting stars, rain, bokeh orbs, vignette**
+- **Atmosphere panel — 15 layered effects:** drifting dust, mote size, halo glow, sonar rings, film grain, breathing gradient, vinyl spin, aurora ribbons, starfield + shooting stars, rain, bokeh orbs, vignette, **god rays (warm light shafts), parallax depth (layers follow your mouse / device tilt), liquid gradient mesh (flowing, theme-tinted)**
 - **Living vinyl** — softly breathing shadow, a slow lamplight glint, and a warm bloom when playback begins
 - **Procedural vinyl-crackle ambient** (Web Audio) — optional, off by default
 - **Warm first-run default** + a **time-of-day greeting** when the record is at rest
@@ -43,7 +44,7 @@
 - One-click presets (SomaFM Groove Salad, Lush, Drone Zone and more)
 - Add any stream URL manually
 - Now Playing metadata (track & artist)
-- Export / Import your station collection as JSON
+- Export / Import your station collection as JSON (Pro: full backup of everything)
 
 ### 🔄 Reliability
 - Auto-reconnects on network change (WiFi ↔ Mobile)
@@ -56,14 +57,15 @@
 
 ### 💎 Pro extras
 - **3 Profiles** — Work / Evening / Weekend, each with its own stations + theme
-- **8 extra themes**, **mood presets**, the full **12-effect atmosphere panel** and **vinyl-crackle ambient**
+- **8 extra themes**, **mood presets**, the full **15-effect atmosphere panel** (incl. god rays, parallax depth, liquid mesh) and **vinyl-crackle ambient**
 - **6 Curated collections** with one-tap add
 - **Favorites** ★ with filter, and **History** of the last played stations
 - **Wake-up alarm** — fires a station at a set time (native mobile time picker)
 - **Custom station artwork** on the vinyl label
 - **Crossfade** between stations and **gradual fade-out** as the sleep timer ends
+- **Full backup & restore** — export *everything* (stations, profiles, themes, all settings) to a single JSON file and restore it on any device
 - **Service worker** for offline/PWA support
-- **Android APK** (Capacitor) and **Windows desktop** (Electron, tray app + global media keys)
+- **Android APK** (Capacitor) and **Windows desktop** (Electron — single-instance tray app + global media keys)
 
 ### 🌍 Multilingual
 - 🇺🇦 Українська · 🇬🇧 English · 🇩🇪 Deutsch · 🇫🇷 Français · 🇪🇸 Español · 🇵🇱 Polski
@@ -103,7 +105,6 @@ No server, no install, no dependencies. Just one HTML file.
 **Option B — Live demo**
 👉 [yypaziuk.github.io/lounge-player](https://yypaziuk.github.io/lounge-player)
 - Free player: [`/player.html`](https://yypaziuk.github.io/lounge-player/player.html)
-- Pro player: [`/pro.html`](https://yypaziuk.github.io/lounge-player/pro.html)
 
 ---
 
