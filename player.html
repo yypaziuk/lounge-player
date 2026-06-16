@@ -1339,7 +1339,7 @@ const I18N = {
     proTitle:'Розблокуйте Pro', proLede:'Усе з Free — плюс профілі, теми та більше контролю над атмосферою.',
     proF1:'3 профілі — Робота · Вечір · Вихідні', proF2:'+8 ексклюзивних тем', proF3:'Обране ★ та фільтр',
     proF4:'Історія прослуханого', proF5:'Будильник на станцію', proF6:'Обкладинки станцій', proF7:'Кросфейд між станціями',
-    proF8:'Набори настрою одним дотиком', proF9:'15 ефектів атмосфери (промені світла, паралакс, перелив…)',
+    proF8:'Набори настрою одним дотиком', proF9:'15 ефектів атмосфери (промені світла, паралакс, перелив…)', proF10:'9 добірок + групи станцій',
     proCta:'Отримати Pro — $3', proNote:'Одноразово · оновлення назавжди',
   },
   en:{ flag:'🇬🇧', name:'English',
@@ -1379,7 +1379,7 @@ const I18N = {
     proTitle:'Unlock Pro', proLede:'Everything in Free — plus profiles, themes and more atmosphere control.',
     proF1:'3 profiles — Work · Evening · Weekend', proF2:'+8 exclusive themes', proF3:'Favorites ★ and filter',
     proF4:'Listening history', proF5:'Wake-up alarm', proF6:'Station artwork', proF7:'Crossfade between stations',
-    proF8:'One-tap mood presets', proF9:'15 atmosphere effects (light rays, parallax, liquid mesh…)',
+    proF8:'One-tap mood presets', proF9:'15 atmosphere effects (light rays, parallax, liquid mesh…)', proF10:'9 collections + station groups',
     proCta:'Get Pro — $3', proNote:'One-time · free updates forever',
   },
   de:{ flag:'🇩🇪', name:'Deutsch',
@@ -1419,7 +1419,7 @@ const I18N = {
     proTitle:'Pro freischalten', proLede:'Alles aus Free — plus Profile, Themes und mehr Atmosphäre-Kontrolle.',
     proF1:'3 Profile — Arbeit · Abend · Wochenende', proF2:'+8 exklusive Themes', proF3:'Favoriten ★ und Filter',
     proF4:'Wiedergabeverlauf', proF5:'Wecker', proF6:'Sender-Artwork', proF7:'Crossfade zwischen Sendern',
-    proF8:'Stimmungs-Presets mit einem Tipp', proF9:'15 Atmosphäre-Effekte (Lichtstrahlen, Parallax, Farbfluss…)',
+    proF8:'Stimmungs-Presets mit einem Tipp', proF9:'15 Atmosphäre-Effekte (Lichtstrahlen, Parallax, Farbfluss…)', proF10:'9 Sammlungen + Sendergruppen',
     proCta:'Pro holen — $3', proNote:'Einmalig · für immer Updates',
   },
   fr:{ flag:'🇫🇷', name:'Français',
@@ -1459,7 +1459,7 @@ const I18N = {
     proTitle:'Débloquer Pro', proLede:'Tout dans Free — plus profils, thèmes et contrôle de l\'ambiance.',
     proF1:'3 profils — Travail · Soir · Week-end', proF2:'+8 thèmes exclusifs', proF3:'Favoris ★ et filtre',
     proF4:'Historique d\'écoute', proF5:'Réveil', proF6:'Pochettes de stations', proF7:'Fondu entre stations',
-    proF8:'Ambiances en un toucher', proF9:'15 effets d\'ambiance (rayons, parallax, dégradé fluide…)',
+    proF8:'Ambiances en un toucher', proF9:'15 effets d\'ambiance (rayons, parallax, dégradé fluide…)', proF10:'9 collections + groupes de stations',
     proCta:'Obtenir Pro — $3', proNote:'Unique · mises à jour à vie',
   },
   es:{ flag:'🇪🇸', name:'Español',
@@ -1499,7 +1499,7 @@ const I18N = {
     proTitle:'Desbloquear Pro', proLede:'Todo lo de Free — más perfiles, temas y control de ambiente.',
     proF1:'3 perfiles — Trabajo · Tarde · Fin de semana', proF2:'+8 temas exclusivos', proF3:'Favoritos ★ y filtro',
     proF4:'Historial de escucha', proF5:'Alarma', proF6:'Carátulas de emisoras', proF7:'Fundido entre emisoras',
-    proF8:'Ambientes con un toque', proF9:'15 efectos de ambiente (rayos de luz, parallax, malla líquida…)',
+    proF8:'Ambientes con un toque', proF9:'15 efectos de ambiente (rayos de luz, parallax, malla líquida…)', proF10:'9 colecciones + grupos de emisoras',
     proCta:'Obtener Pro — $3', proNote:'Pago único · actualizaciones para siempre',
   },
   pl:{ flag:'🇵🇱', name:'Polski',
@@ -1539,7 +1539,7 @@ const I18N = {
     proTitle:'Odblokuj Pro', proLede:'Wszystko z Free — plus profile, motywy i kontrola atmosfery.',
     proF1:'3 profile — Praca · Wieczór · Weekend', proF2:'+8 ekskluzywnych motywów', proF3:'Ulubione ★ i filtr',
     proF4:'Historia odtwarzania', proF5:'Budzik', proF6:'Okładki stacji', proF7:'Przenikanie między stacjami',
-    proF8:'Nastroje jednym dotknięciem', proF9:'15 efektów atmosfery (promienie, paralaksa, płynny gradient…)',
+    proF8:'Nastroje jednym dotknięciem', proF9:'15 efektów atmosfery (promienie, paralaksa, płynny gradient…)', proF10:'9 kolekcji + grupy stacji',
     proCta:'Zdobądź Pro — $3', proNote:'Jednorazowo · aktualizacje na zawsze',
   },
 };
@@ -1600,7 +1600,7 @@ function renderProTeaser() {
   if (lede) lede.textContent = t('proLede');
   if (cta)  cta.textContent  = t('proCta');
   if (note) note.textContent = t('proNote');
-  const keys = ['proF1','proF2','proF3','proF4','proF5','proF6','proF7','proF8','proF9'];
+  const keys = ['proF1','proF2','proF3','proF4','proF5','proF6','proF7','proF8','proF9','proF10'];
   feats.innerHTML = keys.map(k =>
     `<li><span class="pro-lock" aria-hidden="true">🔒</span>${escapeHTML(t(k))}</li>`
   ).join('');
