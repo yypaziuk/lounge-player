@@ -12,7 +12,8 @@
 | Themes | 6 | **14** |
 | Atmosphere effects | core | **15 controls** |
 | Profiles | — | **3 (Work / Evening / Weekend)** |
-| Curated collections | — | **6** |
+| Curated collections | — | **9** |
+| Station groups | — | ✓ |
 | Favorites · History | — | ✓ |
 | Wake-up alarm | — | ✓ |
 | Station artwork | — | ✓ |
@@ -58,7 +59,8 @@
 ### 💎 Pro extras
 - **3 Profiles** — Work / Evening / Weekend, each with its own stations + theme
 - **8 extra themes**, **mood presets**, the full **15-effect atmosphere panel** (incl. god rays, parallax depth, liquid mesh) and **vinyl-crackle ambient**
-- **6 Curated collections** with one-tap add
+- **9 Curated collections** with one-tap add (each a unique, hand-checked set)
+- **Station groups** — tag stations into your own groups, filter and collapse them, manage groups in one place
 - **Favorites** ★ with filter, and **History** of the last played stations
 - **Wake-up alarm** — fires a station at a set time (native mobile time picker)
 - **Custom station artwork** on the vinyl label
@@ -95,7 +97,7 @@
 ## 🚀 Quick Start
 
 **Option A — Open locally**
-1. Download `player.html` (Free) or `pro.html` (Pro)
+1. Download `player.html` (Free), or get `pro.html` on [Gumroad](https://yypaziuk.gumroad.com/l/lounge-player) (Pro)
 2. Open in any modern browser
 3. Click **+ Add** or pick a preset station
 4. Press Play ▶
@@ -105,6 +107,7 @@ No server, no install, no dependencies. Just one HTML file.
 **Option B — Live demo**
 👉 [yypaziuk.github.io/lounge-player](https://yypaziuk.github.io/lounge-player)
 - Free player: [`/player.html`](https://yypaziuk.github.io/lounge-player/player.html)
+- Pro is available on [Gumroad](https://yypaziuk.gumroad.com/l/lounge-player) (one-time $3)
 
 ---
 
