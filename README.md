@@ -6,22 +6,23 @@
 
 **Two editions, one file each — no frameworks, no build step, no npm.**
 
-| | Free | Pro · $3 |
+| | Free | Pro |
 |---|------|----------|
 | File | `player.html` | `pro.html` |
 | Themes | 6 | **14** |
-| Atmosphere effects | core | **15 controls** |
+| Atmosphere effects | core | **16 controls** |
 | Profiles | — | **3 (Work / Evening / Weekend)** |
 | Curated collections | — | **9** |
 | Station groups | — | ✓ |
 | Favorites · History | — | ✓ |
 | Wake-up alarm | — | ✓ |
+| Station schedule | — | ✓ |
 | Station artwork | — | ✓ |
 | Crossfade · sleep fade-out | — | ✓ |
 | Full backup &amp; restore | basic (stations) | **everything (profiles, themes, settings)** |
 | Android APK · Windows desktop | — | ✓ |
 
-👉 **Get Pro:** [yypaziuk.gumroad.com/l/lounge-player](https://yypaziuk.gumroad.com/l/lounge-player) — one-time $3, free updates forever.
+👉 **Try Pro:** [lounge-player.pro](https://lounge-player.pro) — every feature, synced across your devices.
 
 ---
 
@@ -33,7 +34,7 @@
   - **Free (6):** Golden Hour · Midnight Jazz · Velvet Bordeaux · Tokyo Neon · Cabin Fire · Arctic Aurora
   - **Pro (8):** Monsoon Rain · Cozy Library · Cognac & Oak · Nebula Dream · Sakura Dawn · Synthwave · Abyssal Ocean · Noir Velvet
 - **One-tap mood presets** — Cozy Evening · Rainy Window · Starlit · Golden Calm · Aurora Night · Reading Room: each sets a theme + a tasteful blend of effects in one tap
-- **Atmosphere panel — 15 layered effects:** drifting dust, mote size, halo glow, sonar rings, film grain, breathing gradient, vinyl spin, aurora ribbons, starfield + shooting stars, rain, bokeh orbs, vignette, **god rays (warm light shafts), parallax depth (layers follow your mouse / device tilt), liquid gradient mesh (flowing, theme-tinted)**
+- **Atmosphere panel — 16 layered effects:** drifting dust, mote size, halo glow, sonar rings, film grain, breathing gradient, vinyl spin, aurora ribbons, starfield + shooting stars, rain, bokeh orbs, vignette, **god rays (warm light shafts), parallax depth (layers follow your mouse / device tilt), liquid gradient mesh (flowing, theme-tinted), equalizer (procedural bars that pulse to the beat in your theme's colours)**
 - **Living vinyl** — softly breathing shadow, a slow lamplight glint, and a warm bloom when playback begins
 - **Procedural vinyl-crackle ambient** (Web Audio) — optional, off by default
 - **Warm first-run default** + a **time-of-day greeting** when the record is at rest
@@ -58,11 +59,12 @@
 
 ### 💎 Pro extras
 - **3 Profiles** — Work / Evening / Weekend, each with its own stations + theme
-- **8 extra themes**, **mood presets**, the full **15-effect atmosphere panel** (incl. god rays, parallax depth, liquid mesh) and **vinyl-crackle ambient**
+- **8 extra themes**, **mood presets**, the full **16-effect atmosphere panel** (incl. god rays, parallax depth, liquid mesh, equalizer) and **vinyl-crackle ambient**
 - **9 Curated collections** with one-tap add (each a unique, hand-checked set)
 - **Station groups** — tag stations into your own groups, filter and collapse them, manage groups in one place
 - **Favorites** ★ with filter, and **History** of the last played stations
 - **Wake-up alarm** — fires a station at a set time (native mobile time picker)
+- **Station schedule** — daily rules that auto-switch to a profile at set times of day (e.g. Work at 9:00, Evening jazz at 18:00)
 - **Custom station artwork** on the vinyl label
 - **Crossfade** between stations and **gradual fade-out** as the sleep timer ends
 - **Full backup & restore** — export *everything* (stations, profiles, themes, all settings) to a single JSON file and restore it on any device
@@ -97,7 +99,7 @@
 ## 🚀 Quick Start
 
 **Option A — Open locally**
-1. Download `player.html` (Free), or get `pro.html` on [Gumroad](https://yypaziuk.gumroad.com/l/lounge-player) (Pro)
+1. Download `player.html` (Free), or open the full app at [lounge-player.pro](https://lounge-player.pro) (Free + Pro)
 2. Open in any modern browser
 3. Click **+ Add** or pick a preset station
 4. Press Play ▶
@@ -107,7 +109,7 @@ No server, no install, no dependencies. Just one HTML file.
 **Option B — Live demo**
 👉 [yypaziuk.github.io/lounge-player](https://yypaziuk.github.io/lounge-player)
 - Free player: [`/player.html`](https://yypaziuk.github.io/lounge-player/player.html)
-- Pro is available on [Gumroad](https://yypaziuk.gumroad.com/l/lounge-player) (one-time $3)
+- Full app (Free + Pro): [lounge-player.pro](https://lounge-player.pro)
 
 ---
 
@@ -145,7 +147,7 @@ Pull requests are welcome! Some ideas if you want to contribute:
 ## 📄 License
 
 The **Free** edition (`player.html`) is released under the **MIT** license — free to use, modify and share.
-The **Pro** edition (`pro.html`) is a commercial product; buying it supports development and gets you free updates forever.
+The **Pro** edition (`pro.html`) is a commercial product (subscription) — it supports development and unlocks every feature plus cross-device sync.
 
 ---
 
