@@ -767,11 +767,18 @@ input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.25); }
 .pro-cta {
   position: relative; display: block; text-align: center;
   padding: 0.75rem 1rem; border-radius: 12px;
-  background: linear-gradient(135deg, var(--amber), var(--gold));
-  color: #2a1606; font-weight: 600; font-size: 0.92rem;
-  letter-spacing: 0.01em;
-  box-shadow: 0 6px 18px rgba(255,150,60, 0.22);
+  /* те саме «живе золото», що Pro-бейджі/CTA у повній версії — один бренд */
+  background: linear-gradient(110deg, #a86a14 0%, #e8b45a 30%, #ffe9b0 50%, #e8b45a 70%, #a86a14 100%);
+  background-size: 220% 100%;
+  animation: proShimmer 3.4s ease-in-out infinite;
+  color: #241102; font-weight: 700; font-size: 0.92rem;
+  letter-spacing: 0.02em;
+  box-shadow: 0 4px 18px rgba(216,156,50,0.45), inset 0 1px 0 rgba(255,255,255,0.4);
   transition: filter 0.2s ease;
+}
+@keyframes proShimmer {
+  0%, 100% { background-position: 0% 0; }
+  50%      { background-position: 100% 0; }
 }
 .pro-teaser:hover .pro-cta { filter: brightness(1.06); }
 .pro-note {
@@ -1601,6 +1608,14 @@ function refreshI18n() {
   // theme
   if(atmosphereTitleEl) atmosphereTitleEl.textContent = t('atmosphere');
   if(autoTitleEl) autoTitleEl.textContent = t('autoTime');
+  // live-label за поточним станом: на boot (статичний HTML = англ. «off air»)
+  // і при зміні мови під час гри (той самий фікс, що в pro.html)
+  {
+    const st = body.dataset.state || 'idle';
+    const map = { idle:'offAir', connecting:'connecting_', playing:'onAir',
+                  reconnecting:'reconnecting_', offline:'noSignal', error:'noSignal' };
+    if (liveLabel && map[st]) liveLabel.textContent = t(map[st]);
+  }
   // lang dropdown
   renderLangDrop();
   updateAutoLabel();

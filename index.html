@@ -142,14 +142,23 @@ h1 em{font-style:italic;color:#ffdc9e;font-weight:300}
 }
 .btn-ghost:hover{border-color:rgba(255,186,106,.5);color:rgba(255,220,158,.9);transform:translateY(-2px)}
 .btn-pro{
-  background:linear-gradient(135deg,rgba(255,186,80,.22),rgba(255,148,44,.15));
-  color:rgba(255,220,158,.95);
-  border:1px solid rgba(255,186,80,.4);
+  /* «живе золото» бренду Pro — як бейджі й CTA у плеєрі */
+  background:linear-gradient(110deg,#a86a14 0%,#e8b45a 30%,#ffe9b0 50%,#e8b45a 70%,#a86a14 100%);
+  background-size:220% 100%;
+  animation:proShimmer 3.4s ease-in-out infinite;
+  color:#241102;
+  font-weight:700;
+  border:1px solid rgba(255,228,168,.55);
+  box-shadow:0 4px 18px rgba(216,156,50,.4),inset 0 1px 0 rgba(255,255,255,.4);
 }
+@keyframes proShimmer{0%,100%{background-position:0% 0}50%{background-position:100% 0}}
 .btn-pro:hover{
-  background:linear-gradient(135deg,rgba(255,186,80,.35),rgba(255,148,44,.28));
-  border-color:rgba(255,186,80,.7);
+  background:linear-gradient(110deg,#b87a1e 0%,#f0c470 30%,#fff3cc 50%,#f0c470 70%,#b87a1e 100%);
+  background-size:220% 100%;
+  color:#241102;
+  border-color:#ffe9b0;
   transform:translateY(-2px);
+  box-shadow:0 6px 22px rgba(232,180,90,.55),inset 0 1px 0 rgba(255,255,255,.45);
 }
 
 /* vinyl preview */
