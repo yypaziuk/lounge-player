@@ -10,9 +10,12 @@
 |---|------|----------|
 | File | `player.html` | `pro.html` |
 | Themes | 6 | **14** |
-| Atmosphere effects | core | **16 controls** |
+| Languages | **11** | **11** |
+| Atmosphere effects | 3 basic | **16 controls** |
 | Profiles | — | **3 (Work / Evening / Weekend)** |
+| Cloud sync across devices | — | ✓ |
 | Curated collections | — | **9** |
+| Station of the week | — | ✓ |
 | Station groups | — | ✓ |
 | Favorites · History | — | ✓ |
 | Wake-up alarm | — | ✓ |
@@ -34,7 +37,7 @@
   - **Free (6):** Golden Hour · Midnight Jazz · Velvet Bordeaux · Tokyo Neon · Cabin Fire · Arctic Aurora
   - **Pro (8):** Monsoon Rain · Cozy Library · Cognac & Oak · Nebula Dream · Sakura Dawn · Synthwave · Abyssal Ocean · Noir Velvet
 - **One-tap mood presets** — Cozy Evening · Rainy Window · Starlit · Golden Calm · Aurora Night · Reading Room: each sets a theme + a tasteful blend of effects in one tap
-- **Atmosphere panel — 16 layered effects:** drifting dust, mote size, halo glow, sonar rings, film grain, breathing gradient, vinyl spin, aurora ribbons, starfield + shooting stars, rain, bokeh orbs, vignette, **god rays (warm light shafts), parallax depth (layers follow your mouse / device tilt), liquid gradient mesh (flowing, theme-tinted), equalizer (procedural bars that pulse to the beat in your theme's colours)**
+- **Atmosphere panel — 16 layered effects:** drifting dust, mote size, halo glow, sonar rings, film grain, breathing gradient, vinyl spin, aurora ribbons, starfield + shooting stars, rain, bokeh orbs, vignette, **god rays (warm light shafts), parallax depth (layers follow your mouse / device tilt), liquid gradient mesh (flowing, theme-tinted), equalizer (procedural bars flowing in your theme's colours)**
 - **Living vinyl** — softly breathing shadow, a slow lamplight glint, and a warm bloom when playback begins
 - **Procedural vinyl-crackle ambient** (Web Audio) — optional, off by default
 - **Warm first-run default** + a **time-of-day greeting** when the record is at rest
@@ -59,8 +62,9 @@
 
 ### 💎 Pro extras
 - **3 Profiles** — Work / Evening / Weekend, each with its own stations + theme
+- **Cloud sync** — stations, profiles, themes and settings follow you across web, Android and desktop
 - **8 extra themes**, **mood presets**, the full **16-effect atmosphere panel** (incl. god rays, parallax depth, liquid mesh, equalizer) and **vinyl-crackle ambient**
-- **9 Curated collections** with one-tap add (each a unique, hand-checked set)
+- **9 Curated collections** with one-tap add (each a unique, hand-checked set) and a **Station of the week** — curated picks served from the cloud, refreshed without app updates
 - **Station groups** — tag stations into your own groups, filter and collapse them, manage groups in one place
 - **Favorites** ★ with filter, and **History** of the last played stations
 - **Wake-up alarm** — fires a station at a set time (native mobile time picker)
@@ -72,7 +76,7 @@
 - **Android APK** (Capacitor) and **Windows desktop** (Electron — single-instance tray app + global media keys)
 
 ### 🌍 Multilingual
-- 🇺🇦 Українська · 🇬🇧 English · 🇩🇪 Deutsch · 🇫🇷 Français · 🇪🇸 Español · 🇵🇱 Polski
+- 🇺🇦 Українська · 🇬🇧 English · 🇩🇪 Deutsch · 🇫🇷 Français · 🇪🇸 Español · 🇮🇹 Italiano · 🇧🇷 Português · 🇵🇱 Polski · 🇹🇷 Türkçe · 🇯🇵 日本語 · 🇨🇳 中文
 - Auto-detects browser language on first launch
 
 ### ⌨️ Controls
@@ -92,7 +96,7 @@
 - Focus mode — fullscreen vinyl + clock
 - Drag & drop station reorder
 - PWA — installable as desktop/mobile app (on HTTPS)
-- MediaSession API — works with headphone buttons
+- MediaSession API — works with headphone buttons and system media controls (Android / desktop; intentionally off on iOS web, where lock-screen sessions are unreliable)
 
 ---
 
@@ -122,7 +126,7 @@ Single self-contained HTML file. No frameworks, no build step, no npm.
 - **Search** — Radio Browser API across rotating mirrors (de2 → de1 → nl1 → at1)
 - **Themes & effects** — CSS custom properties + body data-attributes swapped on the fly
 - **Vinyl crackle** — procedurally generated noise buffer via the Web Audio API (no audio files)
-- **i18n** — pure JS translation table, 6 languages
+- **i18n** — pure JS translation table, 11 languages
 - **Storage** — `localStorage` with in-memory fallback
 - **Metadata** — SomaFM API + Icecast `status-json.xsl` polling
 - **Desktop/mobile builds** — same `pro.html` wrapped via Electron (Windows) and Capacitor (Android)

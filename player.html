@@ -85,7 +85,8 @@ body {
   opacity: 0;
   pointer-events: none;
   transition: opacity 1.4s ease;
-  background-attachment: fixed;
+  /* no background-attachment:fixed here — it kills iOS composited scrolling */
+  transform: translateZ(0);
 }
 .bg-layer.visible { opacity: 1; }
 
@@ -145,8 +146,9 @@ main {
 /* lang dropdown */
 .lang-wrap { position: relative; }
 #lang-drop {
-  position: absolute; top: calc(100% + 8px); left: 50%;
-  transform: translateX(-50%); z-index: 300;
+  /* left:0, not centered — a centered menu overflows the left screen edge on iPhone */
+  position: absolute; top: calc(100% + 8px); left: 0;
+  z-index: 300;
   background: rgba(10,5,20,0.92);
   border: 1px solid var(--cream-line); border-radius: 14px;
   backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
@@ -161,6 +163,16 @@ main {
   padding: 0.48rem 0.7rem; border-radius: 8px;
   text-align: left; font-size: 0.82rem;
   transition: background 120ms; white-space: nowrap;
+  display: flex; align-items: center; gap: 0.55rem;
+}
+.lang-opt .lang-flag { flex-shrink: 0; display: flex; }
+.lang-opt .lang-flag svg {
+  width: 21px; height: 14px; display: block; border-radius: 2px; overflow: hidden;
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.14);
+}
+#lang-btn svg {
+  width: 18px; height: 12px; display: block; border-radius: 2px; overflow: hidden;
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.25);
 }
 .lang-opt:hover { background: rgba(255,255,255,0.06); }
 .lang-opt[data-active="true"] { color: var(--amber-glow); }
@@ -1100,7 +1112,7 @@ body.in-focus main { visibility: hidden; }
     <div class="topbar-left">
       <button id="theme-btn" class="icon-btn" type="button" aria-label="Theme"><span class="theme-icon"></span></button>
       <div class="lang-wrap" id="lang-wrap">
-        <button id="lang-btn" class="icon-btn" type="button" aria-label="Language">🇺🇦</button>
+        <button id="lang-btn" class="icon-btn" type="button" aria-label="Language"><svg viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="16" fill="#ffd500"/><rect width="24" height="8" fill="#005bbb"/></svg></button>
         <div id="lang-drop" hidden></div>
       </div>
     </div>
@@ -1363,7 +1375,7 @@ const I18N = {
     proTitle:'Розблокуйте Pro', proLede:'Усе з Free — плюс профілі, теми та більше контролю над атмосферою.',
     proF1:'3 профілі — Робота · Вечір · Вихідні', proF2:'+8 ексклюзивних тем', proF3:'Обране ★ та фільтр',
     proF4:'Історія прослуханого', proF5:'Будильник на станцію', proF6:'Обкладинки станцій', proF7:'Кросфейд між станціями',
-    proF8:'Набори настрою одним дотиком', proF9:'16 ефектів атмосфери (еквалайзер, промені світла, паралакс…)', proF10:'9 добірок + групи станцій', proF11:'🗓 Розклад станцій за часом доби',
+    proF8:'Набори настрою одним дотиком', proF9:'16 ефектів атмосфери (еквалайзер, промені світла, паралакс…)', proF10:'9 добірок + групи станцій', proF11:'🗓 Розклад станцій за часом доби', proF12:'☁ Хмарна синхронізація між пристроями',
     proCta:'Спробувати Pro →', proNote:'Усі функції · синхронізація між пристроями',
   },
   en:{ flag:'🇬🇧', name:'English',
@@ -1403,7 +1415,7 @@ const I18N = {
     proTitle:'Unlock Pro', proLede:'Everything in Free — plus profiles, themes and more atmosphere control.',
     proF1:'3 profiles — Work · Evening · Weekend', proF2:'+8 exclusive themes', proF3:'Favorites ★ and filter',
     proF4:'Listening history', proF5:'Wake-up alarm', proF6:'Station artwork', proF7:'Crossfade between stations',
-    proF8:'One-tap mood presets', proF9:'16 atmosphere effects (equalizer, light rays, parallax…)', proF10:'9 collections + station groups', proF11:'🗓 Daily station schedule',
+    proF8:'One-tap mood presets', proF9:'16 atmosphere effects (equalizer, light rays, parallax…)', proF10:'9 collections + station groups', proF11:'🗓 Daily station schedule', proF12:'☁ Cloud sync across devices',
     proCta:'Try Pro →', proNote:'Every feature · sync across devices',
   },
   de:{ flag:'🇩🇪', name:'Deutsch',
@@ -1443,7 +1455,7 @@ const I18N = {
     proTitle:'Pro freischalten', proLede:'Alles aus Free — plus Profile, Themes und mehr Atmosphäre-Kontrolle.',
     proF1:'3 Profile — Arbeit · Abend · Wochenende', proF2:'+8 exklusive Themes', proF3:'Favoriten ★ und Filter',
     proF4:'Wiedergabeverlauf', proF5:'Wecker', proF6:'Sender-Artwork', proF7:'Crossfade zwischen Sendern',
-    proF8:'Stimmungs-Presets mit einem Tipp', proF9:'16 Atmosphäre-Effekte (Equalizer, Lichtstrahlen, Parallax…)', proF10:'9 Sammlungen + Sendergruppen', proF11:'🗓 Täglicher Sender-Zeitplan',
+    proF8:'Stimmungs-Presets mit einem Tipp', proF9:'16 Atmosphäre-Effekte (Equalizer, Lichtstrahlen, Parallax…)', proF10:'9 Sammlungen + Sendergruppen', proF11:'🗓 Täglicher Sender-Zeitplan', proF12:'☁ Cloud-Synchronisation zwischen Geräten',
     proCta:'Pro testen →', proNote:'Alle Funktionen · Sync über Geräte',
   },
   fr:{ flag:'🇫🇷', name:'Français',
@@ -1483,7 +1495,7 @@ const I18N = {
     proTitle:'Débloquer Pro', proLede:'Tout dans Free — plus profils, thèmes et contrôle de l\'ambiance.',
     proF1:'3 profils — Travail · Soir · Week-end', proF2:'+8 thèmes exclusifs', proF3:'Favoris ★ et filtre',
     proF4:'Historique d\'écoute', proF5:'Réveil', proF6:'Pochettes de stations', proF7:'Fondu entre stations',
-    proF8:'Ambiances en un toucher', proF9:'16 effets d\'ambiance (égaliseur, rayons, parallax…)', proF10:'9 collections + groupes de stations', proF11:'🗓 Programmation quotidienne des stations',
+    proF8:'Ambiances en un toucher', proF9:'16 effets d\'ambiance (égaliseur, rayons, parallax…)', proF10:'9 collections + groupes de stations', proF11:'🗓 Programmation quotidienne des stations', proF12:'☁ Synchronisation cloud entre appareils',
     proCta:'Essayer Pro →', proNote:'Toutes les fonctions · sync multi-appareils',
   },
   es:{ flag:'🇪🇸', name:'Español',
@@ -1523,7 +1535,7 @@ const I18N = {
     proTitle:'Desbloquear Pro', proLede:'Todo lo de Free — más perfiles, temas y control de ambiente.',
     proF1:'3 perfiles — Trabajo · Tarde · Fin de semana', proF2:'+8 temas exclusivos', proF3:'Favoritos ★ y filtro',
     proF4:'Historial de escucha', proF5:'Alarma', proF6:'Carátulas de emisoras', proF7:'Fundido entre emisoras',
-    proF8:'Ambientes con un toque', proF9:'16 efectos de ambiente (ecualizador, rayos de luz, parallax…)', proF10:'9 colecciones + grupos de emisoras', proF11:'🗓 Horario diario de estaciones',
+    proF8:'Ambientes con un toque', proF9:'16 efectos de ambiente (ecualizador, rayos de luz, parallax…)', proF10:'9 colecciones + grupos de emisoras', proF11:'🗓 Horario diario de estaciones', proF12:'☁ Sincronización en la nube entre dispositivos',
     proCta:'Probar Pro →', proNote:'Todas las funciones · sync entre dispositivos',
   },
   pl:{ flag:'🇵🇱', name:'Polski',
@@ -1563,11 +1575,164 @@ const I18N = {
     proTitle:'Odblokuj Pro', proLede:'Wszystko z Free — plus profile, motywy i kontrola atmosfery.',
     proF1:'3 profile — Praca · Wieczór · Weekend', proF2:'+8 ekskluzywnych motywów', proF3:'Ulubione ★ i filtr',
     proF4:'Historia odtwarzania', proF5:'Budzik', proF6:'Okładki stacji', proF7:'Przenikanie między stacjami',
-    proF8:'Nastroje jednym dotknięciem', proF9:'16 efektów atmosfery (korektor, promienie, paralaksa…)', proF10:'9 kolekcji + grupy stacji', proF11:'🗓 Dzienny harmonogram stacji',
+    proF8:'Nastroje jednym dotknięciem', proF9:'16 efektów atmosfery (korektor, promienie, paralaksa…)', proF10:'9 kolekcji + grupy stacji', proF11:'🗓 Dzienny harmonogram stacji', proF12:'☁ Synchronizacja w chmurze między urządzeniami',
     proCta:'Wypróbuj Pro →', proNote:'Wszystkie funkcje · synchronizacja',
   },
+  it:{ flag:'🇮🇹', name:'Italiano',
+    onAir:'in onda', offAir:'fuori onda', connecting_:'connessione', reconnecting_:'riconnessione',
+    noSignal:'nessun segnale', radioDefault:'radio', ready:'Pronto alla riproduzione',
+    addFirst:'Aggiungi una stazione per iniziare', selectStation:'Seleziona una stazione dall\'elenco',
+    connectingMsg:'Connessione…', buffering:'Buffering…', paused:'In pausa',
+    reconnectingN:n=>`Riconnessione… (${n})`, noNetwork:'Nessuna rete — in attesa…',
+    networkBack:'Rete ripristinata — connessione…', noStation:'Aggiungi prima una stazione',
+    stations:'Stazioni', addBtn:'⌕ + Aggiungi', filterPh:'Filtra…', quickStart:'Avvio rapido',
+    quickDesc:'Stazioni chill-out affidabili — aggiungi con un clic:',
+    orSearch:'o cerca tra 50 000+ stazioni:', searchMore:'⌕ Cerca stazioni', searchPh:'Cerca per nome…',
+    searching:'Ricerca…', searchWait:'Inizia a digitare…',
+    searchFail:'Ricerca non disponibile. Aggiungi URL manualmente ↓',
+    noResults:q=>`Nessun risultato per «${q}»`, orUrl:'— o aggiungi tramite URL —', namePh:'Nome stazione',
+    urlPh:'https://… URL dello stream', save:'Salva', reconnectsLbl:'riconnessioni', exportTitle:'Esporta',
+    importTitle:'Importa', noExport:'Nessuna stazione da esportare', exported:n=>`Esportate ${n} stazioni`,
+    imported:n=>`Importate ${n} stazioni`, noNew:'Nessuna nuova stazione trovata',
+    fileErr:'Errore nella lettura del file', focusHint:'F · Esc · clic — esci',
+    shortcutsTitle:'Scorciatoie da tastiera', kbPlay:'Riproduci / Pausa', kbPrevNext:'Precedente / Successiva',
+    kbVol:'Volume su / giù', kbMute:'Muto', kbSearch:'Cerca stazione', kbFocus:'Modalità Focus',
+    kbTheme:'Tema successivo', kbHelp:'Questa schermata', tips:'Consigli',
+    tipsText:'Apri in locale — le stazioni restano salvate. ↓ ↑ — esporta/importa. Trascina le righe per riordinare. Su HTTPS — installa come app.',
+    atmosphere:'Atmosfera', autoTime:'Auto in base all\'ora', themeChanges:'il tema cambia con l\'ora',
+    nowIs:(n,s)=>`ora: ${n.toLowerCase()} · ${s}`, installApp:'↗ Installa come app', language:'Lingua',
+    deleteStation:'Elimina', proTitle:'Sblocca Pro',
+    proLede:'Tutto di Free — più profili, temi e maggiore controllo dell\'atmosfera.',
+    proF1:'3 profili — Lavoro · Sera · Weekend', proF2:'+8 temi esclusivi', proF3:'Preferiti ★ e filtro',
+    proF4:'Cronologia di ascolto', proF5:'Sveglia con stazione', proF6:'Copertine delle stazioni',
+    proF7:'Crossfade tra stazioni', proF8:'Preset di atmosfera con un tocco',
+    proF9:'16 effetti atmosfera (equalizzatore, raggi di luce, parallasse…)',
+    proF10:'9 raccolte + gruppi di stazioni', proF11:'🗓 Programma giornaliero delle stazioni',
+    proF12:'☁ Sincronizzazione cloud tra dispositivi', proCta:'Prova Pro →',
+    proNote:'Tutte le funzioni · sincronizzazione tra dispositivi',
+  },
+  pt:{ flag:'🇧🇷', name:'Português',
+    onAir:'no ar', offAir:'fora do ar', connecting_:'conectando', reconnecting_:'reconectando',
+    noSignal:'sem sinal', radioDefault:'rádio', ready:'Pronto para tocar',
+    addFirst:'Adicione uma estação para começar', selectStation:'Selecione uma estação da lista',
+    connectingMsg:'Conectando…', buffering:'Carregando…', paused:'Pausado',
+    reconnectingN:n=>`Reconectando… (${n})`, noNetwork:'Sem rede — aguardando…',
+    networkBack:'Rede restaurada — conectando…', noStation:'Adicione uma estação primeiro',
+    stations:'Estações', addBtn:'⌕ + Adicionar', filterPh:'Filtrar…', quickStart:'Início rápido',
+    quickDesc:'Estações chill-out confiáveis — adicione com um clique:',
+    orSearch:'ou busque em 50 000+ estações:', searchMore:'⌕ Buscar estações', searchPh:'Buscar por nome…',
+    searching:'Buscando…', searchWait:'Comece a digitar…',
+    searchFail:'Busca indisponível. Adicione a URL manualmente ↓', noResults:q=>`Nada encontrado para «${q}»`,
+    orUrl:'— ou adicione por URL —', namePh:'Nome da estação', urlPh:'https://… URL do stream', save:'Salvar',
+    reconnectsLbl:'reconexões', exportTitle:'Exportar', importTitle:'Importar',
+    noExport:'Nenhuma estação para exportar', exported:n=>`Exportadas ${n} estações`,
+    imported:n=>`${n} estação(ões) importada(s)`, noNew:'Nenhuma estação nova encontrada',
+    fileErr:'Erro ao ler o arquivo', focusHint:'F · Esc · clique — sair', shortcutsTitle:'Atalhos de teclado',
+    kbPlay:'Tocar / Pausar', kbPrevNext:'Anterior / Próxima', kbVol:'Volume + / −', kbMute:'Mudo',
+    kbSearch:'Buscar estação', kbFocus:'Modo Foco', kbTheme:'Próximo tema', kbHelp:'Esta tela', tips:'Dicas',
+    tipsText:'Abra localmente — as estações ficam salvas. ↓ ↑ — exportar/importar. Arraste as linhas para reordenar. Em HTTPS — instale como app.',
+    atmosphere:'Atmosfera', autoTime:'Automático pela hora do dia', themeChanges:'o tema muda com a hora',
+    nowIs:(n,s)=>`agora: ${n.toLowerCase()} · ${s}`, installApp:'↗ Instalar como app', language:'Idioma',
+    deleteStation:'Excluir', proTitle:'Desbloqueie o Pro',
+    proLede:'Tudo do Free — mais perfis, temas e maior controle da atmosfera.',
+    proF1:'3 perfis — Trabalho · Noite · Fim de semana', proF2:'+8 temas exclusivos',
+    proF3:'Favoritas ★ e filtro', proF4:'Histórico de reprodução', proF5:'Despertador com estação',
+    proF6:'Capas das estações', proF7:'Crossfade entre estações', proF8:'Presets de clima com um toque',
+    proF9:'16 efeitos de atmosfera (equalizador, raios de luz, parallax…)',
+    proF10:'9 coleções + grupos de estações', proF11:'🗓 Programação diária de estações',
+    proF12:'☁ Sincronização na nuvem entre dispositivos', proCta:'Experimentar o Pro →',
+    proNote:'Todos os recursos · sincronização entre dispositivos',
+  },
+  tr:{ flag:'🇹🇷', name:'Türkçe',
+    onAir:'yayında', offAir:'yayın dışı', connecting_:'bağlanıyor', reconnecting_:'yeniden bağlanıyor',
+    noSignal:'sinyal yok', radioDefault:'radyo', ready:'Çalmaya hazır',
+    addFirst:'Başlamak için bir istasyon ekle', selectStation:'Listeden bir istasyon seç',
+    connectingMsg:'Bağlanıyor…', buffering:'Arabelleğe alınıyor…', paused:'Duraklatıldı',
+    reconnectingN:n=>`Yeniden bağlanıyor… (${n})`, noNetwork:'Ağ yok — bekleniyor…',
+    networkBack:'Ağ geri geldi — bağlanıyor…', noStation:'Önce bir istasyon ekle', stations:'İstasyonlar',
+    addBtn:'⌕ + Ekle', filterPh:'Filtrele…', quickStart:'Hızlı başlangıç',
+    quickDesc:'Güvenilir sakinleştirici istasyonlar — tek tıkla ekle:', orSearch:'ya da 50 000+ istasyon ara:',
+    searchMore:'⌕ İstasyon ara', searchPh:'İsme göre ara…', searching:'Aranıyor…', searchWait:'Yazmaya başla…',
+    searchFail:'Arama kullanılamıyor. URL\'yi elle ekle ↓', noResults:q=>`«${q}» için sonuç yok`,
+    orUrl:'— ya da URL ile ekle —', namePh:'İstasyon adı', urlPh:'https://… yayın URL\'si', save:'Kaydet',
+    reconnectsLbl:'yeniden bağlanma', exportTitle:'Dışa aktar', importTitle:'İçe aktar',
+    noExport:'Dışa aktarılacak istasyon yok', exported:n=>`${n} istasyon dışa aktarıldı`,
+    imported:n=>`${n} istasyon içe aktarıldı`, noNew:'Yeni istasyon bulunamadı',
+    fileErr:'Dosya okunurken hata', focusHint:'F · Esc · tıkla — çık', shortcutsTitle:'Klavye kısayolları',
+    kbPlay:'Oynat / Duraklat', kbPrevNext:'Önceki / Sonraki', kbVol:'Ses aç / kıs', kbMute:'Sessiz',
+    kbSearch:'İstasyon ara', kbFocus:'Odak modu', kbTheme:'Sonraki tema', kbHelp:'Bu ekran', tips:'İpuçları',
+    tipsText:'Yerel olarak açın — istasyonlar kaydedilir. ↓ ↑ — dışa/içe aktarma. Sıralamak için satırları sürükleyin. HTTPS üzerinde — uygulama olarak kurun.',
+    atmosphere:'Atmosfer', autoTime:'Günün saatine göre otomatik', themeChanges:'tema saate göre değişir',
+    nowIs:(n,s)=>`şimdi: ${n.toLowerCase()} · ${s}`, installApp:'↗ Uygulama olarak kur', language:'Dil',
+    deleteStation:'Sil', proTitle:'Pro\'yu açın',
+    proLede:'Free\'deki her şey — artı profiller, temalar ve daha fazla atmosfer kontrolü.',
+    proF1:'3 profil — İş · Akşam · Hafta sonu', proF2:'+8 özel tema', proF3:'Favoriler ★ ve filtre',
+    proF4:'Dinleme geçmişi', proF5:'İstasyonlu alarm', proF6:'İstasyon kapakları',
+    proF7:'İstasyonlar arası crossfade', proF8:'Tek dokunuşla ruh hali ön ayarları',
+    proF9:'16 atmosfer efekti (ekolayzer, ışık hüzmeleri, paralaks…)',
+    proF10:'9 koleksiyon + istasyon grupları', proF11:'🗓 Günlük istasyon programı',
+    proF12:'☁ Cihazlar arası bulut senkronizasyonu', proCta:'Pro\'yu dene →',
+    proNote:'Tüm özellikler · cihazlar arası senkronizasyon',
+  },
+  ja:{ flag:'🇯🇵', name:'日本語',
+    onAir:'オンエア', offAir:'オフエア', connecting_:'接続中', reconnecting_:'再接続中', noSignal:'信号なし', radioDefault:'ラジオ',
+    ready:'再生の準備完了', addFirst:'ステーションを追加して開始', selectStation:'リストからステーションを選択', connectingMsg:'接続中…',
+    buffering:'バッファ中…', paused:'一時停止中', reconnectingN:n=>`再接続中…（${n}）`, noNetwork:'ネットワークなし — 待機中…',
+    networkBack:'ネットワーク復旧 — 接続中…', noStation:'先にステーションを追加', stations:'ステーション', addBtn:'⌕ + 追加',
+    filterPh:'フィルター…', quickStart:'クイックスタート', quickDesc:'信頼できるチルアウト局 — ワンクリックで追加:',
+    orSearch:'または 50,000+ 局を検索:', searchMore:'⌕ ステーションを検索', searchPh:'名前で検索…', searching:'検索中…',
+    searchWait:'入力を開始…', searchFail:'検索を利用できません。URLを手動で追加 ↓', noResults:q=>`「${q}」の結果なし`,
+    orUrl:'— または URL で追加 —', namePh:'ステーション名', urlPh:'https://… ストリームURL', save:'保存', reconnectsLbl:'再接続',
+    exportTitle:'エクスポート', importTitle:'インポート', noExport:'エクスポートする局がありません', exported:n=>`${n}局をエクスポートしました`,
+    imported:n=>`${n} 局をインポートしました`, noNew:'新しいステーションは見つかりません', fileErr:'ファイルの読み込みエラー',
+    focusHint:'F · Esc · クリック — 終了', shortcutsTitle:'キーボードショートカット', kbPlay:'再生 / 一時停止', kbPrevNext:'前へ / 次へ',
+    kbVol:'音量 上 / 下', kbMute:'ミュート', kbSearch:'ステーション検索', kbFocus:'フォーカスモード', kbTheme:'次のテーマ', kbHelp:'この画面',
+    tips:'ヒント', tipsText:'ローカルで開いても局は保存されます。↓ ↑ — エクスポート/インポート。行をドラッグして並べ替え。HTTPSではアプリとしてインストールできます。',
+    atmosphere:'アトモスフィア', autoTime:'時間帯で自動', themeChanges:'テーマは時間で変化',
+    nowIs:(n,s)=>`再生中: ${n.toLowerCase()} · ${s}`, installApp:'↗ アプリとしてインストール', language:'言語',
+    deleteStation:'削除', proTitle:'Proを解放', proLede:'Freeの全機能に加え、プロファイル、テーマ、より細かなアトモスフィア調整。',
+    proF1:'3つのプロファイル — 仕事 · 夜 · 週末', proF2:'+8つの限定テーマ', proF3:'お気に入り ★ とフィルター', proF4:'再生履歴',
+    proF5:'局で目覚めるアラーム', proF6:'局のアートワーク', proF7:'局間のクロスフェード', proF8:'ワンタップのムードプリセット',
+    proF9:'16のアトモスフィア効果（イコライザー、光線、パララックス…）', proF10:'9つのコレクション + 局グループ', proF11:'🗓 デイリー局スケジュール',
+    proF12:'☁ デバイス間クラウド同期', proCta:'Proを試す →', proNote:'全機能 · デバイス間同期',
+  },
+  zh:{ flag:'🇨🇳', name:'中文',
+    onAir:'播放中', offAir:'未播出', connecting_:'连接中', reconnecting_:'重新连接中', noSignal:'无信号', radioDefault:'电台',
+    ready:'准备就绪', addFirst:'添加一个电台开始', selectStation:'从列表中选择电台', connectingMsg:'连接中…', buffering:'缓冲中…',
+    paused:'已暂停', reconnectingN:n=>`重新连接中…（${n}）`, noNetwork:'无网络 — 等待中…', networkBack:'网络已恢复 — 连接中…',
+    noStation:'请先添加电台', stations:'电台', addBtn:'⌕ + 添加', filterPh:'筛选…', quickStart:'快速开始',
+    quickDesc:'可靠的放松电台 — 一键添加:', orSearch:'或搜索 50,000+ 电台:', searchMore:'⌕ 搜索电台', searchPh:'按名称搜索…',
+    searching:'搜索中…', searchWait:'开始输入…', searchFail:'搜索不可用。请手动添加网址 ↓', noResults:q=>`未找到「${q}」`,
+    orUrl:'— 或通过网址添加 —', namePh:'电台名称', urlPh:'https://… 流媒体网址', save:'保存', reconnectsLbl:'重连',
+    exportTitle:'导出', importTitle:'导入', noExport:'没有可导出的电台', exported:n=>`已导出 ${n} 个电台`,
+    imported:n=>`已导入 ${n} 个电台`, noNew:'未找到新电台', fileErr:'读取文件出错', focusHint:'F · Esc · 点击 — 退出',
+    shortcutsTitle:'键盘快捷键', kbPlay:'播放 / 暂停', kbPrevNext:'上一个 / 下一个', kbVol:'音量 加 / 减', kbMute:'静音',
+    kbSearch:'搜索电台', kbFocus:'专注模式', kbTheme:'下一个主题', kbHelp:'此界面', tips:'提示',
+    tipsText:'本地打开也会保存电台。↓ ↑ — 导出/导入。拖动行可调整顺序。在 HTTPS 上可安装为应用。', atmosphere:'氛围', autoTime:'按时段自动',
+    themeChanges:'主题随时间变化', nowIs:(n,s)=>`正在播放: ${n.toLowerCase()} · ${s}`, installApp:'↗ 安装为应用',
+    language:'语言', deleteStation:'删除', proTitle:'解锁 Pro', proLede:'Free 的全部功能，外加配置文件、主题和更多氛围控制。',
+    proF1:'3 个配置 — 工作 · 夜晚 · 周末', proF2:'+8 个专属主题', proF3:'收藏 ★ 与筛选', proF4:'收听历史', proF5:'电台闹钟', proF6:'电台封面',
+    proF7:'电台间交叉淡入淡出', proF8:'一键氛围预设', proF9:'16 种氛围效果（均衡器、光线、视差…）', proF10:'9 个精选合集 + 电台分组',
+    proF11:'🗓 每日电台时间表', proF12:'☁ 跨设备云同步', proCta:'试用 Pro →', proNote:'全部功能 · 跨设备同步',
+  },
 };
-const LANG_KEYS = ['uk','en','de','fr','es','pl'];
+const LANG_KEYS = ['uk','en','de','fr','es','it','pt','pl','tr','ja','zh'];
+// Inline-SVG прапорці (OS-незалежні — Windows не малює емодзі-прапори, показує UA/GB тощо).
+// viewBox 3:2; кутики й клип — через CSS (.lang-flag svg, #lang-btn svg).
+const FLAGS = {
+  uk: `<svg viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="16" fill="#ffd500"/><rect width="24" height="8" fill="#005bbb"/></svg>`,
+  en: `<svg viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="16" fill="#012169"/><path d="M0,0 24,16 M24,0 0,16" stroke="#fff" stroke-width="3"/><path d="M0,0 24,16 M24,0 0,16" stroke="#c8102e" stroke-width="1.7"/><path d="M12,0 V16 M0,8 H24" stroke="#fff" stroke-width="5"/><path d="M12,0 V16 M0,8 H24" stroke="#c8102e" stroke-width="3"/></svg>`,
+  de: `<svg viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="16" fill="#000"/><rect y="5.33" width="24" height="5.34" fill="#dd0000"/><rect y="10.67" width="24" height="5.33" fill="#ffce00"/></svg>`,
+  fr: `<svg viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="16" fill="#fff"/><rect width="8" height="16" fill="#0055a4"/><rect x="16" width="8" height="16" fill="#ef4135"/></svg>`,
+  es: `<svg viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="16" fill="#aa151b"/><rect y="4" width="24" height="8" fill="#f1bf00"/></svg>`,
+  pl: `<svg viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="16" fill="#dc143c"/><rect width="24" height="8" fill="#fff"/></svg>`,
+  it: `<svg viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="16" fill="#fff"/><rect width="8" height="16" fill="#009246"/><rect x="16" width="8" height="16" fill="#ce2b37"/></svg>`,
+  pt: `<svg viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="16" fill="#009c3b"/><polygon points="12,2.2 21.5,8 12,13.8 2.5,8" fill="#ffdf00"/><circle cx="12" cy="8" r="3.1" fill="#002776"/></svg>`,
+  tr: `<svg viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="16" fill="#e30a17"/><circle cx="9" cy="8" r="4" fill="#fff"/><circle cx="10.6" cy="8" r="3.2" fill="#e30a17"/><polygon points="14.5,6 14.97,7.35 16.4,7.38 15.26,8.25 15.68,9.62 14.5,8.8 13.32,9.62 13.74,8.25 12.6,7.38 14.03,7.35" fill="#fff"/></svg>`,
+  ja: `<svg viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="16" fill="#fff"/><circle cx="12" cy="8" r="4.8" fill="#bc002d"/></svg>`,
+  zh: `<svg viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="16" fill="#de2910"/><polygon points="5,2.1 5.56,3.72 7.28,3.76 5.91,4.8 6.41,6.44 5,5.46 3.59,6.44 4.09,4.8 2.72,3.76 4.44,3.72" fill="#ffde00"/><circle cx="9.5" cy="2.4" r="0.7" fill="#ffde00"/><circle cx="11" cy="4" r="0.7" fill="#ffde00"/><circle cx="11" cy="6.2" r="0.7" fill="#ffde00"/><circle cx="9.5" cy="7.8" r="0.7" fill="#ffde00"/></svg>`,
+};
+const flagSVG = (code) => FLAGS[code] || (I18N[code] && I18N[code].flag) || '🌐';
 let lang = 'uk';
 function t(key, ...args) {
   const val = I18N[lang]?.[key] ?? I18N.en[key] ?? key;
@@ -1578,7 +1743,7 @@ function setLang(code) {
   lang = code;
   safeStorage.setItem('lounge:lang', code);
   document.documentElement.lang = code;
-  langBtn.textContent = I18N[code].flag;
+  langBtn.innerHTML = flagSVG(code);
   langDrop.hidden = true;
   refreshI18n();
   render();
@@ -1632,7 +1797,7 @@ function renderProTeaser() {
   if (lede) lede.textContent = t('proLede');
   if (cta)  cta.textContent  = t('proCta');
   if (note) note.textContent = t('proNote');
-  const keys = ['proF1','proF2','proF3','proF4','proF5','proF6','proF7','proF8','proF9','proF10','proF11'];
+  const keys = ['proF1','proF2','proF3','proF4','proF5','proF6','proF7','proF8','proF9','proF10','proF11','proF12'];
   feats.innerHTML = keys.map(k =>
     `<li><span class="pro-lock" aria-hidden="true">🔒</span>${escapeHTML(t(k))}</li>`
   ).join('');
@@ -1671,7 +1836,7 @@ function renderLangDrop() {
     const btn = document.createElement('button');
     btn.className = 'lang-opt'; btn.dataset.lang = code;
     btn.dataset.active = (code === lang);
-    btn.textContent = `${l.flag} ${l.name}`;
+    btn.innerHTML = `<span class="lang-flag">${flagSVG(code)}</span><span class="lang-name">${l.name}</span>`;
     btn.addEventListener('click', () => setLang(code));
     langDrop.appendChild(btn);
   });
@@ -1833,6 +1998,10 @@ function renderLangDrop() {
     return String(s).replace(/[&<>"']/g, c =>
       ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
   }
+  // colors can arrive from imported JSON — only a hex literal may reach HTML/CSS
+  function safeColor(c) {
+    return (typeof c === 'string' && /^#[0-9a-fA-F]{3,8}$/.test(c)) ? c : '';
+  }
   function prettyHost(u) {
     try {
       const p = new URL(u);
@@ -1870,7 +2039,7 @@ function renderLangDrop() {
       const li = document.createElement('li');
       li.className = 'station';
       li.dataset.active = st.id === activeId;
-      const color = st.color || stationColor(st.name);
+      const color = safeColor(st.color) || stationColor(st.name);
       // colored left accent bar
       const accent = document.createElement('span');
       accent.className = 'station-accent';
@@ -1936,7 +2105,7 @@ function renderLangDrop() {
       stationH.innerHTML = formatStationName(a.name);
       labelName.textContent = labelTextFor(a.name);
       focusLblName.textContent = labelTextFor(a.name);
-      const clr = a.color || stationColor(a.name);
+      const clr = safeColor(a.color) || stationColor(a.name);
       body.style.setProperty('--label-clr', clr);
       if (!userWantsPlay) statusText.textContent = t('ready');
     } else {
@@ -2027,7 +2196,7 @@ function renderLangDrop() {
   }
   function addStation(name, url, extra = {}) {
     const id = 's' + Date.now() + Math.random().toString(36).slice(2,6);
-    const color = extra.color || stationColor(name);
+    const color = safeColor(extra.color) || stationColor(name);
     const st = { id, name, url, color, ...extra };
     stations.push(st);
     if (!activeId) activeId = id;
@@ -2045,12 +2214,23 @@ function renderLangDrop() {
 
   // ───────── audio events ─────────
   audio.addEventListener('playing', () => {
+    clearTimeout(extPauseTimer);
     setState('playing', t('onAir'));
     attempts = 0; attemptsEl.textContent = '0';
     requestWakeLock();
     const a = active();
     if (a) startNowPlaying(a.url);
     updateFocusInfo();
+  });
+  // pause that arrived from outside our code (system widget, audio-focus loss):
+  // sync userWantsPlay, otherwise visibilitychange would auto-resume over it
+  let extPauseTimer = null;
+  audio.addEventListener('pause', () => {
+    if (!userWantsPlay || audio.ended || audio.readyState < 2) return;
+    clearTimeout(extPauseTimer);
+    extPauseTimer = setTimeout(() => {
+      if (userWantsPlay && audio.paused) pause();
+    }, 1200);
   });
   audio.addEventListener('waiting', () => {
     if (userWantsPlay) setState('connecting', t('buffering'));
@@ -2082,6 +2262,20 @@ function renderLangDrop() {
     if (document.hidden) return;
     if (userWantsPlay && audio.paused) scheduleReconnect();
     if (userWantsPlay && !wakeLock)    requestWakeLock();
+  });
+  // iOS Safari/Chrome keep the media session alive after the tab is closed —
+  // tear down on real unload. bfcache and installed-PWA minimize also fire
+  // pagehide while the page stays alive, so those must be skipped.
+  window.addEventListener('pagehide', (e) => {
+    if (e.persisted) return;
+    if (matchMedia('(display-mode: standalone)').matches || navigator.standalone) return;
+    userWantsPlay = false;
+    audio.pause();
+    audio.removeAttribute('src');
+    audio.load();
+    if (!IS_IOS && 'mediaSession' in navigator) {
+      try { navigator.mediaSession.playbackState = 'none'; navigator.mediaSession.metadata = null; } catch (_) {}
+    }
   });
 
   // freeze-watchdog
@@ -2380,8 +2574,12 @@ function renderLangDrop() {
   }
 
   // ───────── media session ─────────
+  // iOS web lock-screen controls are unreliable (session stolen after pause,
+  // stuck ⏯ icon) — MediaSession is disabled there entirely, same as Pro.
+  const IS_IOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+    (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
   function updateMediaSession() {
-    if (!('mediaSession' in navigator)) return;
+    if (IS_IOS || !('mediaSession' in navigator)) return;
     const a = active();
     if (a) {
       navigator.mediaSession.metadata = new MediaMetadata({
@@ -2389,7 +2587,7 @@ function renderLangDrop() {
       });
     }
   }
-  if ('mediaSession' in navigator) {
+  if (!IS_IOS && 'mediaSession' in navigator) {
     navigator.mediaSession.setActionHandler('play',  () => { if (!userWantsPlay) play(); });
     navigator.mediaSession.setActionHandler('pause', () => { if (userWantsPlay) pause(); });
     navigator.mediaSession.setActionHandler('nexttrack', () => nextStation(1));
@@ -2776,7 +2974,7 @@ function renderLangDrop() {
   // ───────── boot ─────────
   load();
   document.documentElement.lang = lang;
-  if (langBtn) langBtn.textContent = I18N[lang]?.flag || '🌐';
+  if (langBtn) langBtn.innerHTML = flagSVG(lang);
   renderSuggestions();
   render();
   refreshI18n();

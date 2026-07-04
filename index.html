@@ -4,11 +4,11 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Lounge · Always On — Internet Radio Player</title>
-<meta name="description" content="A beautiful internet radio player that never stops. Auto-reconnects, 14 themes, 6 languages. Free version open source. Pro adds profiles, mood presets, atmosphere effects and more."/>
+<meta name="description" content="A beautiful internet radio player that never stops. Auto-reconnects, 14 themes, 11 languages. Free version open source. Pro adds profiles, cloud sync, mood presets, atmosphere effects and more."/>
 <meta property="og:type" content="website"/>
 <meta property="og:site_name" content="Lounge · Always On"/>
 <meta property="og:title" content="Lounge · Always On — Internet Radio Player"/>
-<meta property="og:description" content="Beautiful internet radio player that never stops. Auto-reconnects, 14 themes, 6 languages. Free + Pro."/>
+<meta property="og:description" content="Beautiful internet radio player that never stops. Auto-reconnects, 14 themes, 11 languages. Free + Pro."/>
 <meta property="og:url" content="https://yypaziuk.github.io/lounge-player/"/>
 <meta property="og:image" content="https://yypaziuk.github.io/lounge-player/og-image.png"/>
 <meta property="og:image:width" content="1200"/>
@@ -16,7 +16,7 @@
 <meta property="og:image:alt" content="Lounge · Always On — internet radio player"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:title" content="Lounge · Always On — Internet Radio Player"/>
-<meta name="twitter:description" content="Beautiful internet radio player that never stops. 14 themes, 6 languages. Free + Pro."/>
+<meta name="twitter:description" content="Beautiful internet radio player that never stops. 14 themes, 11 languages. Free + Pro."/>
 <meta name="twitter:image" content="https://yypaziuk.github.io/lounge-player/og-image.png"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -320,7 +320,10 @@ h1 em{font-style:italic;color:#ffdc9e;font-weight:300}
   border:1px solid rgba(250,242,226,.1);
   background:rgba(10,5,20,.4);
   font-size:.78rem;color:rgba(250,242,226,.55);
+  display:inline-flex;align-items:center;gap:.45em;
 }
+/* inline-SVG прапорці — Windows не рендерить емодзі-прапори */
+.lang svg{width:18px;height:12px;border-radius:2px;box-shadow:0 0 0 1px rgba(255,255,255,.14);flex-shrink:0}
 
 /* bottom cta */
 .bottom-cta{
@@ -367,7 +370,7 @@ footer a:hover{color:rgba(255,186,106,.7)}
   <div class="hero">
     <p class="eyebrow">Internet Radio Player</p>
     <h1>Radio that<br><em>never stops</em></h1>
-    <p class="sub">Auto-reconnects when you switch networks. Beautiful themes. Six languages. One HTML file — no install, no server, no tracking.</p>
+    <p class="sub">Auto-reconnects when you switch networks. Beautiful themes. Eleven languages. One HTML file — no install, no server, no tracking.</p>
     <div class="cta-row">
       <a class="btn btn-primary" href="player.html">▶ Open Player</a>
       <a class="btn btn-pro" href="https://lounge-player.pro">Try Pro →</a>
@@ -387,8 +390,8 @@ footer a:hover{color:rgba(255,186,106,.7)}
     </div>
     <div class="feature">
       <div class="feature-icon">🎨</div>
-      <div class="feature-title">8 live themes</div>
-      <div class="feature-desc">Golden Hour, Midnight Jazz, Tokyo Neon and more. Auto-switches by time of day or pick manually.</div>
+      <div class="feature-title">6 live themes</div>
+      <div class="feature-desc">Golden Hour, Midnight Jazz, Tokyo Neon and more. Auto-switches by time of day. Pro adds 8 exclusive themes.</div>
     </div>
     <div class="feature">
       <div class="feature-icon">📻</div>
@@ -397,8 +400,8 @@ footer a:hover{color:rgba(255,186,106,.7)}
     </div>
     <div class="feature">
       <div class="feature-icon">🌍</div>
-      <div class="feature-title">6 languages</div>
-      <div class="feature-desc">Ukrainian, English, German, French, Spanish, Polish. Auto-detected from your browser.</div>
+      <div class="feature-title">11 languages</div>
+      <div class="feature-desc">Ukrainian, English, German, French, Spanish, Italian, Portuguese, Polish, Turkish, Japanese, Chinese. Auto-detected from your browser.</div>
     </div>
     <div class="feature">
       <div class="feature-icon">📦</div>
@@ -422,7 +425,7 @@ footer a:hover{color:rgba(255,186,106,.7)}
         <li>Auto-reconnect on network change</li>
         <li>6 themes + auto time-of-day switching</li>
         <li>50 000+ stations via Radio Browser</li>
-        <li>6 languages, auto-detected</li>
+        <li>11 languages, auto-detected</li>
         <li>Focus mode + sleep timer</li>
         <li>Single HTML file, no install</li>
       </ul>
@@ -434,13 +437,15 @@ footer a:hover{color:rgba(255,186,106,.7)}
       <div class="plan-tagline">Everything in Free, plus</div>
       <ul class="plan-features">
         <li>3 Profiles — Work, Evening, Weekend</li>
-        <li>Daily station schedule — auto-switch profile by time of day</li>
+        <li>Cloud sync — stations, profiles &amp; settings on all your devices</li>
         <li>14 Themes (8 Pro-exclusive)</li>
         <li>One-tap mood presets — Cozy Evening, Rainy Window…</li>
         <li>16 atmosphere effects — equalizer, light rays, parallax depth, liquid mesh, aurora…</li>
         <li>Ambient vinyl crackle (procedural audio)</li>
         <li>9 Curated collections + favorites ★ + history</li>
         <li>Station groups — tag, filter &amp; organise your stations</li>
+        <li>Wake-up alarm + daily station schedule by time of day</li>
+        <li>Custom station artwork on the vinyl label</li>
         <li>Crossfade between stations, gentle sleep fade-out</li>
         <li>Living vinyl + time-of-day greeting</li>
         <li>Full backup &amp; restore — all stations, profiles &amp; settings</li>
@@ -469,12 +474,17 @@ footer a:hover{color:rgba(255,186,106,.7)}
 
   <p class="langs-label">Languages</p>
   <div class="langs">
-    <span class="lang">🇺🇦 Українська</span>
-    <span class="lang">🇬🇧 English</span>
-    <span class="lang">🇩🇪 Deutsch</span>
-    <span class="lang">🇫🇷 Français</span>
-    <span class="lang">🇪🇸 Español</span>
-    <span class="lang">🇵🇱 Polski</span>
+    <span class="lang"><svg viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="16" fill="#ffd500"/><rect width="24" height="8" fill="#005bbb"/></svg>Українська</span>
+    <span class="lang"><svg viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="16" fill="#012169"/><path d="M0,0 24,16 M24,0 0,16" stroke="#fff" stroke-width="3"/><path d="M0,0 24,16 M24,0 0,16" stroke="#c8102e" stroke-width="1.7"/><path d="M12,0 V16 M0,8 H24" stroke="#fff" stroke-width="5"/><path d="M12,0 V16 M0,8 H24" stroke="#c8102e" stroke-width="3"/></svg>English</span>
+    <span class="lang"><svg viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="16" fill="#000"/><rect y="5.33" width="24" height="5.34" fill="#dd0000"/><rect y="10.67" width="24" height="5.33" fill="#ffce00"/></svg>Deutsch</span>
+    <span class="lang"><svg viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="16" fill="#fff"/><rect width="8" height="16" fill="#0055a4"/><rect x="16" width="8" height="16" fill="#ef4135"/></svg>Français</span>
+    <span class="lang"><svg viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="16" fill="#aa151b"/><rect y="4" width="24" height="8" fill="#f1bf00"/></svg>Español</span>
+    <span class="lang"><svg viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="16" fill="#fff"/><rect width="8" height="16" fill="#009246"/><rect x="16" width="8" height="16" fill="#ce2b37"/></svg>Italiano</span>
+    <span class="lang"><svg viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="16" fill="#009c3b"/><polygon points="12,2.2 21.5,8 12,13.8 2.5,8" fill="#ffdf00"/><circle cx="12" cy="8" r="3.1" fill="#002776"/></svg>Português</span>
+    <span class="lang"><svg viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="16" fill="#dc143c"/><rect width="24" height="8" fill="#fff"/></svg>Polski</span>
+    <span class="lang"><svg viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="16" fill="#e30a17"/><circle cx="9" cy="8" r="4" fill="#fff"/><circle cx="10.6" cy="8" r="3.2" fill="#e30a17"/><polygon points="14.5,6 14.97,7.35 16.4,7.38 15.26,8.25 15.68,9.62 14.5,8.8 13.32,9.62 13.74,8.25 12.6,7.38 14.03,7.35" fill="#fff"/></svg>Türkçe</span>
+    <span class="lang"><svg viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="16" fill="#fff"/><circle cx="12" cy="8" r="4.8" fill="#bc002d"/></svg>日本語</span>
+    <span class="lang"><svg viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="16" fill="#de2910"/><polygon points="5,2.1 5.56,3.72 7.28,3.76 5.91,4.8 6.41,6.44 5,5.46 3.59,6.44 4.09,4.8 2.72,3.76 4.44,3.72" fill="#ffde00"/><circle cx="9.5" cy="2.4" r="0.7" fill="#ffde00"/><circle cx="11" cy="4" r="0.7" fill="#ffde00"/><circle cx="11" cy="6.2" r="0.7" fill="#ffde00"/><circle cx="9.5" cy="7.8" r="0.7" fill="#ffde00"/></svg>中文</span>
   </div>
 
   <div class="bottom-cta">
