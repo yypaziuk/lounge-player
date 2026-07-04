@@ -1836,7 +1836,7 @@ function renderLangDrop() {
     const btn = document.createElement('button');
     btn.className = 'lang-opt'; btn.dataset.lang = code;
     btn.dataset.active = (code === lang);
-    btn.innerHTML = `<span class="lang-flag">${flagSVG(code)}</span><span class="lang-name">${l.name}</span>`;
+    btn.innerHTML = `<span class="lang-flag">${flagSVG(code)}</span><span class="lang-name">${escapeHTML(l.name)}</span>`;
     btn.addEventListener('click', () => setLang(code));
     langDrop.appendChild(btn);
   });
@@ -1998,10 +1998,17 @@ function renderLangDrop() {
     return String(s).replace(/[&<>"']/g, c =>
       ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
   }
-  // colors can arrive from imported JSON — only a hex literal may reach HTML/CSS
+  // colors can arrive from imported JSON — only a valid hex literal may reach HTML/CSS
   function safeColor(c) {
-    return (typeof c === 'string' && /^#[0-9a-fA-F]{3,8}$/.test(c)) ? c : '';
+    return (typeof c === 'string' && /^#([0-9a-fA-F]{3,4}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/.test(c)) ? c : '';
   }
+  // ── platform detection: single source of truth (mirrors ENV in pro.html) ──
+  // do NOT inline new platform probes elsewhere — scattered predicates drift apart
+  const IS_IOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+    (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  const IS_NATIVE_WRAPPER = !!window.Capacitor || /Electron/i.test(navigator.userAgent);
+  const isStandaloneApp = () =>
+    (window.matchMedia && matchMedia('(display-mode: standalone)').matches) || navigator.standalone === true;
   function prettyHost(u) {
     try {
       const p = new URL(u);
@@ -2223,13 +2230,16 @@ function renderLangDrop() {
     updateFocusInfo();
   });
   // pause that arrived from outside our code (system widget, audio-focus loss):
-  // sync userWantsPlay, otherwise visibilitychange would auto-resume over it
+  // sync userWantsPlay, otherwise visibilitychange would auto-resume over it.
+  // The debounce swallows technical pauses from load/reconnect ('playing' clears
+  // the timer); readyState/ended are rechecked AT FIRE TIME — a reconnect in
+  // flight has readyState 0 and must not be killed by a stale timer.
   let extPauseTimer = null;
   audio.addEventListener('pause', () => {
-    if (!userWantsPlay || audio.ended || audio.readyState < 2) return;
     clearTimeout(extPauseTimer);
+    if (!userWantsPlay) return;
     extPauseTimer = setTimeout(() => {
-      if (userWantsPlay && audio.paused) pause();
+      if (userWantsPlay && audio.paused && !audio.ended && audio.readyState >= 2) pause();
     }, 1200);
   });
   audio.addEventListener('waiting', () => {
@@ -2267,8 +2277,7 @@ function renderLangDrop() {
   // tear down on real unload. bfcache and installed-PWA minimize also fire
   // pagehide while the page stays alive, so those must be skipped.
   window.addEventListener('pagehide', (e) => {
-    if (e.persisted) return;
-    if (matchMedia('(display-mode: standalone)').matches || navigator.standalone) return;
+    if (e.persisted || isStandaloneApp() || IS_NATIVE_WRAPPER) return;
     userWantsPlay = false;
     audio.pause();
     audio.removeAttribute('src');
@@ -2576,8 +2585,6 @@ function renderLangDrop() {
   // ───────── media session ─────────
   // iOS web lock-screen controls are unreliable (session stolen after pause,
   // stuck ⏯ icon) — MediaSession is disabled there entirely, same as Pro.
-  const IS_IOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
-    (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
   function updateMediaSession() {
     if (IS_IOS || !('mediaSession' in navigator)) return;
     const a = active();
