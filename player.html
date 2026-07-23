@@ -1935,6 +1935,7 @@ function renderLangDrop() {
   let reconnectTimer = null;
   let stalledTimer   = null;
   let attempts = 0;
+  let playEpoch = 0;   // кожен play() інвалідовує «завислі» await-и попередніх спроб
   let lastTime = 0;
   let stuckTicks = 0;
   let wakeLock = null;
@@ -2143,6 +2144,8 @@ function renderLangDrop() {
     audio.load();
   }
   async function play() {
+    const epoch = ++playEpoch;      // цей виклик стає «поточним»
+    clearTimeout(reconnectTimer);   // скасувати заплановані reconnect від попередньої спроби
     const a = active();
     if (!a?.url) { setState('error', t('noStation')); return; }
     userWantsPlay = true;
@@ -2150,7 +2153,9 @@ function renderLangDrop() {
     setState('connecting', t('connectingMsg'));
     loadCurrent();
     try { await audio.play(); }
-    catch (_) { scheduleReconnect(); }
+    // reject «завислого» audio.play() від попередньої спроби (спам-клік) не має
+    // тягти reconnect поверх уже актуального відтворення
+    catch (_) { if (epoch === playEpoch && userWantsPlay) scheduleReconnect(); }
   }
   function pause() {
     userWantsPlay = false;
@@ -2178,9 +2183,10 @@ function renderLangDrop() {
     const delay = Math.min(12000, 1200 * Math.pow(1.5, Math.min(attempts - 1, 7)));
     reconnectTimer = setTimeout(async () => {
       if (!userWantsPlay) return;
+      const epoch = playEpoch;
       loadCurrent();
       try { await audio.play(); }
-      catch (_) { scheduleReconnect(); }
+      catch (_) { if (epoch === playEpoch && userWantsPlay) scheduleReconnect(); }
     }, delay);
   }
   function switchTo(id) {
@@ -2222,6 +2228,7 @@ function renderLangDrop() {
   // ───────── audio events ─────────
   audio.addEventListener('playing', () => {
     clearTimeout(extPauseTimer);
+    if (!userWantsPlay) return;   // юзер уже натиснув паузу — не воскрешати відтворення/wake-lock/polling
     setState('playing', t('onAir'));
     attempts = 0; attemptsEl.textContent = '0';
     requestWakeLock();
@@ -2303,7 +2310,12 @@ function renderLangDrop() {
   async function requestWakeLock() {
     try {
       if ('wakeLock' in navigator) {
-        wakeLock = await navigator.wakeLock.request('screen');
+        const wl = await navigator.wakeLock.request('screen');
+        // поки лок брався (await), юзер міг натиснути паузу → releaseWakeLock спрацював
+        // вхолосту (wakeLock ще null). Відпускаємо одразу, інакше екран лишиться
+        // розбудженим на паузі.
+        if (!userWantsPlay) { try { wl.release(); } catch (_) {} return; }
+        wakeLock = wl;
         wakeLock.addEventListener?.('release', () => { wakeLock = null; });
       }
     } catch (_) {}
@@ -2360,6 +2372,10 @@ function renderLangDrop() {
       }
       return;
     }
+    // не перехоплювати браузерні комбінації (Ctrl+A виділити, Ctrl+F знайти,
+    // Cmd+←/→ навігація історії тощо) — наші однобуквені шорткати лише без модифікаторів.
+    // Shift НЕ виключаємо: «?» = Shift+/.
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
     switch (e.code) {
       case 'Space':       e.preventDefault(); playBtn.click(); break;
       case 'ArrowLeft':   e.preventDefault(); nextStation(-1); break;
@@ -2603,7 +2619,10 @@ function renderLangDrop() {
 
   // ───────── now playing metadata ─────────
   function withTimeout(p, ms) {
-    return Promise.race([p, new Promise((_, r) => setTimeout(() => r(new Error('timeout')), ms))]);
+    let timer;
+    const timeout = new Promise((_, r) => { timer = setTimeout(() => r(new Error('timeout')), ms); });
+    // clearTimeout при перемозі p — інакше таймер висить усі ms і реджектить у нікуди
+    return Promise.race([p, timeout]).finally(() => clearTimeout(timer));
   }
   async function fetchNowPlaying(streamUrl) {
     try {
@@ -2635,9 +2654,12 @@ function renderLangDrop() {
     return null;
   }
   async function pollNowPlaying() {
-    if (!npActiveUrl) return;
-    const track = await fetchNowPlaying(npActiveUrl);
-    if (!npActiveUrl) return; // switched station while fetching
+    const url = npActiveUrl;
+    if (!url) return;
+    const track = await fetchNowPlaying(url);
+    // станцію могли перемкнути поки запит був у дорозі — порівнюємо саме той url,
+    // а не просто !null, інакше повільна відповідь старої станції запише її трек у нову
+    if (npActiveUrl !== url) return;
     if (track) {
       nowPlayingEl.textContent = track;
       nowPlayingEl.hidden = false;
@@ -2766,6 +2788,19 @@ function renderLangDrop() {
 
   // ───────── themes ─────────
   const THEMES = {
+    // ── Флагманська стартова тема: неон Токіо, але приборканий — тепле бузкове небо,
+    //    м'які рожево-цианові сяйва. Перше враження = «вау + спокій». (та сама, що в Pro)
+    neon: {
+      name: 'Neon Lullaby',      sub: 'City lights, soft and warm',   slot: 'past midnight',
+      sky:   ['#4a2c72','#38215e','#28184e','#1a0f3a','#100827','#060314'],
+      stops: [0,12,26,50,78,100], angle: 180,
+      glow1:'rgba(255,132,208,0.56)', gA:'60% 34%', gApos:'80% 96%',
+      glow2:'rgba(108,216,255,0.40)', gB:'52% 28%', gBpos:'12% 92%',
+      glow3:'rgba(190,140,255,0.32)', gC:'66% 26%', gCpos:'50% 2%',
+      haloBg:'radial-gradient(circle, rgba(255,150,220,0.48), rgba(255,150,220,0.09) 44%, transparent 70%)',
+      sonar:'rgba(255,150,220,0.58)', mote:'rgba(255,206,240,0.90)',
+      amber:'#ff9ad8', amberGlow:'#ffc4ec', label:'#d466ae'
+    },
     dusk: {
       name: 'Golden Hour',       sub: 'Warm patio, late August',     slot: 'evening',
       sky:   ['#ffe4a8','#f7a558','#d85a32','#8a2848','#2e1042','#0e0420'],
@@ -2833,7 +2868,7 @@ function renderLangDrop() {
       amber:'#48eec0', amberGlow:'#88f8d8', label:'#1e6870'
     }
   };
-  const THEME_KEYS = ['dusk','jazz','bordeaux','tokyo','forest','aurora'];
+  const THEME_KEYS = ['neon','dusk','jazz','bordeaux','tokyo','forest','aurora'];
 
   function makeGradient(th) {
     const s = th.stops || [0,12,28,55,85,100];
@@ -2992,7 +3027,8 @@ function renderLangDrop() {
   autoMode = safeStorage.getItem('lounge:autoTheme') === '1';
   autoCb.checked = autoMode;
   const savedTheme = safeStorage.getItem('lounge:theme');
-  const firstKey = autoMode ? autoThemeNow() : (THEMES[savedTheme] ? savedTheme : 'dusk');
+  // новий гість (нема збереженої теми) → флагманська «Neon Lullaby»; хто вже обрав тему — лишається на ній
+  const firstKey = autoMode ? autoThemeNow() : (THEMES[savedTheme] ? savedTheme : 'neon');
   applyTheme(firstKey, false);
   renderThemeList();
   updateAutoLabel();
