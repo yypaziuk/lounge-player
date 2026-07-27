@@ -9,9 +9,9 @@
 | | Free | Pro |
 |---|------|----------|
 | File | `player.html` | `pro.html` |
-| Themes | 6 | **14** |
+| Themes | 7 | **18** |
 | Languages | **11** | **11** |
-| Atmosphere effects | 3 basic | **16 controls** |
+| Atmosphere effects | 3 basic | **17 controls** |
 | Profiles | — | **3 (Work / Evening / Weekend)** |
 | Cloud sync across devices | — | ✓ |
 | Curated collections | — | **9** |
@@ -33,9 +33,9 @@
 
 ### 🎨 Visual
 - Spinning vinyl record with tonearm animation
-- **14 themes** that can auto-change by time of day
-  - **Free (6):** Golden Hour · Midnight Jazz · Velvet Bordeaux · Tokyo Neon · Cabin Fire · Arctic Aurora
-  - **Pro (8):** Monsoon Rain · Cozy Library · Cognac & Oak · Nebula Dream · Sakura Dawn · Synthwave · Abyssal Ocean · Noir Velvet
+- **18 themes** that can auto-change by time of day
+  - **Free (7):** Neon Lullaby · Golden Hour · Midnight Jazz · Velvet Bordeaux · Tokyo Neon · Cabin Fire · Arctic Aurora
+  - **Pro (11):** Monsoon Rain · Cozy Library · Cognac & Oak · Nebula Dream · Sakura Dawn · Synthwave · Abyssal Ocean · Noir Velvet · Sunset Drift · First Light · Jade Hour
 - **One-tap mood presets** — Cozy Evening · Rainy Window · Starlit · Golden Calm · Aurora Night · Reading Room: each sets a theme + a tasteful blend of effects in one tap
 - **Atmosphere panel — 16 layered effects:** drifting dust, mote size, halo glow, sonar rings, film grain, breathing gradient, vinyl spin, aurora ribbons, starfield + shooting stars, rain, bokeh orbs, vignette, **god rays (warm light shafts), parallax depth (layers follow your mouse / device tilt), liquid gradient mesh (flowing, theme-tinted), equalizer (procedural bars flowing in your theme's colours)**
 - **Living vinyl** — softly breathing shadow, a slow lamplight glint, and a warm bloom when playback begins
@@ -63,7 +63,7 @@
 ### 💎 Pro extras
 - **3 Profiles** — Work / Evening / Weekend, each with its own stations + theme
 - **Cloud sync** — stations, profiles, themes and settings follow you across web, Android and desktop
-- **8 extra themes**, **mood presets**, the full **16-effect atmosphere panel** (incl. god rays, parallax depth, liquid mesh, equalizer) and **vinyl-crackle ambient**
+- **11 extra themes**, **mood presets**, the full **17-effect atmosphere panel** (incl. god rays, parallax depth, liquid mesh, drifting fog, equalizer) and **vinyl-crackle ambient**
 - **9 Curated collections** with one-tap add (each a unique, hand-checked set) and a **Station of the week** — curated picks served from the cloud, refreshed without app updates
 - **Station groups** — tag stations into your own groups, filter and collapse them, manage groups in one place
 - **Favorites** ★ with filter, and **History** of the last played stations
