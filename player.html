@@ -440,6 +440,26 @@ input[type="range"]::-moz-range-thumb {
 }
 input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.25); }
 
+/* Дотик: трек 2px — це зона влучання у 2 пікселі заввишки, пальцем недосяжна
+   (мишею ок). Розтягуємо САМ input до 28px (зона дотику), а тонку лінію малюємо
+   треком — вигляд не змінюється. */
+@media (hover: none) {
+  input[type="range"] { height: 28px; background: transparent; }
+  input[type="range"]::-webkit-slider-runnable-track {
+    height: 2px; background: var(--cream-line); border-radius: 2px;
+  }
+  input[type="range"]::-webkit-slider-thumb { margin-top: -6px; }
+  input[type="range"]::-moz-range-track {
+    height: 2px; background: var(--cream-line); border-radius: 2px;
+  }
+  .vol .vol-btn { padding: 9px; }
+}
+
+/* iOS жорстко резервує гучність за апаратними кнопками: `audio.volume` там
+   ігнорується (обмеження WebKit). Показувати мертвий контрол = обіцяти те, чого
+   система не дасть — ховаємо; керування кнопками збоку телефона. */
+body.ios-no-vol .vol { display: none; }
+
 /* sleep timer */
 .sleep-bar {
   display: flex; align-items: center; justify-content: center;
@@ -2010,6 +2030,8 @@ function renderLangDrop() {
   const IS_NATIVE_WRAPPER = !!window.Capacitor || /Electron/i.test(navigator.userAgent);
   const isStandaloneApp = () =>
     (window.matchMedia && matchMedia('(display-mode: standalone)').matches) || navigator.standalone === true;
+  // iOS ігнорує audio.volume — ховаємо повзунок, щоб не обіцяти неробочого (CSS .ios-no-vol)
+  if (IS_IOS) document.body.classList.add('ios-no-vol');
   function prettyHost(u) {
     try {
       const p = new URL(u);
