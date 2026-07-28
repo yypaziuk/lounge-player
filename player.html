@@ -848,21 +848,25 @@ body.ios-no-vol .vol { display: none; }
 }
 
 /* shortcuts overlay */
+/* Скрим свідомо ЛЕГКИЙ і БЕЗ блюру: розмиває сама картка (.overlay-card), тож фон,
+   тема й ефекти лишаються видимими — вікно відчувається як скло над плеєром. */
 .overlay {
   position: fixed; inset: 0; z-index: 50;
   display: grid; place-items: center;
   padding: 1.5rem;
-  background: rgba(10, 5, 20, 0.65);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: rgba(10, 5, 20, 0.22);
   animation: fadeIn 200ms ease;
 }
 .overlay[hidden] { display: none; }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
+/* Напівпрозоре «скло». ⚠️ Прозорість через alpha ФОНУ, НЕ через opacity на елементі —
+   інакше поплив би і текст усередині. */
 .overlay-card {
-  background: linear-gradient(135deg, #38234a, #1f1230);
-  border: 1px solid var(--cream-line);
+  background: linear-gradient(135deg, rgba(56,35,74,0.70), rgba(31,18,48,0.70));
+  backdrop-filter: blur(7px) saturate(1.05);
+  -webkit-backdrop-filter: blur(7px) saturate(1.05);
+  border: 1px solid rgba(255,255,255,0.16);
   border-radius: 18px;
   padding: 1.75rem;
   max-width: 380px; width: 100%;
