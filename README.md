@@ -37,7 +37,7 @@
   - **Free (7):** Neon Lullaby · Golden Hour · Midnight Jazz · Velvet Bordeaux · Tokyo Neon · Cabin Fire · Arctic Aurora
   - **Pro (11):** Monsoon Rain · Cozy Library · Cognac & Oak · Nebula Dream · Sakura Dawn · Synthwave · Abyssal Ocean · Noir Velvet · Sunset Drift · First Light · Jade Hour
 - **One-tap mood presets** — Cozy Evening · Rainy Window · Starlit · Golden Calm · Aurora Night · Reading Room: each sets a theme + a tasteful blend of effects in one tap
-- **Atmosphere panel — 16 layered effects:** drifting dust, mote size, halo glow, sonar rings, film grain, breathing gradient, vinyl spin, aurora ribbons, starfield + shooting stars, rain, bokeh orbs, vignette, **god rays (warm light shafts), parallax depth (layers follow your mouse / device tilt), liquid gradient mesh (flowing, theme-tinted), equalizer (procedural bars flowing in your theme's colours)**
+- **Atmosphere panel — 17 layered effects:** drifting dust, mote size, halo glow, sonar rings, film grain, breathing gradient, vinyl spin, aurora ribbons, starfield + shooting stars, rain, bokeh orbs, vignette, **god rays (warm light shafts), parallax depth (layers follow your mouse / device tilt), liquid gradient mesh (flowing, theme-tinted), drifting fog (wisps rising from below), equalizer (procedural bars flowing in your theme's colours)**
 - **Living vinyl** — softly breathing shadow, a slow lamplight glint, and a warm bloom when playback begins
 - **Procedural vinyl-crackle ambient** (Web Audio) — optional, off by default
 - **Warm first-run default** + a **time-of-day greeting** when the record is at rest
