@@ -514,7 +514,18 @@ body.ios-no-vol .vol { display: none; }
   font-size: 0.7rem; letter-spacing: 0.32em; text-transform: uppercase;
   color: var(--cream-faint);
 }
-.stations-actions { display: flex; gap: 0.4rem; }
+/* Дії над списком станцій — два змістові кластери (порт із pro.html):
+   «таця» службових інструментів (↓↑ бекап) окремо від головної дії «Додати». */
+.stations-actions { display: flex; gap: 0.45rem 0.7rem; flex-wrap: wrap; align-items: center; }
+.act-tray {
+  display: flex; align-items: center; gap: 0.3rem;
+  padding: 0.2rem 0.35rem;
+  border: 1px solid var(--cream-line); border-radius: 999px;
+  background: rgba(0,0,0,0.18);
+}
+.act-tray .icon-label-btn { border-color: transparent; }
+.act-tray .icon-label-btn:hover { border-color: var(--amber); }
+.act-main { display: flex; align-items: center; gap: 0.45rem; flex-wrap: wrap; }
 
 .pill-btn {
   background: transparent;
@@ -535,6 +546,20 @@ body.ios-no-vol .vol { display: none; }
   background: rgba(255,186,106,0.16);
   border-color: var(--amber); color: var(--amber-glow);
 }
+/* головна дія — суцільний акцент теми + темний гліф (порт із pro.html) */
+.pill-btn-primary {
+  background: linear-gradient(135deg, var(--amber), var(--amber-glow));
+  border-color: rgba(255,255,255,0.35);
+  color: #241102; font-weight: 700;
+  box-shadow: 0 3px 14px -2px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.35);
+}
+.pill-btn-primary:hover {
+  background: linear-gradient(135deg, var(--amber), var(--amber-glow));
+  border-color: rgba(255,255,255,0.6); color: #241102;
+  filter: brightness(1.1);
+  box-shadow: 0 5px 20px -2px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.45);
+}
+.pill-btn-primary:active { transform: scale(0.985); }
 
 #filter {
   width: 100%; margin-bottom: 0.8rem;
@@ -1223,13 +1248,17 @@ body.in-focus main { visibility: hidden; }
     <div class="stations-head">
       <h3 id="stations-label-el" data-i18n="stations">Станції</h3>
       <div class="stations-actions">
-        <div class="io-wrap">
-          <button id="export-btn" class="icon-label-btn" type="button" title="Експорт станцій (↓)">↓</button>
-          <label class="icon-label-btn" title="Імпорт станцій (↑)">↑
-            <input id="import-file" type="file" accept=".json" hidden>
-          </label>
+        <div class="act-tray">
+          <div class="io-wrap">
+            <button id="export-btn" class="icon-label-btn" type="button" title="Експорт станцій (↓)">↓</button>
+            <label class="icon-label-btn" title="Імпорт станцій (↑)">↑
+              <input id="import-file" type="file" accept=".json" hidden>
+            </label>
+          </div>
         </div>
-        <button id="add-btn" class="pill-btn" type="button">⌕ + Додати</button>
+        <div class="act-main">
+          <button id="add-btn" class="pill-btn pill-btn-primary" type="button">⌕ + Додати</button>
+        </div>
       </div>
     </div>
 
