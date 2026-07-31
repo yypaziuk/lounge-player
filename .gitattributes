@@ -1,0 +1,22 @@
+# .gitattributes — фіксує кінці рядків, щоб git не переписував файли за спиною.
+#
+# Навіщо: у монорепо (де лежать джерела) `git checkout` повертав HTML із CRLF, бо на
+# Windows діє core.autocrlf=true. Зміст при цьому ідентичний, але файл росте на байт
+# з кожного рядка й РОЗХОДИТЬСЯ ПОБАЙТОВО з тим, що вже опубліковано — а `git status`
+# про це мовчить, бо порівнює нормалізований вміст, а не байти.
+# Сторінки віддає GitHub Pages (Linux), тож LF тут і природний, і стабільний.
+# Дзеркало правил — `.gitattributes` у монорепо; тримати обидва в одному стилі.
+
+* text=auto
+
+*.html          text eol=lf
+*.md            text eol=lf
+*.js            text eol=lf
+*.css           text eol=lf
+*.json          text eol=lf
+*.webmanifest   text eol=lf
+.gitattributes  text eol=lf
+
+*.png    binary
+*.jpg    binary
+*.ico    binary
