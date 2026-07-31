@@ -1968,7 +1968,10 @@ function renderLangDrop() {
   const toastEl      = $('#toast');
 
   // ───────── motes ─────────
-  for (let i = 0; i < 14; i++) {
+  // Кожна порошинка — окремий композитний шар; на телефоні це постійна робота GPU.
+  // На 390px різниця між 14 і 7 оком не читається. Той самий підхід, що fxCount у pro.html.
+  const MOTE_COUNT = matchMedia('(hover: none)').matches ? 7 : 14;
+  for (let i = 0; i < MOTE_COUNT; i++) {
     const s = document.createElement('span');
     s.style.setProperty('--x', Math.random() * 100 + '%');
     s.style.setProperty('--xshift', (Math.random() * 60 - 30) + 'px');
@@ -1991,7 +1994,6 @@ function renderLangDrop() {
   let playEpoch = 0;   // кожен play() інвалідовує «завислі» await-и попередніх спроб
   let lastTime = 0;
   let stuckTicks = 0;
-  let wakeLock = null;
   let mutedVol = null;
   let sleepDeadline = null;
   let sleepTickTimer = null;
@@ -2221,7 +2223,6 @@ function renderLangDrop() {
     audio.removeAttribute('src');
     audio.load();
     setState('idle', t('paused'));
-    releaseWakeLock();
     stopNowPlaying();
   }
   function scheduleReconnect() {
@@ -2283,10 +2284,9 @@ function renderLangDrop() {
   // ───────── audio events ─────────
   audio.addEventListener('playing', () => {
     clearTimeout(extPauseTimer);
-    if (!userWantsPlay) return;   // юзер уже натиснув паузу — не воскрешати відтворення/wake-lock/polling
+    if (!userWantsPlay) return;   // юзер уже натиснув паузу — не воскрешати відтворення/polling
     setState('playing', t('onAir'));
     attempts = 0; attemptsEl.textContent = '0';
-    requestWakeLock();
     const a = active();
     if (a) startNowPlaying(a.url);
     updateFocusInfo();
@@ -2333,7 +2333,6 @@ function renderLangDrop() {
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) return;
     if (userWantsPlay && audio.paused) scheduleReconnect();
-    if (userWantsPlay && !wakeLock)    requestWakeLock();
   });
   // iOS Safari/Chrome keep the media session alive after the tab is closed —
   // tear down on real unload. bfcache and installed-PWA minimize also fire
@@ -2361,24 +2360,10 @@ function renderLangDrop() {
     }
   }, 3000);
 
-  // ───────── wake lock ─────────
-  async function requestWakeLock() {
-    try {
-      if ('wakeLock' in navigator) {
-        const wl = await navigator.wakeLock.request('screen');
-        // поки лок брався (await), юзер міг натиснути паузу → releaseWakeLock спрацював
-        // вхолосту (wakeLock ще null). Відпускаємо одразу, інакше екран лишиться
-        // розбудженим на паузі.
-        if (!userWantsPlay) { try { wl.release(); } catch (_) {} return; }
-        wakeLock = wl;
-        wakeLock.addEventListener?.('release', () => { wakeLock = null; });
-      }
-    } catch (_) {}
-  }
-  function releaseWakeLock() {
-    try { wakeLock?.release?.(); } catch (_) {}
-    wakeLock = null;
-  }
+  // ───────── screen wake lock: НАВМИСНО ВІДСУТНІЙ (рішення 2026-07-31) ─────────
+  // Тримання екрана увімкненим на весь час прослуховування гріло телефон (дисплей —
+  // найбільший споживач) і не давало пристрою піти у сплячку. Радіо екрана не потребує.
+  // Той самий фікс синхронно зроблено в pro.html — НЕ повертати в жодному з файлів.
 
   // ───────── volume / mute ─────────
   volSlider.addEventListener('input', () => {
