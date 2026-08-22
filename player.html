@@ -1301,7 +1301,9 @@ body.in-focus main { visibility: hidden; }
   <a class="pro-teaser" id="pro-teaser" href="https://lounge-player.pro" target="_blank" rel="noopener">
     <div class="pro-glow" aria-hidden="true"></div>
     <div class="pro-teaser-head">
-      <span class="pro-kicker">LOUNGE&nbsp;PRO</span>
+      <!-- Було «LOUNGE PRO» — читалось як платний тариф. Тепер це просто назва
+           повної версії плеєра, і напис має говорити саме це. -->
+      <span class="pro-kicker" id="pro-kicker" data-i18n="proKicker">LOUNGE · ПОВНА ВЕРСІЯ</span>
     </div>
     <h3 class="pro-title" id="pro-title">The full version — free</h3>
     <p class="pro-lede" id="pro-lede"></p>
@@ -1426,7 +1428,7 @@ const I18N = {
     themeChanges:'тема змінюється з часом',
     nowIs:(n,s)=>`зараз: ${n.toLowerCase()} · ${s}`,
     installApp:'↗ Встановити як додаток', language:'Мова', deleteStation:'Видалити',
-    proTitle:'Повна версія — безкоштовно', proLede:'Усе з Free — плюс профілі, теми та більше контролю над атмосферою.',
+    proKicker:'LOUNGE · ПОВНА ВЕРСІЯ', proTitle:'Повна версія — безкоштовно', proLede:'Усе з Free — плюс профілі, теми та більше контролю над атмосферою.',
     proF1:'3 профілі — Робота · Вечір · Вихідні', proF2:'+11 ексклюзивних тем', proF3:'Обране ★ та фільтр',
     proF4:'Історія прослуханого', proF5:'Будильник на станцію', proF6:'Обкладинки станцій', proF7:'Кросфейд між станціями',
     proF8:'Набори настрою одним дотиком', proF9:'17 ефектів атмосфери (еквалайзер, промені світла, паралакс…)', proF10:'9 добірок + групи станцій', proF11:'🗓 Розклад станцій за часом доби', proF12:'☁ Хмарна синхронізація між пристроями',
@@ -1466,7 +1468,7 @@ const I18N = {
     themeChanges:'theme changes with time',
     nowIs:(n,s)=>`now: ${n.toLowerCase()} · ${s}`,
     installApp:'↗ Install as app', language:'Language', deleteStation:'Delete',
-    proTitle:'The full version — free', proLede:'Everything in Free — plus profiles, themes and more atmosphere control.',
+    proKicker:'LOUNGE · FULL VERSION', proTitle:'The full version — free', proLede:'Everything in Free — plus profiles, themes and more atmosphere control.',
     proF1:'3 profiles — Work · Evening · Weekend', proF2:'+11 exclusive themes', proF3:'Favorites ★ and filter',
     proF4:'Listening history', proF5:'Wake-up alarm', proF6:'Station artwork', proF7:'Crossfade between stations',
     proF8:'One-tap mood presets', proF9:'17 atmosphere effects (equalizer, light rays, parallax…)', proF10:'9 collections + station groups', proF11:'🗓 Daily station schedule', proF12:'☁ Cloud sync across devices',
@@ -1506,7 +1508,7 @@ const I18N = {
     themeChanges:'Theme wechselt mit der Zeit',
     nowIs:(n,s)=>`aktuell: ${n.toLowerCase()} · ${s}`,
     installApp:'↗ Als App installieren', language:'Sprache', deleteStation:'Löschen',
-    proTitle:'Die Vollversion — kostenlos', proLede:'Alles aus Free — plus Profile, Themes und mehr Atmosphäre-Kontrolle.',
+    proKicker:'LOUNGE · VOLLVERSION', proTitle:'Die Vollversion — kostenlos', proLede:'Alles aus Free — plus Profile, Themes und mehr Atmosphäre-Kontrolle.',
     proF1:'3 Profile — Arbeit · Abend · Wochenende', proF2:'+11 exklusive Themes', proF3:'Favoriten ★ und Filter',
     proF4:'Wiedergabeverlauf', proF5:'Wecker', proF6:'Sender-Artwork', proF7:'Crossfade zwischen Sendern',
     proF8:'Stimmungs-Presets mit einem Tipp', proF9:'17 Atmosphäre-Effekte (Equalizer, Lichtstrahlen, Parallax…)', proF10:'9 Sammlungen + Sendergruppen', proF11:'🗓 Täglicher Sender-Zeitplan', proF12:'☁ Cloud-Synchronisation zwischen Geräten',
@@ -1546,7 +1548,7 @@ const I18N = {
     themeChanges:'le thème change avec le temps',
     nowIs:(n,s)=>`maintenant: ${n.toLowerCase()} · ${s}`,
     installApp:'↗ Installer comme app', language:'Langue', deleteStation:'Supprimer',
-    proTitle:'La version complète — gratuite', proLede:'Tout dans Free — plus profils, thèmes et contrôle de l\'ambiance.',
+    proKicker:'LOUNGE · VERSION COMPLÈTE', proTitle:'La version complète — gratuite', proLede:'Tout dans Free — plus profils, thèmes et contrôle de l\'ambiance.',
     proF1:'3 profils — Travail · Soir · Week-end', proF2:'+11 thèmes exclusifs', proF3:'Favoris ★ et filtre',
     proF4:'Historique d\'écoute', proF5:'Réveil', proF6:'Pochettes de stations', proF7:'Fondu entre stations',
     proF8:'Ambiances en un toucher', proF9:'17 effets d\'ambiance (égaliseur, rayons, parallax…)', proF10:'9 collections + groupes de stations', proF11:'🗓 Programmation quotidienne des stations', proF12:'☁ Synchronisation cloud entre appareils',
@@ -1586,7 +1588,7 @@ const I18N = {
     themeChanges:'el tema cambia con el tiempo',
     nowIs:(n,s)=>`ahora: ${n.toLowerCase()} · ${s}`,
     installApp:'↗ Instalar como app', language:'Idioma', deleteStation:'Eliminar',
-    proTitle:'La versión completa — gratis', proLede:'Todo lo de Free — más perfiles, temas y control de ambiente.',
+    proKicker:'LOUNGE · VERSIÓN COMPLETA', proTitle:'La versión completa — gratis', proLede:'Todo lo de Free — más perfiles, temas y control de ambiente.',
     proF1:'3 perfiles — Trabajo · Tarde · Fin de semana', proF2:'+11 temas exclusivos', proF3:'Favoritos ★ y filtro',
     proF4:'Historial de escucha', proF5:'Alarma', proF6:'Carátulas de emisoras', proF7:'Fundido entre emisoras',
     proF8:'Ambientes con un toque', proF9:'17 efectos de ambiente (ecualizador, rayos de luz, parallax…)', proF10:'9 colecciones + grupos de emisoras', proF11:'🗓 Horario diario de estaciones', proF12:'☁ Sincronización en la nube entre dispositivos',
@@ -1626,7 +1628,7 @@ const I18N = {
     themeChanges:'motyw zmienia się z czasem',
     nowIs:(n,s)=>`teraz: ${n.toLowerCase()} · ${s}`,
     installApp:'↗ Zainstaluj jako app', language:'Język', deleteStation:'Usuń',
-    proTitle:'Pełna wersja — za darmo', proLede:'Wszystko z Free — plus profile, motywy i kontrola atmosfery.',
+    proKicker:'LOUNGE · PEŁNA WERSJA', proTitle:'Pełna wersja — za darmo', proLede:'Wszystko z Free — plus profile, motywy i kontrola atmosfery.',
     proF1:'3 profile — Praca · Wieczór · Weekend', proF2:'+11 ekskluzywnych motywów', proF3:'Ulubione ★ i filtr',
     proF4:'Historia odtwarzania', proF5:'Budzik', proF6:'Okładki stacji', proF7:'Przenikanie między stacjami',
     proF8:'Nastroje jednym dotknięciem', proF9:'17 efektów atmosfery (korektor, promienie, paralaksa…)', proF10:'9 kolekcji + grupy stacji', proF11:'🗓 Dzienny harmonogram stacji', proF12:'☁ Synchronizacja w chmurze między urządzeniami',
@@ -1655,7 +1657,7 @@ const I18N = {
     tipsText:'Apri in locale — le stazioni restano salvate. ↓ ↑ — esporta/importa. Trascina le righe per riordinare. Su HTTPS — installa come app.',
     atmosphere:'Atmosfera', autoTime:'Auto in base all\'ora', themeChanges:'il tema cambia con l\'ora',
     nowIs:(n,s)=>`ora: ${n.toLowerCase()} · ${s}`, installApp:'↗ Installa come app', language:'Lingua',
-    deleteStation:'Elimina', proTitle:'La versione completa — gratis',
+    deleteStation:'Elimina', proKicker:'LOUNGE · VERSIONE COMPLETA', proTitle:'La versione completa — gratis',
     proLede:'Tutto di Free — più profili, temi e maggiore controllo dell\'atmosfera.',
     proF1:'3 profili — Lavoro · Sera · Weekend', proF2:'+11 temi esclusivi', proF3:'Preferiti ★ e filtro',
     proF4:'Cronologia di ascolto', proF5:'Sveglia con stazione', proF6:'Copertine delle stazioni',
@@ -1687,7 +1689,7 @@ const I18N = {
     tipsText:'Abra localmente — as estações ficam salvas. ↓ ↑ — exportar/importar. Arraste as linhas para reordenar. Em HTTPS — instale como app.',
     atmosphere:'Atmosfera', autoTime:'Automático pela hora do dia', themeChanges:'o tema muda com a hora',
     nowIs:(n,s)=>`agora: ${n.toLowerCase()} · ${s}`, installApp:'↗ Instalar como app', language:'Idioma',
-    deleteStation:'Excluir', proTitle:'A versão completa — grátis',
+    deleteStation:'Excluir', proKicker:'LOUNGE · VERSÃO COMPLETA', proTitle:'A versão completa — grátis',
     proLede:'Tudo do Free — mais perfis, temas e maior controle da atmosfera.',
     proF1:'3 perfis — Trabalho · Noite · Fim de semana', proF2:'+11 temas exclusivos',
     proF3:'Favoritas ★ e filtro', proF4:'Histórico de reprodução', proF5:'Despertador com estação',
@@ -1718,7 +1720,7 @@ const I18N = {
     tipsText:'Yerel olarak açın — istasyonlar kaydedilir. ↓ ↑ — dışa/içe aktarma. Sıralamak için satırları sürükleyin. HTTPS üzerinde — uygulama olarak kurun.',
     atmosphere:'Atmosfer', autoTime:'Günün saatine göre otomatik', themeChanges:'tema saate göre değişir',
     nowIs:(n,s)=>`şimdi: ${n.toLowerCase()} · ${s}`, installApp:'↗ Uygulama olarak kur', language:'Dil',
-    deleteStation:'Sil', proTitle:'Tam sürüm — ücretsiz',
+    deleteStation:'Sil', proKicker:'LOUNGE · TAM SÜRÜM', proTitle:'Tam sürüm — ücretsiz',
     proLede:'Free\'deki her şey — artı profiller, temalar ve daha fazla atmosfer kontrolü.',
     proF1:'3 profil — İş · Akşam · Hafta sonu', proF2:'+11 özel tema', proF3:'Favoriler ★ ve filtre',
     proF4:'Dinleme geçmişi', proF5:'İstasyonlu alarm', proF6:'İstasyon kapakları',
@@ -1744,7 +1746,7 @@ const I18N = {
     tips:'ヒント', tipsText:'ローカルで開いても局は保存されます。↓ ↑ — エクスポート/インポート。行をドラッグして並べ替え。HTTPSではアプリとしてインストールできます。',
     atmosphere:'アトモスフィア', autoTime:'時間帯で自動', themeChanges:'テーマは時間で変化',
     nowIs:(n,s)=>`再生中: ${n.toLowerCase()} · ${s}`, installApp:'↗ アプリとしてインストール', language:'言語',
-    deleteStation:'削除', proTitle:'フル機能版 — 無料', proLede:'Freeの全機能に加え、プロファイル、テーマ、より細かなアトモスフィア調整。',
+    deleteStation:'削除', proKicker:'LOUNGE · フル機能版', proTitle:'フル機能版 — 無料', proLede:'Freeの全機能に加え、プロファイル、テーマ、より細かなアトモスフィア調整。',
     proF1:'3つのプロファイル — 仕事 · 夜 · 週末', proF2:'+11つの限定テーマ', proF3:'お気に入り ★ とフィルター', proF4:'再生履歴',
     proF5:'局で目覚めるアラーム', proF6:'局のアートワーク', proF7:'局間のクロスフェード', proF8:'ワンタップのムードプリセット',
     proF9:'17のアトモスフィア効果（イコライザー、光線、パララックス…）', proF10:'9つのコレクション + 局グループ', proF11:'🗓 デイリー局スケジュール',
@@ -1764,7 +1766,7 @@ const I18N = {
     kbSearch:'搜索电台', kbFocus:'专注模式', kbTheme:'下一个主题', kbHelp:'此界面', tips:'提示',
     tipsText:'本地打开也会保存电台。↓ ↑ — 导出/导入。拖动行可调整顺序。在 HTTPS 上可安装为应用。', atmosphere:'氛围', autoTime:'按时段自动',
     themeChanges:'主题随时间变化', nowIs:(n,s)=>`正在播放: ${n.toLowerCase()} · ${s}`, installApp:'↗ 安装为应用',
-    language:'语言', deleteStation:'删除', proTitle:'完整版 — 免费', proLede:'Free 的全部功能，外加配置文件、主题和更多氛围控制。',
+    language:'语言', deleteStation:'删除', proKicker:'LOUNGE · 完整版', proTitle:'完整版 — 免费', proLede:'Free 的全部功能，外加配置文件、主题和更多氛围控制。',
     proF1:'3 个配置 — 工作 · 夜晚 · 周末', proF2:'+11 个专属主题', proF3:'收藏 ★ 与筛选', proF4:'收听历史', proF5:'电台闹钟', proF6:'电台封面',
     proF7:'电台间交叉淡入淡出', proF8:'一键氛围预设', proF9:'17 种氛围效果（均衡器、光线、视差…）', proF10:'9 个精选合集 + 电台分组',
     proF11:'🗓 每日电台时间表', proF12:'☁ 跨设备云同步', proCta:'打开 Pro →', proNote:'全部功能 · 无需账号、无需付费',
@@ -1847,6 +1849,8 @@ function renderProTeaser() {
   const cta   = document.getElementById('pro-cta');
   const note  = document.getElementById('pro-note');
   if (!title || !feats) return;
+  const kicker = document.getElementById('pro-kicker');
+  if (kicker) kicker.textContent = t('proKicker');
   title.textContent = t('proTitle');
   if (lede) lede.textContent = t('proLede');
   if (cta)  cta.textContent  = t('proCta');
