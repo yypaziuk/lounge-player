@@ -4,11 +4,11 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Lounge · Always On — Internet Radio Player</title>
-<meta name="description" content="A beautiful internet radio player that never stops. Auto-reconnects, 18 themes, 11 languages. Free version open source. Pro adds profiles, cloud sync, mood presets, atmosphere effects and more."/>
+<meta name="description" content="A beautiful internet radio player that never stops. Auto-reconnects, 18 themes, 11 languages. Open source and free — both versions. The full version adds profiles, cloud sync, mood presets and atmosphere effects."/>
 <meta property="og:type" content="website"/>
 <meta property="og:site_name" content="Lounge · Always On"/>
 <meta property="og:title" content="Lounge · Always On — Internet Radio Player"/>
-<meta property="og:description" content="Beautiful internet radio player that never stops. Auto-reconnects, 18 themes, 11 languages. Free + Pro."/>
+<meta property="og:description" content="Beautiful internet radio player that never stops. Auto-reconnects, 18 themes, 11 languages. Free, no account."/>
 <meta property="og:url" content="https://yypaziuk.github.io/lounge-player/"/>
 <meta property="og:image" content="https://yypaziuk.github.io/lounge-player/og-image.png"/>
 <meta property="og:image:width" content="1200"/>
@@ -16,7 +16,7 @@
 <meta property="og:image:alt" content="Lounge · Always On — internet radio player"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:title" content="Lounge · Always On — Internet Radio Player"/>
-<meta name="twitter:description" content="Beautiful internet radio player that never stops. 18 themes, 11 languages. Free + Pro."/>
+<meta name="twitter:description" content="Beautiful internet radio player that never stops. 18 themes, 11 languages. Free, no account."/>
 <meta name="twitter:image" content="https://yypaziuk.github.io/lounge-player/og-image.png"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -287,6 +287,11 @@ h1 em{font-style:italic;color:#ffdc9e;font-weight:300}
 .plan-pro .plan-features li::before{color:rgba(255,186,106,.55)}
 
 /* themes strip */
+.plans-note{
+  font-size:.78rem;line-height:1.6;font-weight:300;
+  color:rgba(250,242,226,.42);
+  max-width:46ch;margin:-2.5rem auto clamp(3rem,7vw,5rem);
+}
 .themes-label{
   font-size:.65rem;letter-spacing:.35em;text-transform:uppercase;
   color:rgba(250,242,226,.35);margin-bottom:1rem;
@@ -363,7 +368,7 @@ footer a:hover{color:rgba(255,186,106,.7)}
     <div class="nav-links">
       <a class="nav-link" href="https://github.com/yypaziuk/lounge-player">GitHub</a>
       <a class="nav-link primary" href="player.html">Open Player ▶</a>
-      <a class="nav-link pro" href="https://lounge-player.pro">Try Pro →</a>
+      <a class="nav-link pro" href="https://lounge-player.pro">Open Pro →</a>
     </div>
   </nav>
 
@@ -373,7 +378,7 @@ footer a:hover{color:rgba(255,186,106,.7)}
     <p class="sub">Auto-reconnects when you switch networks. Beautiful themes. Eleven languages. One HTML file — no install, no server, no tracking.</p>
     <div class="cta-row">
       <a class="btn btn-primary" href="player.html">▶ Open Player</a>
-      <a class="btn btn-pro" href="https://lounge-player.pro">Try Pro →</a>
+      <a class="btn btn-pro" href="https://lounge-player.pro">Open Pro →</a>
     </div>
   </div>
 
@@ -433,8 +438,8 @@ footer a:hover{color:rgba(255,186,106,.7)}
     </div>
     <div class="plan plan-pro">
       <div class="plan-name">Pro</div>
-      <div class="plan-price">Subscription</div>
-      <div class="plan-tagline">Everything in Free, plus</div>
+      <div class="plan-price">$0</div>
+      <div class="plan-tagline">Everything in Free, plus — no account, no payment</div>
       <ul class="plan-features">
         <li>3 Profiles — Work, Evening, Weekend</li>
         <li>Cloud sync — stations, profiles &amp; settings on all your devices</li>
@@ -450,9 +455,11 @@ footer a:hover{color:rgba(255,186,106,.7)}
         <li>Living vinyl + time-of-day greeting</li>
         <li>Full backup &amp; restore — all stations, profiles &amp; settings</li>
       </ul>
-      <a class="btn btn-pro" href="https://lounge-player.pro">Try Pro →</a>
+      <a class="btn btn-pro" href="https://lounge-player.pro">Open Pro →</a>
     </div>
   </div>
+
+  <p class="plans-note">Both versions are free, with no ads and no tracking. If Lounge makes your day nicer, there is a ☕ button in the player.</p>
 
   <p class="themes-label">Themes</p>
   <div class="themes">
@@ -496,7 +503,7 @@ footer a:hover{color:rgba(255,186,106,.7)}
     <p>FREE · OPEN SOURCE · NO TRACKING</p>
     <div class="cta-row">
       <a class="btn btn-primary" href="player.html">▶ Open Player</a>
-      <a class="btn btn-pro" href="https://lounge-player.pro">Try Pro →</a>
+      <a class="btn btn-pro" href="https://lounge-player.pro">Open Pro →</a>
       <a class="btn btn-ghost" href="https://github.com/yypaziuk/lounge-player">View on GitHub</a>
     </div>
   </div>

@@ -25,7 +25,10 @@
 | Full backup &amp; restore | basic (stations) | **everything (profiles, themes, settings)** |
 | Android APK · Windows desktop | — | ✓ |
 
-👉 **Try Pro:** [lounge-player.pro](https://lounge-player.pro) — every feature, synced across your devices.
+👉 **Open the full app:** [lounge-player.pro](https://lounge-player.pro) — every feature, free, synced across your devices.
+
+> **Both editions are free.** There is no subscription and no ads. If the player makes your day
+> nicer, there is a ☕ button inside it — supporting is entirely optional.
 
 ---
 
@@ -103,7 +106,7 @@
 ## 🚀 Quick Start
 
 **Option A — Open locally**
-1. Download `player.html` (Free), or open the full app at [lounge-player.pro](https://lounge-player.pro) (Free + Pro)
+1. Download `player.html`, or open the full app at [lounge-player.pro](https://lounge-player.pro) — both free
 2. Open in any modern browser
 3. Click **+ Add** or pick a preset station
 4. Press Play ▶
@@ -113,7 +116,7 @@ No server, no install, no dependencies. Just one HTML file.
 **Option B — Live demo**
 👉 [yypaziuk.github.io/lounge-player](https://yypaziuk.github.io/lounge-player)
 - Free player: [`/player.html`](https://yypaziuk.github.io/lounge-player/player.html)
-- Full app (Free + Pro): [lounge-player.pro](https://lounge-player.pro)
+- Full app (free, no account): [lounge-player.pro](https://lounge-player.pro)
 
 ---
 
@@ -151,7 +154,10 @@ Pull requests are welcome! Some ideas if you want to contribute:
 ## 📄 License
 
 The **Free** edition (`player.html`) is released under the **MIT** license — free to use, modify and share.
-The **Pro** edition (`pro.html`) is a commercial product (subscription) — it supports development and unlocks every feature plus cross-device sync.
+
+The **Pro** edition (`pro.html`) is **also free to use**, but its source is not open and it is not
+covered by the MIT license. It is hosted at [lounge-player.pro](https://lounge-player.pro) and
+funded by voluntary donations — there is no subscription, no paywall and no ads.
 
 ---
 
