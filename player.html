@@ -820,7 +820,8 @@ body.ios-no-vol .vol { display: none; }
   display: flex; align-items: flex-start; gap: 0.45rem;
   font-size: 0.78rem; line-height: 1.35; color: var(--cream-soft);
 }
-.pro-lock { flex-shrink: 0; font-size: 0.72rem; opacity: 0.7; margin-top: 0.08em; }
+/* маркер пункту в списку можливостей Pro (був 🔒 — див. коментар у рендері) */
+.pro-lock { flex-shrink: 0; font-size: 0.72rem; opacity: 0.7; margin-top: 0.08em; color: var(--gold); }
 .pro-cta {
   position: relative; display: block; text-align: center;
   padding: 0.75rem 1rem; border-radius: 12px;
@@ -1302,10 +1303,10 @@ body.in-focus main { visibility: hidden; }
     <div class="pro-teaser-head">
       <span class="pro-kicker">LOUNGE&nbsp;PRO</span>
     </div>
-    <h3 class="pro-title" id="pro-title">Unlock Pro</h3>
+    <h3 class="pro-title" id="pro-title">The full version — free</h3>
     <p class="pro-lede" id="pro-lede"></p>
     <ul class="pro-feats" id="pro-feats"></ul>
-    <span class="pro-cta" id="pro-cta">Try Pro →</span>
+    <span class="pro-cta" id="pro-cta">Open Pro →</span>
     <span class="pro-note" id="pro-note"></span>
   </a>
 
@@ -1425,11 +1426,11 @@ const I18N = {
     themeChanges:'тема змінюється з часом',
     nowIs:(n,s)=>`зараз: ${n.toLowerCase()} · ${s}`,
     installApp:'↗ Встановити як додаток', language:'Мова', deleteStation:'Видалити',
-    proTitle:'Розблокуйте Pro', proLede:'Усе з Free — плюс профілі, теми та більше контролю над атмосферою.',
+    proTitle:'Повна версія — безкоштовно', proLede:'Усе з Free — плюс профілі, теми та більше контролю над атмосферою.',
     proF1:'3 профілі — Робота · Вечір · Вихідні', proF2:'+11 ексклюзивних тем', proF3:'Обране ★ та фільтр',
     proF4:'Історія прослуханого', proF5:'Будильник на станцію', proF6:'Обкладинки станцій', proF7:'Кросфейд між станціями',
     proF8:'Набори настрою одним дотиком', proF9:'17 ефектів атмосфери (еквалайзер, промені світла, паралакс…)', proF10:'9 добірок + групи станцій', proF11:'🗓 Розклад станцій за часом доби', proF12:'☁ Хмарна синхронізація між пристроями',
-    proCta:'Спробувати Pro →', proNote:'Усі функції · синхронізація між пристроями',
+    proCta:'Відкрити Pro →', proNote:'Усі функції · без реєстрації та оплати',
   },
   en:{ flag:'🇬🇧', name:'English',
     onAir:'on air', offAir:'off air', connecting_:'connecting',
@@ -1465,11 +1466,11 @@ const I18N = {
     themeChanges:'theme changes with time',
     nowIs:(n,s)=>`now: ${n.toLowerCase()} · ${s}`,
     installApp:'↗ Install as app', language:'Language', deleteStation:'Delete',
-    proTitle:'Unlock Pro', proLede:'Everything in Free — plus profiles, themes and more atmosphere control.',
+    proTitle:'The full version — free', proLede:'Everything in Free — plus profiles, themes and more atmosphere control.',
     proF1:'3 profiles — Work · Evening · Weekend', proF2:'+11 exclusive themes', proF3:'Favorites ★ and filter',
     proF4:'Listening history', proF5:'Wake-up alarm', proF6:'Station artwork', proF7:'Crossfade between stations',
     proF8:'One-tap mood presets', proF9:'17 atmosphere effects (equalizer, light rays, parallax…)', proF10:'9 collections + station groups', proF11:'🗓 Daily station schedule', proF12:'☁ Cloud sync across devices',
-    proCta:'Try Pro →', proNote:'Every feature · sync across devices',
+    proCta:'Open Pro →', proNote:'Every feature · no account, no payment',
   },
   de:{ flag:'🇩🇪', name:'Deutsch',
     onAir:'live', offAir:'offline', connecting_:'verbinden',
@@ -1505,11 +1506,11 @@ const I18N = {
     themeChanges:'Theme wechselt mit der Zeit',
     nowIs:(n,s)=>`aktuell: ${n.toLowerCase()} · ${s}`,
     installApp:'↗ Als App installieren', language:'Sprache', deleteStation:'Löschen',
-    proTitle:'Pro freischalten', proLede:'Alles aus Free — plus Profile, Themes und mehr Atmosphäre-Kontrolle.',
+    proTitle:'Die Vollversion — kostenlos', proLede:'Alles aus Free — plus Profile, Themes und mehr Atmosphäre-Kontrolle.',
     proF1:'3 Profile — Arbeit · Abend · Wochenende', proF2:'+11 exklusive Themes', proF3:'Favoriten ★ und Filter',
     proF4:'Wiedergabeverlauf', proF5:'Wecker', proF6:'Sender-Artwork', proF7:'Crossfade zwischen Sendern',
     proF8:'Stimmungs-Presets mit einem Tipp', proF9:'17 Atmosphäre-Effekte (Equalizer, Lichtstrahlen, Parallax…)', proF10:'9 Sammlungen + Sendergruppen', proF11:'🗓 Täglicher Sender-Zeitplan', proF12:'☁ Cloud-Synchronisation zwischen Geräten',
-    proCta:'Pro testen →', proNote:'Alle Funktionen · Sync über Geräte',
+    proCta:'Pro öffnen →', proNote:'Alle Funktionen · ohne Konto, ohne Zahlung',
   },
   fr:{ flag:'🇫🇷', name:'Français',
     onAir:'en direct', offAir:'hors antenne', connecting_:'connexion',
@@ -1545,11 +1546,11 @@ const I18N = {
     themeChanges:'le thème change avec le temps',
     nowIs:(n,s)=>`maintenant: ${n.toLowerCase()} · ${s}`,
     installApp:'↗ Installer comme app', language:'Langue', deleteStation:'Supprimer',
-    proTitle:'Débloquer Pro', proLede:'Tout dans Free — plus profils, thèmes et contrôle de l\'ambiance.',
+    proTitle:'La version complète — gratuite', proLede:'Tout dans Free — plus profils, thèmes et contrôle de l\'ambiance.',
     proF1:'3 profils — Travail · Soir · Week-end', proF2:'+11 thèmes exclusifs', proF3:'Favoris ★ et filtre',
     proF4:'Historique d\'écoute', proF5:'Réveil', proF6:'Pochettes de stations', proF7:'Fondu entre stations',
     proF8:'Ambiances en un toucher', proF9:'17 effets d\'ambiance (égaliseur, rayons, parallax…)', proF10:'9 collections + groupes de stations', proF11:'🗓 Programmation quotidienne des stations', proF12:'☁ Synchronisation cloud entre appareils',
-    proCta:'Essayer Pro →', proNote:'Toutes les fonctions · sync multi-appareils',
+    proCta:'Ouvrir Pro →', proNote:'Toutes les fonctions · sans compte ni paiement',
   },
   es:{ flag:'🇪🇸', name:'Español',
     onAir:'en antena', offAir:'fuera del aire', connecting_:'conectando',
@@ -1585,11 +1586,11 @@ const I18N = {
     themeChanges:'el tema cambia con el tiempo',
     nowIs:(n,s)=>`ahora: ${n.toLowerCase()} · ${s}`,
     installApp:'↗ Instalar como app', language:'Idioma', deleteStation:'Eliminar',
-    proTitle:'Desbloquear Pro', proLede:'Todo lo de Free — más perfiles, temas y control de ambiente.',
+    proTitle:'La versión completa — gratis', proLede:'Todo lo de Free — más perfiles, temas y control de ambiente.',
     proF1:'3 perfiles — Trabajo · Tarde · Fin de semana', proF2:'+11 temas exclusivos', proF3:'Favoritos ★ y filtro',
     proF4:'Historial de escucha', proF5:'Alarma', proF6:'Carátulas de emisoras', proF7:'Fundido entre emisoras',
     proF8:'Ambientes con un toque', proF9:'17 efectos de ambiente (ecualizador, rayos de luz, parallax…)', proF10:'9 colecciones + grupos de emisoras', proF11:'🗓 Horario diario de estaciones', proF12:'☁ Sincronización en la nube entre dispositivos',
-    proCta:'Probar Pro →', proNote:'Todas las funciones · sync entre dispositivos',
+    proCta:'Abrir Pro →', proNote:'Todas las funciones · sin cuenta ni pago',
   },
   pl:{ flag:'🇵🇱', name:'Polski',
     onAir:'na antenie', offAir:'poza anteną', connecting_:'łączenie',
@@ -1625,11 +1626,11 @@ const I18N = {
     themeChanges:'motyw zmienia się z czasem',
     nowIs:(n,s)=>`teraz: ${n.toLowerCase()} · ${s}`,
     installApp:'↗ Zainstaluj jako app', language:'Język', deleteStation:'Usuń',
-    proTitle:'Odblokuj Pro', proLede:'Wszystko z Free — plus profile, motywy i kontrola atmosfery.',
+    proTitle:'Pełna wersja — za darmo', proLede:'Wszystko z Free — plus profile, motywy i kontrola atmosfery.',
     proF1:'3 profile — Praca · Wieczór · Weekend', proF2:'+11 ekskluzywnych motywów', proF3:'Ulubione ★ i filtr',
     proF4:'Historia odtwarzania', proF5:'Budzik', proF6:'Okładki stacji', proF7:'Przenikanie między stacjami',
     proF8:'Nastroje jednym dotknięciem', proF9:'17 efektów atmosfery (korektor, promienie, paralaksa…)', proF10:'9 kolekcji + grupy stacji', proF11:'🗓 Dzienny harmonogram stacji', proF12:'☁ Synchronizacja w chmurze między urządzeniami',
-    proCta:'Wypróbuj Pro →', proNote:'Wszystkie funkcje · synchronizacja',
+    proCta:'Otwórz Pro →', proNote:'Wszystkie funkcje · bez konta i opłat',
   },
   it:{ flag:'🇮🇹', name:'Italiano',
     onAir:'in onda', offAir:'fuori onda', connecting_:'connessione', reconnecting_:'riconnessione',
@@ -1654,15 +1655,15 @@ const I18N = {
     tipsText:'Apri in locale — le stazioni restano salvate. ↓ ↑ — esporta/importa. Trascina le righe per riordinare. Su HTTPS — installa come app.',
     atmosphere:'Atmosfera', autoTime:'Auto in base all\'ora', themeChanges:'il tema cambia con l\'ora',
     nowIs:(n,s)=>`ora: ${n.toLowerCase()} · ${s}`, installApp:'↗ Installa come app', language:'Lingua',
-    deleteStation:'Elimina', proTitle:'Sblocca Pro',
+    deleteStation:'Elimina', proTitle:'La versione completa — gratis',
     proLede:'Tutto di Free — più profili, temi e maggiore controllo dell\'atmosfera.',
     proF1:'3 profili — Lavoro · Sera · Weekend', proF2:'+11 temi esclusivi', proF3:'Preferiti ★ e filtro',
     proF4:'Cronologia di ascolto', proF5:'Sveglia con stazione', proF6:'Copertine delle stazioni',
     proF7:'Crossfade tra stazioni', proF8:'Preset di atmosfera con un tocco',
     proF9:'17 effetti atmosfera (equalizzatore, raggi di luce, parallasse…)',
     proF10:'9 raccolte + gruppi di stazioni', proF11:'🗓 Programma giornaliero delle stazioni',
-    proF12:'☁ Sincronizzazione cloud tra dispositivi', proCta:'Prova Pro →',
-    proNote:'Tutte le funzioni · sincronizzazione tra dispositivi',
+    proF12:'☁ Sincronizzazione cloud tra dispositivi', proCta:'Apri Pro →',
+    proNote:'Tutte le funzioni · senza account né pagamento',
   },
   pt:{ flag:'🇧🇷', name:'Português',
     onAir:'no ar', offAir:'fora do ar', connecting_:'conectando', reconnecting_:'reconectando',
@@ -1686,15 +1687,15 @@ const I18N = {
     tipsText:'Abra localmente — as estações ficam salvas. ↓ ↑ — exportar/importar. Arraste as linhas para reordenar. Em HTTPS — instale como app.',
     atmosphere:'Atmosfera', autoTime:'Automático pela hora do dia', themeChanges:'o tema muda com a hora',
     nowIs:(n,s)=>`agora: ${n.toLowerCase()} · ${s}`, installApp:'↗ Instalar como app', language:'Idioma',
-    deleteStation:'Excluir', proTitle:'Desbloqueie o Pro',
+    deleteStation:'Excluir', proTitle:'A versão completa — grátis',
     proLede:'Tudo do Free — mais perfis, temas e maior controle da atmosfera.',
     proF1:'3 perfis — Trabalho · Noite · Fim de semana', proF2:'+11 temas exclusivos',
     proF3:'Favoritas ★ e filtro', proF4:'Histórico de reprodução', proF5:'Despertador com estação',
     proF6:'Capas das estações', proF7:'Crossfade entre estações', proF8:'Presets de clima com um toque',
     proF9:'17 efeitos de atmosfera (equalizador, raios de luz, parallax…)',
     proF10:'9 coleções + grupos de estações', proF11:'🗓 Programação diária de estações',
-    proF12:'☁ Sincronização na nuvem entre dispositivos', proCta:'Experimentar o Pro →',
-    proNote:'Todos os recursos · sincronização entre dispositivos',
+    proF12:'☁ Sincronização na nuvem entre dispositivos', proCta:'Abrir o Pro →',
+    proNote:'Todos os recursos · sem conta nem pagamento',
   },
   tr:{ flag:'🇹🇷', name:'Türkçe',
     onAir:'yayında', offAir:'yayın dışı', connecting_:'bağlanıyor', reconnecting_:'yeniden bağlanıyor',
@@ -1717,15 +1718,15 @@ const I18N = {
     tipsText:'Yerel olarak açın — istasyonlar kaydedilir. ↓ ↑ — dışa/içe aktarma. Sıralamak için satırları sürükleyin. HTTPS üzerinde — uygulama olarak kurun.',
     atmosphere:'Atmosfer', autoTime:'Günün saatine göre otomatik', themeChanges:'tema saate göre değişir',
     nowIs:(n,s)=>`şimdi: ${n.toLowerCase()} · ${s}`, installApp:'↗ Uygulama olarak kur', language:'Dil',
-    deleteStation:'Sil', proTitle:'Pro\'yu açın',
+    deleteStation:'Sil', proTitle:'Tam sürüm — ücretsiz',
     proLede:'Free\'deki her şey — artı profiller, temalar ve daha fazla atmosfer kontrolü.',
     proF1:'3 profil — İş · Akşam · Hafta sonu', proF2:'+11 özel tema', proF3:'Favoriler ★ ve filtre',
     proF4:'Dinleme geçmişi', proF5:'İstasyonlu alarm', proF6:'İstasyon kapakları',
     proF7:'İstasyonlar arası crossfade', proF8:'Tek dokunuşla ruh hali ön ayarları',
     proF9:'17 atmosfer efekti (ekolayzer, ışık hüzmeleri, paralaks…)',
     proF10:'9 koleksiyon + istasyon grupları', proF11:'🗓 Günlük istasyon programı',
-    proF12:'☁ Cihazlar arası bulut senkronizasyonu', proCta:'Pro\'yu dene →',
-    proNote:'Tüm özellikler · cihazlar arası senkronizasyon',
+    proF12:'☁ Cihazlar arası bulut senkronizasyonu', proCta:'Pro\'yu aç →',
+    proNote:'Tüm özellikler · hesap ve ödeme yok',
   },
   ja:{ flag:'🇯🇵', name:'日本語',
     onAir:'オンエア', offAir:'オフエア', connecting_:'接続中', reconnecting_:'再接続中', noSignal:'信号なし', radioDefault:'ラジオ',
@@ -1743,11 +1744,11 @@ const I18N = {
     tips:'ヒント', tipsText:'ローカルで開いても局は保存されます。↓ ↑ — エクスポート/インポート。行をドラッグして並べ替え。HTTPSではアプリとしてインストールできます。',
     atmosphere:'アトモスフィア', autoTime:'時間帯で自動', themeChanges:'テーマは時間で変化',
     nowIs:(n,s)=>`再生中: ${n.toLowerCase()} · ${s}`, installApp:'↗ アプリとしてインストール', language:'言語',
-    deleteStation:'削除', proTitle:'Proを解放', proLede:'Freeの全機能に加え、プロファイル、テーマ、より細かなアトモスフィア調整。',
+    deleteStation:'削除', proTitle:'フル機能版 — 無料', proLede:'Freeの全機能に加え、プロファイル、テーマ、より細かなアトモスフィア調整。',
     proF1:'3つのプロファイル — 仕事 · 夜 · 週末', proF2:'+11つの限定テーマ', proF3:'お気に入り ★ とフィルター', proF4:'再生履歴',
     proF5:'局で目覚めるアラーム', proF6:'局のアートワーク', proF7:'局間のクロスフェード', proF8:'ワンタップのムードプリセット',
     proF9:'17のアトモスフィア効果（イコライザー、光線、パララックス…）', proF10:'9つのコレクション + 局グループ', proF11:'🗓 デイリー局スケジュール',
-    proF12:'☁ デバイス間クラウド同期', proCta:'Proを試す →', proNote:'全機能 · デバイス間同期',
+    proF12:'☁ デバイス間クラウド同期', proCta:'Pro を開く →', proNote:'全機能 · アカウント登録も支払いも不要',
   },
   zh:{ flag:'🇨🇳', name:'中文',
     onAir:'播放中', offAir:'未播出', connecting_:'连接中', reconnecting_:'重新连接中', noSignal:'无信号', radioDefault:'电台',
@@ -1763,10 +1764,10 @@ const I18N = {
     kbSearch:'搜索电台', kbFocus:'专注模式', kbTheme:'下一个主题', kbHelp:'此界面', tips:'提示',
     tipsText:'本地打开也会保存电台。↓ ↑ — 导出/导入。拖动行可调整顺序。在 HTTPS 上可安装为应用。', atmosphere:'氛围', autoTime:'按时段自动',
     themeChanges:'主题随时间变化', nowIs:(n,s)=>`正在播放: ${n.toLowerCase()} · ${s}`, installApp:'↗ 安装为应用',
-    language:'语言', deleteStation:'删除', proTitle:'解锁 Pro', proLede:'Free 的全部功能，外加配置文件、主题和更多氛围控制。',
+    language:'语言', deleteStation:'删除', proTitle:'完整版 — 免费', proLede:'Free 的全部功能，外加配置文件、主题和更多氛围控制。',
     proF1:'3 个配置 — 工作 · 夜晚 · 周末', proF2:'+11 个专属主题', proF3:'收藏 ★ 与筛选', proF4:'收听历史', proF5:'电台闹钟', proF6:'电台封面',
     proF7:'电台间交叉淡入淡出', proF8:'一键氛围预设', proF9:'17 种氛围效果（均衡器、光线、视差…）', proF10:'9 个精选合集 + 电台分组',
-    proF11:'🗓 每日电台时间表', proF12:'☁ 跨设备云同步', proCta:'试用 Pro →', proNote:'全部功能 · 跨设备同步',
+    proF11:'🗓 每日电台时间表', proF12:'☁ 跨设备云同步', proCta:'打开 Pro →', proNote:'全部功能 · 无需账号、无需付费',
   },
 };
 const LANG_KEYS = ['uk','en','de','fr','es','it','pt','pl','tr','ja','zh'];
@@ -1852,7 +1853,10 @@ function renderProTeaser() {
   if (note) note.textContent = t('proNote');
   const keys = ['proF1','proF2','proF3','proF4','proF5','proF6','proF7','proF8','proF9','proF10','proF11','proF12'];
   feats.innerHTML = keys.map(k =>
-    `<li><span class="pro-lock" aria-hidden="true">🔒</span>${escapeHTML(t(k))}</li>`
+    // ✦, а НЕ замок: Pro безкоштовний з 22.08.2026, і замок біля кожного пункту
+    // суперечив би заголовку «Повна версія — безкоштовно». Це список того, що там є,
+    // а не того, що замкнене.
+    `<li><span class="pro-lock" aria-hidden="true">✦</span>${escapeHTML(t(k))}</li>`
   ).join('');
 }
 function buildHelpTitle() {
