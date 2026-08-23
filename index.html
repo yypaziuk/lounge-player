@@ -4,7 +4,7 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Lounge · Always On — Internet Radio Player</title>
-<meta name="description" content="A beautiful internet radio player that never stops. Auto-reconnects, 18 themes, 11 languages. Open source and free — both versions. The full version adds profiles, cloud sync, mood presets and atmosphere effects."/>
+<meta name="description" content="A beautiful internet radio player that never stops. Auto-reconnects, 18 themes, 11 languages. Free, no account — the Free edition is open source. The full version adds profiles, cloud sync, mood presets and atmosphere effects."/>
 <meta property="og:type" content="website"/>
 <meta property="og:site_name" content="Lounge · Always On"/>
 <meta property="og:title" content="Lounge · Always On — Internet Radio Player"/>
@@ -261,12 +261,8 @@ h1 em{font-style:italic;color:#ffdc9e;font-weight:300}
   color:rgba(250,242,226,.38);margin-bottom:.8rem;
 }
 .plan-pro .plan-name{color:rgba(255,186,106,.55)}
-.plan-price{
-  font-family:'Fraunces',serif;font-weight:300;font-style:italic;
-  font-size:2.6rem;color:#faf2e2;line-height:1;
-  margin-bottom:.3rem;
-}
-.plan-pro .plan-price{color:#ffdc9e}
+/* .plan-price прибрано разом із «$0»: обидві редакції безкоштовні, і ціна в картці
+   читалась як недороблений прайс. Про безкоштовність каже заголовок секції. */
 .plan-tagline{
   font-size:.76rem;color:rgba(250,242,226,.35);
   margin-bottom:1.6rem;font-weight:300;
@@ -368,7 +364,7 @@ footer a:hover{color:rgba(255,186,106,.7)}
     <div class="nav-links">
       <a class="nav-link" href="https://github.com/yypaziuk/lounge-player">GitHub</a>
       <a class="nav-link primary" href="player.html">Open Player ▶</a>
-      <a class="nav-link pro" href="https://lounge-player.pro">Open Pro →</a>
+      <a class="nav-link pro" href="https://lounge-player.pro">Open Full Version →</a>
     </div>
   </nav>
 
@@ -378,7 +374,7 @@ footer a:hover{color:rgba(255,186,106,.7)}
     <p class="sub">Auto-reconnects when you switch networks. Beautiful themes. Eleven languages. One HTML file — no install, no server, no tracking.</p>
     <div class="cta-row">
       <a class="btn btn-primary" href="player.html">▶ Open Player</a>
-      <a class="btn btn-pro" href="https://lounge-player.pro">Open Pro →</a>
+      <a class="btn btn-pro" href="https://lounge-player.pro">Open Full Version →</a>
     </div>
   </div>
 
@@ -396,7 +392,7 @@ footer a:hover{color:rgba(255,186,106,.7)}
     <div class="feature">
       <div class="feature-icon">🎨</div>
       <div class="feature-title">7 live themes</div>
-      <div class="feature-desc">Neon Lullaby, Golden Hour, Midnight Jazz, Tokyo Neon and more. Auto-switches by time of day. Pro adds 11 exclusive themes.</div>
+      <div class="feature-desc">Neon Lullaby, Golden Hour, Midnight Jazz, Tokyo Neon and more. Auto-switches by time of day. The full version adds 11 more.</div>
     </div>
     <div class="feature">
       <div class="feature-icon">📻</div>
@@ -420,11 +416,10 @@ footer a:hover{color:rgba(255,186,106,.7)}
     </div>
   </div>
 
-  <p class="section-label">Free vs Pro</p>
+  <p class="section-label">Two editions, both free</p>
   <div class="pricing">
     <div class="plan">
       <div class="plan-name">Free</div>
-      <div class="plan-price">$0</div>
       <div class="plan-tagline">Open source, always</div>
       <ul class="plan-features">
         <li>Auto-reconnect on network change</li>
@@ -437,13 +432,12 @@ footer a:hover{color:rgba(255,186,106,.7)}
       <a class="btn btn-ghost" href="player.html">▶ Open Player</a>
     </div>
     <div class="plan plan-pro">
-      <div class="plan-name">Pro</div>
-      <div class="plan-price">$0</div>
+      <div class="plan-name">Full version</div>
       <div class="plan-tagline">Everything in Free, plus — no account, no payment</div>
       <ul class="plan-features">
         <li>3 Profiles — Work, Evening, Weekend</li>
         <li>Cloud sync — stations, profiles &amp; settings on all your devices</li>
-        <li>18 Themes (11 Pro-exclusive) — Sunset Drift, First Light, Jade Hour, Synthwave…</li>
+        <li>18 Themes (11 full-version only) — Sunset Drift, First Light, Jade Hour, Synthwave…</li>
         <li>One-tap mood presets — Cozy Evening, Rainy Window…</li>
         <li>17 atmosphere effects — equalizer, light rays, drifting fog, parallax depth, liquid mesh, aurora…</li>
         <li>Ambient vinyl crackle (procedural audio)</li>
@@ -455,7 +449,7 @@ footer a:hover{color:rgba(255,186,106,.7)}
         <li>Living vinyl + time-of-day greeting</li>
         <li>Full backup &amp; restore — all stations, profiles &amp; settings</li>
       </ul>
-      <a class="btn btn-pro" href="https://lounge-player.pro">Open Pro →</a>
+      <a class="btn btn-pro" href="https://lounge-player.pro">Open Full Version →</a>
     </div>
   </div>
 
@@ -470,17 +464,17 @@ footer a:hover{color:rgba(255,186,106,.7)}
     <div class="theme-pill"><span class="theme-dot" style="background:linear-gradient(135deg,#ff68d8,#0e0638)"></span>Tokyo Neon</div>
     <div class="theme-pill"><span class="theme-dot" style="background:linear-gradient(135deg,#ff9030,#081610)"></span>Cabin Fire</div>
     <div class="theme-pill"><span class="theme-dot" style="background:linear-gradient(135deg,#48eec0,#08182e)"></span>Arctic Aurora</div>
-    <div class="theme-pill theme-pro"><span class="theme-dot" style="background:linear-gradient(135deg,#4a80b8,#0a1628)"></span>Monsoon Rain <span class="pro-tag">PRO</span></div>
-    <div class="theme-pill theme-pro"><span class="theme-dot" style="background:linear-gradient(135deg,#c89848,#1a0e06)"></span>Cozy Library <span class="pro-tag">PRO</span></div>
-    <div class="theme-pill theme-pro"><span class="theme-dot" style="background:linear-gradient(135deg,#e88228,#281006)"></span>Cognac &amp; Oak <span class="pro-tag">PRO</span></div>
-    <div class="theme-pill theme-pro"><span class="theme-dot" style="background:linear-gradient(135deg,#b94bff,#0e0626)"></span>Nebula Dream <span class="pro-tag">PRO</span></div>
-    <div class="theme-pill theme-pro"><span class="theme-dot" style="background:linear-gradient(135deg,#ff9bc0,#3c2c40)"></span>Sakura Dawn <span class="pro-tag">PRO</span></div>
-    <div class="theme-pill theme-pro"><span class="theme-dot" style="background:linear-gradient(135deg,#ff5fb0,#1a0e3e)"></span>Synthwave <span class="pro-tag">PRO</span></div>
-    <div class="theme-pill theme-pro"><span class="theme-dot" style="background:linear-gradient(135deg,#34c8c0,#01080c)"></span>Abyssal Ocean <span class="pro-tag">PRO</span></div>
-    <div class="theme-pill theme-pro"><span class="theme-dot" style="background:linear-gradient(135deg,#c8c8d2,#161619)"></span>Noir Velvet <span class="pro-tag">PRO</span></div>
-    <div class="theme-pill theme-pro"><span class="theme-dot" style="background:linear-gradient(135deg,#ff8a3d,#061026)"></span>Sunset Drift <span class="pro-tag">PRO</span></div>
-    <div class="theme-pill theme-pro"><span class="theme-dot" style="background:linear-gradient(135deg,#a8c2dc,#232f4c)"></span>First Light <span class="pro-tag">PRO</span></div>
-    <div class="theme-pill theme-pro"><span class="theme-dot" style="background:linear-gradient(135deg,#3fbe8e,#07412e)"></span>Jade Hour <span class="pro-tag">PRO</span></div>
+    <div class="theme-pill theme-pro"><span class="theme-dot" style="background:linear-gradient(135deg,#4a80b8,#0a1628)"></span>Monsoon Rain <span class="pro-tag">FULL</span></div>
+    <div class="theme-pill theme-pro"><span class="theme-dot" style="background:linear-gradient(135deg,#c89848,#1a0e06)"></span>Cozy Library <span class="pro-tag">FULL</span></div>
+    <div class="theme-pill theme-pro"><span class="theme-dot" style="background:linear-gradient(135deg,#e88228,#281006)"></span>Cognac &amp; Oak <span class="pro-tag">FULL</span></div>
+    <div class="theme-pill theme-pro"><span class="theme-dot" style="background:linear-gradient(135deg,#b94bff,#0e0626)"></span>Nebula Dream <span class="pro-tag">FULL</span></div>
+    <div class="theme-pill theme-pro"><span class="theme-dot" style="background:linear-gradient(135deg,#ff9bc0,#3c2c40)"></span>Sakura Dawn <span class="pro-tag">FULL</span></div>
+    <div class="theme-pill theme-pro"><span class="theme-dot" style="background:linear-gradient(135deg,#ff5fb0,#1a0e3e)"></span>Synthwave <span class="pro-tag">FULL</span></div>
+    <div class="theme-pill theme-pro"><span class="theme-dot" style="background:linear-gradient(135deg,#34c8c0,#01080c)"></span>Abyssal Ocean <span class="pro-tag">FULL</span></div>
+    <div class="theme-pill theme-pro"><span class="theme-dot" style="background:linear-gradient(135deg,#c8c8d2,#161619)"></span>Noir Velvet <span class="pro-tag">FULL</span></div>
+    <div class="theme-pill theme-pro"><span class="theme-dot" style="background:linear-gradient(135deg,#ff8a3d,#061026)"></span>Sunset Drift <span class="pro-tag">FULL</span></div>
+    <div class="theme-pill theme-pro"><span class="theme-dot" style="background:linear-gradient(135deg,#a8c2dc,#232f4c)"></span>First Light <span class="pro-tag">FULL</span></div>
+    <div class="theme-pill theme-pro"><span class="theme-dot" style="background:linear-gradient(135deg,#3fbe8e,#07412e)"></span>Jade Hour <span class="pro-tag">FULL</span></div>
   </div>
 
   <p class="langs-label">Languages</p>
@@ -503,7 +497,7 @@ footer a:hover{color:rgba(255,186,106,.7)}
     <p>FREE · OPEN SOURCE · NO TRACKING</p>
     <div class="cta-row">
       <a class="btn btn-primary" href="player.html">▶ Open Player</a>
-      <a class="btn btn-pro" href="https://lounge-player.pro">Open Pro →</a>
+      <a class="btn btn-pro" href="https://lounge-player.pro">Open Full Version →</a>
       <a class="btn btn-ghost" href="https://github.com/yypaziuk/lounge-player">View on GitHub</a>
     </div>
   </div>
