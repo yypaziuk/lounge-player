@@ -2041,9 +2041,13 @@ function renderLangDrop() {
   })();
 
   function load() {
-    try { stations = JSON.parse(safeStorage.getItem('lounge:stations') || '[]'); }
+    try { stations = cleanStations(JSON.parse(safeStorage.getItem('lounge:stations') || '[]')); }
     catch (_) { stations = []; }
-    activeId = safeStorage.getItem('lounge:active') || (stations[0]?.id ?? null);
+    // збережений activeId міг вказувати на вже видалену станцію (save() не стирав його,
+    // коли станцій не лишалось) — тоді addStation вважав, що активна є, і нова станція
+    // не ставала активною: ▶ казав «додайте станцію» при непорожньому списку
+    const savedActive = safeStorage.getItem('lounge:active');
+    activeId = stations.some(s => s.id === savedActive) ? savedActive : (stations[0]?.id ?? null);
     const v = parseFloat(safeStorage.getItem('lounge:volume'));
     if (!isNaN(v)) { audio.volume = v; volSlider.value = Math.round(v * 100); }
     // load language
@@ -2054,6 +2058,7 @@ function renderLangDrop() {
   function save() {
     safeStorage.setItem('lounge:stations', JSON.stringify(stations));
     if (activeId) safeStorage.setItem('lounge:active', activeId);
+    else safeStorage.removeItem('lounge:active');
   }
   function active() { return stations.find(s => s.id === activeId) || null; }
 
@@ -2066,6 +2071,16 @@ function renderLangDrop() {
   function safeColor(c) {
     return (typeof c === 'string' && /^#([0-9a-fA-F]{3,4}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/.test(c)) ? c : '';
   }
+  // Станція, яку можна показати й зіграти: об'єкт із НЕПОРОЖНІМИ рядками name/url.
+  // Навіщо: один запис із name:123 (кривий файл імпорту) лягав у сховище, і
+  // render падав на name.trim при КОЖНОМУ завантаженні — плеєр мертвий, доки людина
+  // сама не почистить сховище. Тож фільтруємо і на вході (імпорт), і на читанні
+  // (load) — друге лікує тих, у кого сміття вже лежить.
+  function isStation(st) {
+    return !!st && typeof st === 'object' && typeof st.name === 'string' && typeof st.url === 'string'
+      && !!st.name.trim() && !!st.url.trim();
+  }
+  function cleanStations(arr) { return Array.isArray(arr) ? arr.filter(isStation) : []; }
   // ── platform detection: single source of truth (mirrors ENV in pro.html) ──
   // do NOT inline new platform probes elsewhere — scattered predicates drift apart
   const IS_IOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
@@ -2274,7 +2289,7 @@ function renderLangDrop() {
   function addStation(name, url, extra = {}) {
     const id = 's' + Date.now() + Math.random().toString(36).slice(2,6);
     const color = safeColor(extra.color) || stationColor(name);
-    const st = { id, name, url, color, ...extra };
+    const st = { id, name, url, ...extra, color };   // color ПІСЛЯ spread: сирий extra.color не перетирав би очищений
     stations.push(st);
     if (!activeId) activeId = id;
     save(); render();
@@ -2407,7 +2422,9 @@ function renderLangDrop() {
     userWantsPlay ? pause() : play();
   });
   turntable.addEventListener('keydown', e => {
-    if (e.code === 'Space' || e.code === 'Enter') { e.preventDefault(); playBtn.click(); }
+    // stopPropagation: інакше Пробіл доходив і до глобального обробника — два toggle
+    // поспіль (грай → пауза), тобто Пробіл на вінілі не робив нічого
+    if (e.code === 'Space' || e.code === 'Enter') { e.preventDefault(); e.stopPropagation(); playBtn.click(); }
   });
 
   // ───────── keyboard shortcuts ─────────
@@ -2439,7 +2456,9 @@ function renderLangDrop() {
       case 'KeyF':        e.preventDefault(); toggleFocus(); break;
       case 'KeyT': {
         e.preventDefault();
-        if (autoMode) { autoMode = false; autoCb.checked = false; stopAutoLoop(); updateAutoLabel(); }
+        // як клік по темі в списку: вимкнення автотеми ЗБЕРІГАЄМО — інакше після
+        // перезавантаження автотема верталась і перетирала обрану тему
+        if (autoMode) { autoMode = false; autoCb.checked = false; safeStorage.setItem('lounge:autoTheme', '0'); stopAutoLoop(); updateAutoLabel(); }
         const ti = THEME_KEYS.indexOf(currentTheme);
         applyTheme(THEME_KEYS[(ti + 1) % THEME_KEYS.length]);
         break;
@@ -2467,6 +2486,7 @@ function renderLangDrop() {
     addPanel.hidden = true;
     addBtn.style.visibility = 'visible';
     searchInput.value = ''; newName.value = ''; newUrl.value = '';
+    clearTimeout(searchDebounce); searchSeq++;   // запит у дорозі не має «воскреснути» при наступному відкритті
     searchResults.innerHTML = '';
     searchState.textContent = t('searchWait');
     searchState.style.display = 'block';
@@ -2495,6 +2515,7 @@ function renderLangDrop() {
     clearTimeout(searchDebounce);
     const q = searchInput.value.trim();
     if (!q) {
+      searchSeq++;   // запит у дорозі вже не наш: інакше його результати з'являлись під порожнім полем
       searchResults.innerHTML = '';
       searchState.textContent = t('searchWait');
       searchState.style.display = 'block';
@@ -2794,12 +2815,17 @@ function renderLangDrop() {
         const arr = Array.isArray(d) ? d : (d.stations || []);
         const existing = new Set(stations.map(s => s.url));
         let count = 0;
-        arr.forEach(st => {
-          if (st.name && st.url && !existing.has(st.url)) {
-            addStation(st.name, st.url, {
-              country: st.country, codec: st.codec,
-              bitrate: st.bitrate, color: st.color
+        (Array.isArray(arr) ? arr : []).forEach(st => {
+          // isStation: запис null чи name:123 раніше або обривав імпорт посередині
+          // (частина станцій уже додана, а тост «помилка»), або ламав плеєр назавжди
+          if (isStation(st) && !existing.has(st.url)) {
+            addStation(st.name.trim(), st.url.trim(), {
+              country: typeof st.country === 'string' ? st.country : undefined,
+              codec: typeof st.codec === 'string' ? st.codec : undefined,
+              bitrate: Number.isFinite(+st.bitrate) ? +st.bitrate : undefined,
+              color: st.color
             });
+            existing.add(st.url);
             count++;
           }
         });
