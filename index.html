@@ -90,6 +90,7 @@ nav{
   color:rgba(250,242,226,.6);padding:.4rem .85rem;
   border-radius:999px;font-size:.75rem;letter-spacing:.06em;
   text-decoration:none;transition:all 200ms;
+  white-space:nowrap;   /* пігулка з текстом у два рядки при radius 999 виглядає зламаною */
 }
 .nav-link:hover{border-color:rgba(255,186,106,.6);color:rgba(255,220,158,.9)}
 .nav-link.primary{
@@ -216,7 +217,7 @@ h1 em{font-style:italic;color:#ffdc9e;font-weight:300}
 }
 .feature{
   background:rgba(10,5,20,.65);
-  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
   padding:1.75rem 1.5rem;text-align:left;
 }
 .feature-icon{font-size:1.6rem;margin-bottom:.8rem;line-height:1}
@@ -242,7 +243,7 @@ h1 em{font-style:italic;color:#ffdc9e;font-weight:300}
 }
 .plan{
   background:rgba(10,5,20,.65);
-  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
   padding:2rem 1.75rem;
   text-align:left;
   display:flex;flex-direction:column;
@@ -299,7 +300,7 @@ h1 em{font-style:italic;color:#ffdc9e;font-weight:300}
   border:1px solid rgba(250,242,226,.1);
   background:rgba(10,5,20,.5);
   font-size:.72rem;color:rgba(250,242,226,.6);
-  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
 }
 .theme-pill.theme-pro{border-color:rgba(255,186,80,.2)}
 .theme-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
@@ -348,11 +349,25 @@ footer a:hover{color:rgba(255,186,106,.7)}
 
 @media(max-width:600px){
   .pricing{grid-template-columns:1fr}
+  /* 501–600: бренд + три пігулки вже не влазять (~515px) — GitHub є ще внизу й у футері */
+  .nav-links .nav-link:not(.pro):not(.primary){display:none}
 }
 @media(max-width:500px){
   .cta-row{flex-direction:column;align-items:stretch}
   .btn{justify-content:center}
   .nav-links .nav-link:not(.pro){display:none}
+}
+@media(max-width:380px){
+  /* 320–380: бренд + повна пігулка ширші за контент — назва й так є в заголовку сторінки */
+  nav{justify-content:center}
+  .nav-brand{display:none}
+}
+/* «Зменшити рух» в ОС: без нескінченних анімацій (обертання, мерехтіння, пил).
+   WCAG 2.3.3; заодно телефон не гріє композитор даремно. */
+@media (prefers-reduced-motion: reduce){
+  .vinyl,.vinyl-halo,.btn-pro{animation:none}
+  .motes{display:none}
+  .btn,.nav-link{transition:none}
 }
 </style>
 </head>
@@ -374,7 +389,7 @@ footer a:hover{color:rgba(255,186,106,.7)}
   <div class="hero">
     <p class="eyebrow">Internet Radio Player</p>
     <h1>Radio that<br><em>never stops</em></h1>
-    <p class="sub">Auto-reconnects when you switch networks. Beautiful themes. Eleven languages. One HTML file — no install, no server, no tracking.</p>
+    <p class="sub">Auto-reconnects when you switch networks. Beautiful themes. 11 languages. One HTML file — no install, no account, no ads.</p>
     <div class="cta-row">
       <a class="btn btn-primary" href="player.html">▶ Open Player</a>
       <a class="btn btn-pro" href="https://lounge-player.pro">Open Full Version →</a>
@@ -410,12 +425,12 @@ footer a:hover{color:rgba(255,186,106,.7)}
     <div class="feature">
       <div class="feature-icon">📦</div>
       <div class="feature-title">One file</div>
-      <div class="feature-desc">Single HTML file, ~100KB. No npm, no server, no install. Download and open in any browser.</div>
+      <div class="feature-desc">Single HTML file, under 150 KB. No npm, no server, no install. Download and open in any browser.</div>
     </div>
     <div class="feature">
       <div class="feature-icon">🌙</div>
       <div class="feature-title">Focus mode</div>
-      <div class="feature-desc">Press F for fullscreen vinyl + clock. Sleep timer 15m–2h. MediaSession for headphone controls.</div>
+      <div class="feature-desc">Press F for fullscreen vinyl + clock. Sleep timer 15m–2h. Headphone &amp; lock-screen controls on desktop and Android.</div>
     </div>
   </div>
 
@@ -456,7 +471,7 @@ footer a:hover{color:rgba(255,186,106,.7)}
     </div>
   </div>
 
-  <p class="plans-note">Both versions are free, with no ads and no tracking. If Lounge makes your day nicer, there is a ☕ button in the player.</p>
+  <p class="plans-note">Both versions are free, with no ads, no accounts and no tracking cookies. If Lounge makes your day nicer, there is a ☕ button in the player.</p>
 
   <p class="themes-label">Themes</p>
   <div class="themes">
@@ -481,7 +496,9 @@ footer a:hover{color:rgba(255,186,106,.7)}
   </div>
 
   <p class="langs-label">Languages</p>
-  <!-- SVG-прапори — копія const FLAGS із player.html/pro.html; правити СИНХРОННО -->
+  <!-- SVG-прапори — копія const FLAGS із player.html у порядку LANG_KEYS.
+       Звіряє _audit/showcase-check.js: розбіжність розмітки чи порядку = ❌ -->
+
   <div class="langs">
     <span class="lang"><svg viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="16" fill="#ffd500"/><rect width="24" height="8" fill="#005bbb"/></svg>Українська</span>
     <span class="lang"><svg viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="16" fill="#012169"/><path d="M0,0 24,16 M24,0 0,16" stroke="#fff" stroke-width="3"/><path d="M0,0 24,16 M24,0 0,16" stroke="#c8102e" stroke-width="1.7"/><path d="M12,0 V16 M0,8 H24" stroke="#fff" stroke-width="5"/><path d="M12,0 V16 M0,8 H24" stroke="#c8102e" stroke-width="3"/></svg>English</span>
@@ -497,7 +514,7 @@ footer a:hover{color:rgba(255,186,106,.7)}
   </div>
 
   <div class="bottom-cta">
-    <p>FREE · OPEN SOURCE · NO TRACKING</p>
+    <p>FREE · NO ADS · FREE EDITION IS OPEN SOURCE</p>
     <div class="cta-row">
       <a class="btn btn-primary" href="player.html">▶ Open Player</a>
       <a class="btn btn-pro" href="https://lounge-player.pro">Open Full Version →</a>
@@ -507,7 +524,7 @@ footer a:hover{color:rgba(255,186,106,.7)}
 
   <footer>
     <a href="https://github.com/yypaziuk/lounge-player">github.com/yypaziuk/lounge-player</a>
-    &nbsp;·&nbsp; MIT License
+    &nbsp;·&nbsp; Free edition: MIT License
     &nbsp;·&nbsp; <a class="ig-link" href="https://www.instagram.com/lounge.player/" target="_blank" rel="noopener" aria-label="@lounge.player on Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none"/></svg>@lounge.player</a>
   </footer>
 

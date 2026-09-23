@@ -2,6 +2,11 @@
 <html lang="uk">
 <head>
 <meta charset="utf-8" />
+<!-- no-referrer: SomaFM (основа наших колекцій) віддає 403 на потоки з Referer github.io
+     і localhost — тобто НЕ грав ні Free-плеєр на GitHub Pages, ні APK (сторінка з
+     https://localhost). Без Referer — 200. Заразом станції не бачать, звідки слухають.
+     Мета-тег перекриває заголовок Referrer-Policy з nginx. Знайдено 2026-09-23. -->
+<meta name="referrer" content="no-referrer" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#2d1a3a" />
 <title>Lounge · Always On</title>
