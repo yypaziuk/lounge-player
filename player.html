@@ -474,6 +474,8 @@ body.ios-no-vol .vol { display: none; }
   min-height: 1.4em; position: relative;
 }
 .sleep-bar .sleep-key { color: var(--cream-dim); }
+/* Перекладені підписи (з 25.09) не рвати посимвольно: у ja «スリー/プ», «1時/間» на 320 px. */
+.sleep-bar .sleep-key, .sleep-options button { white-space: nowrap; }
 .sleep-options { display: inline-flex; gap: 0.55rem; }
 .sleep-options button {
   background: none; border: none; cursor: pointer;
@@ -1399,7 +1401,7 @@ body.in-focus main { visibility: hidden; }
 // I18N — Internationalization
 // ═══════════════════════════════════════════
 const I18N = {
-  uk:{ flag:'🇺🇦', name:'Українська',
+  uk:{ flag:'🇺🇦', name:'Українська', sleepKey:'Сон', sleepOff:'вимк', sleepMin:'хв', sleepHour:'год', sleepCancel:'Скасувати таймер',
     onAir:'в ефірі', offAir:'поза ефіром', connecting_:'підключення',
     reconnecting_:'перепідключення', noSignal:'немає сигналу',
     radioDefault:'радіо', ready:'Готово до підключення',
@@ -1439,7 +1441,7 @@ const I18N = {
     proF8:'Набори настрою одним дотиком', proF9:'17 ефектів атмосфери (еквалайзер, промені світла, паралакс…)', proF10:'9 добірок + групи станцій', proF11:'🗓 Розклад станцій за часом доби', proF12:'☁ Хмарна синхронізація між пристроями',
     proCta:'Відкрити повну версію →', proNote:'Усі функції · без реєстрації та оплати',
   },
-  en:{ flag:'🇬🇧', name:'English',
+  en:{ flag:'🇬🇧', name:'English', sleepKey:'Sleep', sleepOff:'off', sleepMin:'m', sleepHour:'h', sleepCancel:'Cancel timer',
     onAir:'on air', offAir:'off air', connecting_:'connecting',
     reconnecting_:'reconnecting', noSignal:'no signal',
     radioDefault:'radio', ready:'Ready to play',
@@ -1479,7 +1481,7 @@ const I18N = {
     proF8:'One-tap mood presets', proF9:'17 atmosphere effects (equalizer, light rays, parallax…)', proF10:'9 collections + station groups', proF11:'🗓 Daily station schedule', proF12:'☁ Cloud sync across devices',
     proCta:'Open the full version →', proNote:'Every feature · no account, no payment',
   },
-  de:{ flag:'🇩🇪', name:'Deutsch',
+  de:{ flag:'🇩🇪', name:'Deutsch', sleepKey:'Schlaf', sleepOff:'aus', sleepMin:'m', sleepHour:'h', sleepCancel:'Timer abbrechen',
     onAir:'live', offAir:'offline', connecting_:'verbinden',
     reconnecting_:'neuverbindung', noSignal:'kein signal',
     radioDefault:'radio', ready:'Bereit',
@@ -1519,7 +1521,7 @@ const I18N = {
     proF8:'Stimmungs-Presets mit einem Tipp', proF9:'17 Atmosphäre-Effekte (Equalizer, Lichtstrahlen, Parallax…)', proF10:'9 Sammlungen + Sendergruppen', proF11:'🗓 Täglicher Sender-Zeitplan', proF12:'☁ Cloud-Synchronisation zwischen Geräten',
     proCta:'Vollversion öffnen →', proNote:'Alle Funktionen · ohne Konto, ohne Zahlung',
   },
-  fr:{ flag:'🇫🇷', name:'Français',
+  fr:{ flag:'🇫🇷', name:'Français', sleepKey:'Veille', sleepOff:'non', sleepMin:'m', sleepHour:'h', sleepCancel:'Annuler le minuteur',
     onAir:'en direct', offAir:'hors antenne', connecting_:'connexion',
     reconnecting_:'reconnexion', noSignal:'pas de signal',
     radioDefault:'radio', ready:'Prêt',
@@ -1559,7 +1561,7 @@ const I18N = {
     proF8:'Ambiances en un toucher', proF9:'17 effets d\'ambiance (égaliseur, rayons, parallax…)', proF10:'9 collections + groupes de stations', proF11:'🗓 Programmation quotidienne des stations', proF12:'☁ Synchronisation cloud entre appareils',
     proCta:'Ouvrir la version complète →', proNote:'Toutes les fonctions · sans compte ni paiement',
   },
-  es:{ flag:'🇪🇸', name:'Español',
+  es:{ flag:'🇪🇸', name:'Español', sleepKey:'Dormir', sleepOff:'no', sleepMin:'m', sleepHour:'h', sleepCancel:'Cancelar temporizador',
     onAir:'en antena', offAir:'fuera del aire', connecting_:'conectando',
     reconnecting_:'reconectando', noSignal:'sin señal',
     radioDefault:'radio', ready:'Listo',
@@ -1599,7 +1601,7 @@ const I18N = {
     proF8:'Ambientes con un toque', proF9:'17 efectos de ambiente (ecualizador, rayos de luz, parallax…)', proF10:'9 colecciones + grupos de emisoras', proF11:'🗓 Horario diario de estaciones', proF12:'☁ Sincronización en la nube entre dispositivos',
     proCta:'Abrir la versión completa →', proNote:'Todas las funciones · sin cuenta ni pago',
   },
-  pl:{ flag:'🇵🇱', name:'Polski',
+  pl:{ flag:'🇵🇱', name:'Polski', sleepKey:'Sen', sleepOff:'wył', sleepMin:'m', sleepHour:'h', sleepCancel:'Anuluj minutnik',
     onAir:'na antenie', offAir:'poza anteną', connecting_:'łączenie',
     reconnecting_:'ponowne łączenie', noSignal:'brak sygnału',
     radioDefault:'radio', ready:'Gotowe',
@@ -1639,7 +1641,7 @@ const I18N = {
     proF8:'Nastroje jednym dotknięciem', proF9:'17 efektów atmosfery (korektor, promienie, paralaksa…)', proF10:'9 kolekcji + grupy stacji', proF11:'🗓 Dzienny harmonogram stacji', proF12:'☁ Synchronizacja w chmurze między urządzeniami',
     proCta:'Otwórz pełną wersję →', proNote:'Wszystkie funkcje · bez konta i opłat',
   },
-  it:{ flag:'🇮🇹', name:'Italiano',
+  it:{ flag:'🇮🇹', name:'Italiano', sleepKey:'Sonno', sleepOff:'no', sleepMin:'m', sleepHour:'h', sleepCancel:'Annulla timer',
     onAir:'in onda', offAir:'fuori onda', connecting_:'connessione', reconnecting_:'riconnessione',
     noSignal:'nessun segnale', radioDefault:'radio', ready:'Pronto alla riproduzione',
     addFirst:'Aggiungi una stazione per iniziare', selectStation:'Seleziona una stazione dall\'elenco',
@@ -1672,7 +1674,7 @@ const I18N = {
     proF12:'☁ Sincronizzazione cloud tra dispositivi', proCta:'Apri la versione completa →',
     proNote:'Tutte le funzioni · senza account né pagamento',
   },
-  pt:{ flag:'🇧🇷', name:'Português',
+  pt:{ flag:'🇧🇷', name:'Português', sleepKey:'Dormir', sleepOff:'não', sleepMin:'m', sleepHour:'h', sleepCancel:'Cancelar timer',
     onAir:'no ar', offAir:'fora do ar', connecting_:'conectando', reconnecting_:'reconectando',
     noSignal:'sem sinal', radioDefault:'rádio', ready:'Pronto para tocar',
     addFirst:'Adicione uma estação para começar', selectStation:'Selecione uma estação da lista',
@@ -1704,7 +1706,7 @@ const I18N = {
     proF12:'☁ Sincronização na nuvem entre dispositivos', proCta:'Abrir a versão completa →',
     proNote:'Todos os recursos · sem conta nem pagamento',
   },
-  tr:{ flag:'🇹🇷', name:'Türkçe',
+  tr:{ flag:'🇹🇷', name:'Türkçe', sleepKey:'Uyku', sleepOff:'kapalı', sleepMin:'dk', sleepHour:'sa', sleepCancel:'Zamanlayıcıyı iptal et',
     onAir:'yayında', offAir:'yayın dışı', connecting_:'bağlanıyor', reconnecting_:'yeniden bağlanıyor',
     noSignal:'sinyal yok', radioDefault:'radyo', ready:'Çalmaya hazır',
     addFirst:'Başlamak için bir istasyon ekle', selectStation:'Listeden bir istasyon seç',
@@ -1735,7 +1737,7 @@ const I18N = {
     proF12:'☁ Cihazlar arası bulut senkronizasyonu', proCta:'Tam sürümü aç →',
     proNote:'Tüm özellikler · hesap ve ödeme yok',
   },
-  ja:{ flag:'🇯🇵', name:'日本語',
+  ja:{ flag:'🇯🇵', name:'日本語', sleepKey:'睡眠', sleepOff:'オフ', sleepMin:'分', sleepHour:'時間', sleepCancel:'タイマーを解除',
     onAir:'オンエア', offAir:'オフエア', connecting_:'接続中', reconnecting_:'再接続中', noSignal:'信号なし', radioDefault:'ラジオ',
     ready:'再生の準備完了', addFirst:'ステーションを追加して開始', selectStation:'リストからステーションを選択', connectingMsg:'接続中…',
     buffering:'バッファ中…', paused:'一時停止中', reconnectingN:n=>`再接続中…（${n}）`, noNetwork:'ネットワークなし — 待機中…',
@@ -1757,7 +1759,7 @@ const I18N = {
     proF9:'17のアトモスフィア効果（イコライザー、光線、パララックス…）', proF10:'9つのコレクション + 局グループ', proF11:'🗓 デイリー局スケジュール',
     proF12:'☁ デバイス間クラウド同期', proCta:'フル機能版を開く →', proNote:'全機能 · アカウント登録も支払いも不要',
   },
-  zh:{ flag:'🇨🇳', name:'中文',
+  zh:{ flag:'🇨🇳', name:'中文', sleepKey:'睡眠', sleepOff:'关', sleepMin:'分', sleepHour:'小时', sleepCancel:'取消定时',
     onAir:'播放中', offAir:'未播出', connecting_:'连接中', reconnecting_:'重新连接中', noSignal:'无信号', radioDefault:'电台',
     ready:'准备就绪', addFirst:'添加一个电台开始', selectStation:'从列表中选择电台', connectingMsg:'连接中…', buffering:'缓冲中…',
     paused:'已暂停', reconnectingN:n=>`重新连接中…（${n}）`, noNetwork:'无网络 — 等待中…', networkBack:'网络已恢复 — 连接中…',
@@ -1842,6 +1844,15 @@ function refreshI18n() {
                   reconnecting:'reconnecting_', offline:'noSignal', error:'noSignal' };
     if (liveLabel && map[st]) liveLabel.textContent = t(map[st]);
   }
+  // Таймер сну: «Sleep / off / 15m» були вшиті англійською в розмітці (знайдено 25.09 у ja;
+  // той самий фікс, що в pro.html). #sleep-cancel — через getElementById, не через const sleepCancel
+  // чи const $: обидва оголошено нижче, а refreshI18n працює й на boot (TDZ).
+  { const k = document.querySelector('#sleep-bar .sleep-key'); if (k) k.textContent = t('sleepKey');
+    document.querySelectorAll('#sleep-options button[data-min]').forEach(b => {
+      const m = +b.dataset.min;
+      b.textContent = m === 0 ? t('sleepOff') : m < 60 ? m + t('sleepMin') : (m / 60) + t('sleepHour');
+    });
+    const c = document.getElementById('sleep-cancel'); if (c) c.setAttribute('aria-label', t('sleepCancel')); }
   // lang dropdown
   renderLangDrop();
   updateAutoLabel();
