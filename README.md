@@ -28,7 +28,7 @@
 👉 **Open the full app:** [lounge-player.pro](https://lounge-player.pro) — every feature, free, synced across your devices.
 
 > **Both editions are free.** There is no subscription and no ads. If the player makes your day
-> nicer, there is a ☕ button inside it — supporting is entirely optional.
+> nicer, there is a ♥ Support button inside it — supporting is entirely optional.
 
 ---
 
